@@ -27,7 +27,8 @@ DROP TABLE IF EXISTS `building_type`;
 CREATE TABLE `building_type` (
   `building_type_id` int NOT NULL,
   `building_name` varchar(45) NOT NULL,
-  `building_detaill` varchar(45) DEFAULT NULL,
+  `building_tag` enum('RESIDENTIAL','EDUCATIONAL','BUSINESS','INDUSTRIAL','STORAGE') DEFAULT NULL,
+  `additional_details` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`building_type_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -40,13 +41,13 @@ DROP TABLE IF EXISTS `cities`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cities` (
-  `city_id` int NOT NULL,
+  `city_id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `state_id` int NOT NULL,
   PRIMARY KEY (`city_id`),
   KEY `fk_city_state_idx` (`state_id`),
   CONSTRAINT `fk_city_state` FOREIGN KEY (`state_id`) REFERENCES `states` (`state_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -57,9 +58,10 @@ DROP TABLE IF EXISTS `client_projects`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `client_projects` (
+  `client_project_id` int NOT NULL,
   `client_id` int NOT NULL,
   `project_id` int NOT NULL,
-  PRIMARY KEY (`client_id`,`project_id`),
+  PRIMARY KEY (`client_id`,`project_id`,`client_project_id`),
   KEY `fk_projects_idx` (`project_id`),
   CONSTRAINT `fk_clients` FOREIGN KEY (`client_id`) REFERENCES `clients` (`client_id`),
   CONSTRAINT `fk_projects` FOREIGN KEY (`project_id`) REFERENCES `projects` (`project_id`)
@@ -92,9 +94,10 @@ DROP TABLE IF EXISTS `emp_teams`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `emp_teams` (
+  `emp_team_id` int NOT NULL,
   `emp_id` int NOT NULL,
   `team_id` int NOT NULL,
-  PRIMARY KEY (`emp_id`,`team_id`),
+  PRIMARY KEY (`emp_id`,`team_id`,`emp_team_id`),
   KEY `fk_emp_team2_idx` (`team_id`),
   CONSTRAINT `fk_emp_team1` FOREIGN KEY (`emp_id`) REFERENCES `employees` (`emp_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_emp_team2` FOREIGN KEY (`team_id`) REFERENCES `teams` (`team_id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -109,7 +112,7 @@ DROP TABLE IF EXISTS `employees`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `employees` (
-  `emp_id` int NOT NULL,
+  `emp_id` int NOT NULL AUTO_INCREMENT,
   `first_name` varchar(45) NOT NULL,
   `last_name` varchar(45) NOT NULL,
   `age` int NOT NULL,
@@ -119,7 +122,7 @@ CREATE TABLE `employees` (
   PRIMARY KEY (`emp_id`),
   KEY `fk_employee_jobs_idx` (`job_id`),
   CONSTRAINT `fk_employee_jobs` FOREIGN KEY (`job_id`) REFERENCES `jobs` (`job_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,12 +147,12 @@ DROP TABLE IF EXISTS `materials`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `materials` (
-  `material_id` int NOT NULL,
+  `material_id` int NOT NULL AUTO_INCREMENT,
   `material_name` varchar(45) NOT NULL,
   `material_desc` varchar(45) DEFAULT NULL,
   `material_price` int NOT NULL,
   PRIMARY KEY (`material_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,10 +163,11 @@ DROP TABLE IF EXISTS `package_details`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `package_details` (
+  `package_details_id` int NOT NULL,
   `package_id` int NOT NULL,
   `material_id` int NOT NULL,
   `quantity` int NOT NULL,
-  PRIMARY KEY (`package_id`,`material_id`),
+  PRIMARY KEY (`package_id`,`material_id`,`package_details_id`),
   KEY `fk_detail_material_id_idx` (`material_id`),
   CONSTRAINT `fk_detail_material_id` FOREIGN KEY (`material_id`) REFERENCES `materials` (`material_id`),
   CONSTRAINT `fk_detail_package_id` FOREIGN KEY (`package_id`) REFERENCES `packages` (`package_id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -178,14 +182,14 @@ DROP TABLE IF EXISTS `packages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `packages` (
-  `package_id` int NOT NULL,
+  `package_id` int NOT NULL AUTO_INCREMENT,
   `purchase_date` date NOT NULL,
   `status` enum('Invoiced','Paid','In process','Shipped','Out for delivery','Delivered') NOT NULL,
   `site_id` int NOT NULL,
   PRIMARY KEY (`package_id`),
   KEY `fk_package_site_idx` (`site_id`),
   CONSTRAINT `fk_package_site` FOREIGN KEY (`site_id`) REFERENCES `site` (`site_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -210,7 +214,7 @@ DROP TABLE IF EXISTS `projects`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `projects` (
-  `project_id` int NOT NULL,
+  `project_id` int NOT NULL AUTO_INCREMENT,
   `project_name` varchar(45) NOT NULL,
   `building_type` int DEFAULT NULL,
   `phase_id` int DEFAULT NULL,
@@ -227,7 +231,7 @@ CREATE TABLE `projects` (
   CONSTRAINT `fk_project_phases` FOREIGN KEY (`phase_id`) REFERENCES `phases` (`phase_id`) ON DELETE SET NULL ON UPDATE SET NULL,
   CONSTRAINT `fk_project_site` FOREIGN KEY (`site_id`) REFERENCES `site` (`site_id`) ON DELETE SET NULL ON UPDATE SET NULL,
   CONSTRAINT `fk_project_team` FOREIGN KEY (`team_id`) REFERENCES `teams` (`team_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -238,14 +242,14 @@ DROP TABLE IF EXISTS `site`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `site` (
-  `site_id` int NOT NULL,
+  `site_id` int NOT NULL AUTO_INCREMENT,
   `address` varchar(45) NOT NULL,
   `city_id` int NOT NULL,
   `zip` int NOT NULL,
   PRIMARY KEY (`site_id`),
   KEY `fk_city_id_idx` (`city_id`),
   CONSTRAINT `fk_city_id` FOREIGN KEY (`city_id`) REFERENCES `cities` (`city_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -256,10 +260,10 @@ DROP TABLE IF EXISTS `states`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `states` (
-  `state_id` int NOT NULL,
+  `state_id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   PRIMARY KEY (`state_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -270,11 +274,11 @@ DROP TABLE IF EXISTS `teams`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `teams` (
-  `team_id` int NOT NULL,
+  `team_id` int NOT NULL AUTO_INCREMENT,
   `team_name` varchar(45) NOT NULL,
   `team_details` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`team_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -286,4 +290,4 @@ CREATE TABLE `teams` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-30  6:12:03
+-- Dump completed on 2023-06-01  4:41:00
