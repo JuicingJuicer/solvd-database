@@ -127,54 +127,68 @@ INNER JOIN packages ON site.site_id = packages.site_id
 INNER JOIN projects ON site.site_id = projects.project_id;
 
 -- 7 statements with aggregate functions and group by and without having
+-- youngest age of each job
 SELECT min(age), job_id
 FROM employees
 GROUP BY job_id;
+-- number of employees at each type of job
 SELECT count(emp_id), job_id
 FROM employees
 GROUP BY job_id;
+-- average price of materials based on unit of measurement
 SELECT avg(material_price), material_desc
 FROM materials
 group by material_desc;
+-- total price of each package
 SELECT sum(material_price * package_details.quantity), package_id
 FROM materials
 INNER JOIN package_details ON materials.material_id = package_details.material_id
 group by package_id;
+-- oldest age of each job
 SELECT max(age), job_id
 FROM employees
 GROUP BY job_id;
-SELECT sum(material_price), material_desc
-FROM materials
-group by material_desc;
-SELECT sum(package_details.quantity), package_id
-FROM package_details
-group by package_id;
+-- number of members in each team
+SELECT count(emp_id), team_id
+FROM emp_teams
+group by team_id;
+-- number of clients on each project
+SELECT count(client_id), project_id
+FROM client_projects
+group by project_id;
 
 -- 7 statements with aggregate functions and group by and with having
-SELECT COUNT(emp_id), job_id
+-- number of emp over 25 years old grouped by age
+SELECT COUNT(emp_id), age
 FROM employees
-GROUP BY job_id
-HAVING min(age) > 30;
+GROUP BY age
+HAVING age > 25;
+-- teams that have more than 3 memebers
 SELECT count(emp_id), team_id
 FROM emp_teams
 GROUP BY team_id
-HAVING count(emp_id) >= 6;
+HAVING count(emp_id) >= 3;
+-- materials that have over 10 quantity
 SELECT material_id
 FROM package_details
 GROUP BY material_id
 HAVING sum(quantity) > 10;
+-- number of projects that team 1 is on
 SELECT count(project_id), team_id
 FROM projects
 GROUP BY team_id
 HAVING team_id = 1;
-SELECT COUNT(emp_id), job_id, age
+-- youngest age in job_id 6
+SELECT min(age)
 FROM employees
-GROUP BY emp_id
-HAVING age > 30;
+GROUP BY job_id
+HAVING job_id = 6;
+-- average age of each job where job id is less than 5
 SELECT avg(age), job_id
 FROM employees
 GROUP BY job_id
 HAVING job_id < 5;
+-- number of projects that are building_type 2
 SELECT COUNT(project_id), building_type
 FROM projects
 GROUP BY building_type
