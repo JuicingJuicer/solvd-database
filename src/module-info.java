@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author Vince
- *
- */
-module solvdDatabase {
-}
