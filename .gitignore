@@ -27,3 +27,6 @@ replay_pid*
 .settings
 .classpath
 .project
+.properties
+src/main/resources/db.properties
+/target/
