@@ -7,18 +7,19 @@ public class Employee {
 	private int age;
 	private String email;
 	private String phoneNumber;
-//	private Job job;
+	private Job job;
 
 	public Employee() {
 	};
 
-	public Employee(long empId, String firstName, String lastName, int age, String email, String phoneNumber) {
+	public Employee(long empId, String firstName, String lastName, int age, String email, String phoneNumber, Job job) {
 		this.setEmpId(empId);
 		this.setFirstName(firstName);
 		this.setLastName(lastName);
 		this.setAge(age);
 		this.setEmail(email);
 		this.setPhoneNumber(phoneNumber);
+		this.setJob(job);
 	}
 
 	public void setEmpId(long empId) {
@@ -45,6 +46,10 @@ public class Employee {
 		this.email = email;
 	}
 
+	public void setJob(Job job) {
+		this.job = job;
+	}
+
 	public long getEmpId() {
 		return empId;
 	}
@@ -69,9 +74,14 @@ public class Employee {
 		return phoneNumber;
 	}
 
+	public Job getJob() {
+		return job;
+	}
+
 	@Override
 	public String toString() {
-		return "Employee{empId=" + empId + ", firstName=" + firstName + ", lastName=" + lastName + ", age=" + age
-				+ ", email=" + email + ", phoneNumber" + phoneNumber + "}";
+		return "Employees{empId=" + empId + ", firstName=" + firstName + ", lastName=" + lastName + ", age=" + age
+				+ ", email=" + email + ", phoneNumber=" + phoneNumber + ", jobId=" + job.getJobId() + "}\n";
 	}
+
 }
