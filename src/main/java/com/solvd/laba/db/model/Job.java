@@ -1,18 +1,15 @@
 package main.java.com.solvd.laba.db.model;
 
 public class Job {
-	private long jobId;
+	private int jobId;
 	private String jobTitle;
 
-	public Job() {
-	};
-
-	public Job(long jobId, String jobTitle) {
+	public Job(int jobId, String jobTitle) {
 		this.setJobId(jobId);
 		this.setJobTitle(jobTitle);
 	}
 
-	public void setJobId(long jobId) {
+	public void setJobId(int jobId) {
 		this.jobId = jobId;
 	}
 
@@ -20,7 +17,7 @@ public class Job {
 		this.jobTitle = jobTitle;
 	}
 
-	public long getJobId() {
+	public int getJobId() {
 		return jobId;
 	}
 

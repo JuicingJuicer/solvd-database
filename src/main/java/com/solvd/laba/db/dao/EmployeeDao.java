@@ -1,88 +1,67 @@
 package main.java.com.solvd.laba.db.dao;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-import main.java.com.solvd.laba.db.ConnectionUlti;
-import main.java.com.solvd.laba.db.interfaces.IDao;
 import main.java.com.solvd.laba.db.model.Employee;
 
-public class EmployeeDao implements IDao<Employee> {
+public class EmployeeDao extends Dao<Employee> {
+	// dao class that extends dao class
 	JobDao jb = new JobDao();
 
-	@Override
-	public Employee get(long id) throws SQLException {
-		Employee e = new Employee();
-		try (Connection c = ConnectionUlti.getConnection()) {
-			PreparedStatement ps = c.prepareStatement("SELECT * FROM EMPLOYEES WHERE emp_id=?");
-			ps.setLong(1, id);
-			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
-				e.setEmpId(rs.getLong("emp_id"));
-				e.setFirstName(rs.getString("first_name"));
-				e.setLastName(rs.getString("last_name"));
-				e.setAge(rs.getInt("age"));
-				e.setEmail(rs.getString("email"));
-				e.setPhoneNumber(rs.getString("phone_number"));
-				e.setJob(jb.get(rs.getInt("job_id")));
-			}
+	protected String getStatement() {
+		return "SELECT * FROM EMPLOYEES WHERE emp_id=?";
+	}
+
+	protected String getAllStatement() {
+		return "SELECT * FROM EMPLOYEES";
+	}
+
+	protected String insertStatement() {
+		return "INSERT INTO EMPLOYEES (emp_id, first_name, last_name, age, email, phone_number, job_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+	}
+
+	protected String updateStatement() {
+		return "UPDATE EMPLOYEES SET emp_id = ?, first_name = ?, last_name = ?, age = ?, email = ?, phone_number = ?, job_id = ? WHERE emp_id = ?";
+	}
+
+	protected String deleteStatement() {
+		return "DELETE FROM EMPLOYEES WHERE emp_id =?";
+	}
+
+	protected Employee create(ResultSet rs) throws SQLException {
+		return new Employee(rs.getInt("emp_id"), rs.getString("first_name"), rs.getString("last_name"),
+				rs.getInt("age"), rs.getString("email"), rs.getString("phone_number"), jb.get(rs.getInt("job_id")));
+	}
+
+	protected void addValue(Employee emp, PreparedStatement ps, boolean b) throws SQLException {
+		ps.setInt(1, emp.getEmpId());
+		if (b) {
+			ps.setString(2, emp.getFirstName());
+			ps.setString(3, emp.getLastName());
+			ps.setInt(4, emp.getAge());
+			ps.setString(5, emp.getEmail());
+			ps.setString(6, emp.getPhoneNumber());
+			ps.setInt(7, emp.getJob().getJobId());
 		}
-		return e;
 	}
 
-	@Override
-	public ArrayList<String> getCol() throws SQLException {
-		ArrayList<String> col = new ArrayList<>();
-		try (Connection c = ConnectionUlti.getConnection()) {
-			PreparedStatement ps = c.prepareStatement("SHOW columns FROM EMPLOYEES");
-			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
-				col.add(rs.getString("Field"));
-			}
-		}
-		return col;
-	}
-
-	@Override
-	public ArrayList<Employee> getAll() throws SQLException {
-		ArrayList<Employee> employees = new ArrayList<>();
-		try (Connection c = ConnectionUlti.getConnection()) {
-			PreparedStatement ps = c.prepareStatement("SELECT * FROM EMPLOYEES");
-			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
-				employees.add(new Employee(rs.getLong("emp_id"), rs.getString("first_name"), rs.getString("last_name"),
-						rs.getInt("age"), rs.getString("email"), rs.getString("phone_number"),
-						jb.get(rs.getInt("job_id"))));
-			}
-		}
-		return employees;
-	}
-
-	@Override
-	public void insert(Employee emp) {
-		ArrayList<Employee> employees = new ArrayList<>();
-		employees.add(emp);
-	}
-
-	@Override
-	public void update(Employee emp, String[] p) {
-		insert(emp);
-	}
-
-	@Override
-	public void delete(Employee emp) throws SQLException {
-		try (Connection c = ConnectionUlti.getConnection()) {
-			PreparedStatement ps = c.prepareStatement("DELETE FROM EMPLOYEES WHERE emp_id =?");
-			ps.setLong(1, emp.getEmpId());
-			ResultSet rs = ps.executeQuery();
-		}
+	protected void addUpdatedValue(Employee emp, PreparedStatement ps) throws SQLException {
+		ps.setInt(1, emp.getEmpId());
+		ps.setString(2, emp.getFirstName());
+		ps.setString(3, emp.getLastName());
+		ps.setInt(4, emp.getAge());
+		ps.setString(5, emp.getEmail());
+		ps.setString(6, emp.getPhoneNumber());
+		ps.setInt(7, emp.getJob().getJobId());
+		ps.setInt(8, emp.getEmpId());
 	}
 
 	public static void main(String[] args) throws SQLException {
 		EmployeeDao ed = new EmployeeDao();
-		System.out.println(ed.getAll());
+		Employee emp = ed.get(30);
+		emp.setAge(55);
+		ed.update(emp);
 	}
 }

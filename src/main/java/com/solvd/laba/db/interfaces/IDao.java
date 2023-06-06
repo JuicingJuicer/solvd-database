@@ -4,15 +4,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface IDao<T> {
-	T get(long id) throws SQLException;
-
-	ArrayList<String> getCol() throws SQLException;
+	T get(int id) throws SQLException;
 
 	ArrayList<T> getAll() throws SQLException;
 
-	void insert(T t);
+	void insert(T t) throws SQLException;
 
-	void update(T t, String[] p);
+	void update(T t) throws SQLException;
 
 	void delete(T t) throws SQLException;
+
+//	ArrayList<String> getCol() throws SQLException;
 }

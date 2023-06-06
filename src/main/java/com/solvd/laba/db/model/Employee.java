@@ -1,7 +1,7 @@
 package main.java.com.solvd.laba.db.model;
 
 public class Employee {
-	private long empId;
+	private int empId;
 	private String firstName;
 	private String lastName;
 	private int age;
@@ -9,10 +9,7 @@ public class Employee {
 	private String phoneNumber;
 	private Job job;
 
-	public Employee() {
-	};
-
-	public Employee(long empId, String firstName, String lastName, int age, String email, String phoneNumber, Job job) {
+	public Employee(int empId, String firstName, String lastName, int age, String email, String phoneNumber, Job job) {
 		this.setEmpId(empId);
 		this.setFirstName(firstName);
 		this.setLastName(lastName);
@@ -22,7 +19,7 @@ public class Employee {
 		this.setJob(job);
 	}
 
-	public void setEmpId(long empId) {
+	public void setEmpId(int empId) {
 		this.empId = empId;
 	}
 
@@ -50,7 +47,7 @@ public class Employee {
 		this.job = job;
 	}
 
-	public long getEmpId() {
+	public int getEmpId() {
 		return empId;
 	}
 
