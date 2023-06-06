@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import main.java.com.solvd.laba.db.model.Employee;
 
 public class EmployeeDao extends Dao<Employee> {
-	// dao class that extends dao class
 	JobDao jb = new JobDao();
 
 	protected String getStatement() {
@@ -56,12 +55,5 @@ public class EmployeeDao extends Dao<Employee> {
 		ps.setString(6, emp.getPhoneNumber());
 		ps.setInt(7, emp.getJob().getJobId());
 		ps.setInt(8, emp.getEmpId());
-	}
-
-	public static void main(String[] args) throws SQLException {
-		EmployeeDao ed = new EmployeeDao();
-		Employee emp = ed.get(30);
-		emp.setAge(55);
-		ed.update(emp);
 	}
 }

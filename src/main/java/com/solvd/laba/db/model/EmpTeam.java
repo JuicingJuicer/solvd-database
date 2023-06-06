@@ -2,41 +2,41 @@ package main.java.com.solvd.laba.db.model;
 
 public class EmpTeam {
 	private int empTeamId;
-	private int empId;
-	private int teamId;
+	private Employee emp;
+	private Team team;
 
-	public EmpTeam(int empTeamId, int empId, int teamId) {
+	public EmpTeam(int empTeamId, Employee empId, Team team) {
 		this.setEmpTeamId(empTeamId);
-		this.setEmpId(empId);
-		this.setTeamId(teamId);
+		this.setEmp(empId);
+		this.setTeam(team);
 	}
 
 	public void setEmpTeamId(int empTeamId) {
 		this.empTeamId = empTeamId;
 	}
 
-	public void setEmpId(int empId) {
-		this.empId = empId;
+	public void setEmp(Employee emp) {
+		this.emp = emp;
 	}
 
-	public void setTeamId(int teamId) {
-		this.teamId = teamId;
+	public void setTeam(Team team) {
+		this.team = team;
 	}
 
 	public int getEmpTeamId() {
 		return empTeamId;
 	}
 
-	public int getEmpId() {
-		return empId;
+	public Employee getEmp() {
+		return emp;
 	}
 
-	public int getTeamId() {
-		return teamId;
+	public Team getTeam() {
+		return team;
 	}
 
 	@Override
 	public String toString() {
-		return "EmpTeam{empTeamId=" + empTeamId + ", empId=" + empId + ", teamId=" + teamId + "}\n";
+		return "EmpTeam{empTeamId=" + empTeamId + ", empId=" + emp.getEmpId() + ", teamId=" + team.getTeamId() + "}\n";
 	}
 }
