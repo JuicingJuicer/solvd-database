@@ -4,43 +4,48 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import main.java.com.solvd.laba.db.model.Job;
+import main.java.com.solvd.laba.db.model.EmpTeam;
 
-public class EmpTeamDao {
+public class EmpTeamDao extends Dao<EmpTeam> {
+	EmployeeDao ed = new EmployeeDao();
+	TeamDao td = new TeamDao();
+
 	protected String getStatement() {
-		return "SELECT * FROM JOBS WHERE job_id=?";
+		return "SELECT * FROM EMP_TEAMS WHERE emp_team_id=?";
 	}
 
 	protected String getAllStatement() {
-		return "SELECT * FROM JOBS";
+		return "SELECT * FROM EMP_TEAMS";
 	}
 
 	protected String insertStatement() {
-		return "INSERT INTO JOBS (job_id, job_title) VALUES (?, ?)";
+		return "INSERT INTO EMP_TEAMS (emp_team_id, emp_id, team_id) VALUES (?, ?, ?)";
 	}
 
 	protected String updateStatement() {
-		return "UPDATE JOBS SET job_id = ?, job_title = ?";
+		return "UPDATE EMP_TEAMS SET emp_team_id = ?, emp_id = ?, team_id = ? WHERE emp_team_id";
 	}
 
 	protected String deleteStatement() {
-		return "DELETE FROM JOBS WHERE job_id =?";
+		return "DELETE FROM EMP_TEAMS WHERE emp_team_id =?";
 	}
 
-	protected Job create(ResultSet rs) throws SQLException {
-		return new Job(rs.getInt("job_id"), rs.getString("job_title"));
+	protected EmpTeam create(ResultSet rs) throws SQLException {
+		return new EmpTeam(rs.getInt("emp_team_id"), ed.get(rs.getInt("emp_id")), td.get(rs.getInt("team_id")));
 	}
 
-	protected void addValue(Job job, PreparedStatement ps, boolean b) throws SQLException {
-		ps.setInt(1, job.getJobId());
+	protected void addValue(EmpTeam et, PreparedStatement ps, boolean b) throws SQLException {
+		ps.setInt(1, et.getEmpTeamId());
 		if (b) {
-			ps.setString(2, job.getJobTitle());
+			ps.setInt(2, et.getEmp().getEmpId());
+			ps.setInt(3, et.getTeam().getTeamId());
 		}
 	}
 
-	protected void addUpdatedValue(Job job, PreparedStatement ps) throws SQLException {
-		ps.setInt(1, job.getJobId());
-		ps.setString(2, job.getJobTitle());
-		ps.setInt(3, job.getJobId());
+	protected void addUpdatedValue(EmpTeam et, PreparedStatement ps) throws SQLException {
+		ps.setInt(1, et.getEmpTeamId());
+		ps.setInt(2, et.getEmp().getEmpId());
+		ps.setInt(3, et.getTeam().getTeamId());
+		ps.setInt(4, et.getEmpTeamId());
 	}
 }
