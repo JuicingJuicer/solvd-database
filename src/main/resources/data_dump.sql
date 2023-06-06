@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `building_type`
+-- Dumping data for table `building_types`
 --
 
-LOCK TABLES `building_type` WRITE;
-/*!40000 ALTER TABLE `building_type` DISABLE KEYS */;
-INSERT INTO `building_type` VALUES (1,'High school','EDUCATIONAL',NULL),(2,'Office','BUSINESS',NULL),(3,'Retail','BUSINESS',NULL),(4,'House','RESIDENTIAL',NULL),(5,'Hotel','BUSINESS',NULL),(6,'Warehouse','STORAGE',NULL),(7,'Garage','STORAGE',NULL),(8,'Distribution center','INDUSTRIAL',NULL),(9,'Call center','INDUSTRIAL',NULL),(10,'Cottage','RESIDENTIAL',NULL);
-/*!40000 ALTER TABLE `building_type` ENABLE KEYS */;
+LOCK TABLES `building_types` WRITE;
+/*!40000 ALTER TABLE `building_types` DISABLE KEYS */;
+INSERT INTO `building_types` VALUES (1,'High school','EDUCATIONAL',NULL),(2,'Office','BUSINESS',NULL),(3,'Retail','BUSINESS',NULL),(4,'House','RESIDENTIAL',NULL),(5,'Hotel','BUSINESS',NULL),(6,'Warehouse','STORAGE',NULL),(7,'Garage','STORAGE',NULL),(8,'Distribution center','INDUSTRIAL',NULL),(9,'Call center','INDUSTRIAL',NULL),(10,'Cottage','RESIDENTIAL',NULL);
+/*!40000 ALTER TABLE `building_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -31,7 +31,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `cities` WRITE;
 /*!40000 ALTER TABLE `cities` DISABLE KEYS */;
-INSERT INTO `cities` VALUES (1,'San Jose',5),(2,'Phoenix',3),(3,'Miami',9),(4,'Montgomery',1),(5,'Atlanta',10),(6,'Kansas City',16),(7,'Minneapolis',23),(8,'Denver',6),(9,'Baltimore',20),(10,'Detroit',22);
+INSERT INTO `cities` VALUES (1,'San Jose',1),(2,'Phoenix',3),(3,'Miami',9),(4,'Montgomery',1),(5,'Atlanta',10),(6,'Kansas City',16),(7,'Minneapolis',23),(8,'Denver',6),(9,'Baltimore',20),(10,'Detroit',22);
 /*!40000 ALTER TABLE `cities` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -71,7 +71,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `employees` WRITE;
 /*!40000 ALTER TABLE `employees` DISABLE KEYS */;
-INSERT INTO `employees` VALUES (1,'Gene','Bassett',33,'gbassett0@myspace.com','8802432507',1),(2,'Chaddy','McGoldrick',52,'cmcgoldrick1@goodreads.com','6999921215',2),(3,'Kania','Cardinale',49,'kcardinale2@washington.edu','5359031892',3),(4,'Dru','O\'Cahill',23,'docahill3@usatoday.com','3796320272',4),(5,'Minna','Dobbinson',45,'mdobbinson4@newyorker.com','5179114054',5),(6,'Tarra','Djurevic',47,'tdjurevic5@goo.ne.jp','6602731862',6),(7,'Marlee','Rewcastle',48,'mrewcastle6@over-blog.com','8948614274',2),(8,'Sal','Cadge',51,'scadge7@slideshare.net','7908153083',5),(9,'Buckie','Lesek',57,'blesek8@hp.com','9782814433',3),(10,'Noll','Reuter',45,'nreuter9@fc2.com','1896454790',6),(11,'Michael','Vu',31,'mvu3@yahoo.com','9548312423',1),(12,'Jason','Leonard',28,'jleonard2@gmail.com','2092813451',4),(13,'Debera','Guilaem',51,'dguilaem0@hibu.com','3499692275',3),(14,'Aubree','Highnam',47,'ahighnam1@cmu.edu','4702996946',6),(15,'Tiphani','Polson',35,'tpolson2@samsung.com','6284517108',4),(16,'Grove','Bannerman',51,'gbannerman3@spotify.com','7538712942',6),(17,'Germaine','Henmarsh',37,'ghenmarsh4@histats.com','6911289689',1),(18,'Aleksandr','Drogan',47,'adrogan5@quantcast.com','9876932656',5),(19,'Rey','Donnachie',58,'rdonnachie6@cpanel.net','5096856000',5),(20,'Courtenay','Hassell',19,'chassell7@huffingtonpost.com','7846042338',5),(21,'Jacklyn','Linnemann',44,'jlinnemann8@dagondesign.com','8265576674',6),(22,'Mannie','Quennell',25,'mquennell9@netvibes.com','5393393807',3),(23,'Nathanael','Sobtka',23,'nsobtkaa@ted.com','2178386207',2),(24,'Grantley','Merry',40,'gmerryb@qq.com','9498469976',5),(25,'Jamey','Gipp',52,'jgippc@mapquest.com','6765273268',2),(26,'Sissie','Sjostrom',42,'ssjostromd@dmoz.org','8265704126',1),(27,'Homere','Lideard',48,'hlidearde@sbwire.com','1713725913',4),(28,'Chancey','McLorinan',27,'cmclorinanf@sakura.ne.jp','8856301654',2),(29,'Aloisia','Goward',60,'agowardg@mayoclinic.com','4015366247',5),(30,'Margo','Skrzynski',57,'mskrzynskih@moonfruit.com','8418838576',6);
+INSERT INTO `employees` VALUES (1,'Gene','Bassett',33,'gbassett0@myspace.com','8802432507',1),(2,'Chaddy','McGoldrick',52,'cmcgoldrick1@goodreads.com','6999921215',2),(3,'Kania','Cardinale',49,'kcardinale2@washington.edu','5359031892',3),(4,'Dru','O\'Cahill',23,'docahill3@usatoday.com','3796320272',4),(5,'Minna','Dobbinson',45,'mdobbinson4@newyorker.com','5179114054',5),(6,'Tarra','Djurevic',47,'tdjurevic5@goo.ne.jp','6602731862',6),(7,'Marlee','Rewcastle',48,'mrewcastle6@over-blog.com','8948614274',2),(8,'Sal','Cadge',51,'scadge7@slideshare.net','7908153083',5),(9,'Buckie','Lesek',57,'blesek8@hp.com','9782814433',3),(10,'Noll','Reuter',45,'nreuter9@fc2.com','1896454790',6),(11,'Michael','Vu',31,'mvu3@yahoo.com','9548312423',1),(12,'Jason','Leonard',28,'jleonard2@gmail.com','2092813451',4),(13,'Debera','Guilaem',51,'dguilaem0@hibu.com','3499692275',3),(14,'Aubree','Highnam',47,'ahighnam1@cmu.edu','4702996946',6),(15,'Tiphani','Polson',35,'tpolson2@samsung.com','6284517108',4),(16,'Grove','Bannerman',51,'gbannerman3@spotify.com','7538712942',6),(17,'Germaine','Henmarsh',37,'ghenmarsh4@histats.com','6911289689',1),(18,'Aleksandr','Drogan',47,'adrogan5@quantcast.com','9876932656',5),(19,'Rey','Donnachie',58,'rdonnachie6@cpanel.net','5096856000',5),(20,'Courtenay','Hassell',19,'chassell7@huffingtonpost.com','7846042338',5),(21,'Jacklyn','Linnemann',44,'jlinnemann8@dagondesign.com','8265576674',6),(22,'Mannie','Quennell',25,'mquennell9@netvibes.com','5393393807',3),(23,'Nathanael','Sobtka',23,'nsobtkaa@ted.com','2178386207',2),(24,'Grantley','Merry',40,'gmerryb@qq.com','9498469976',5),(25,'Jamey','Gipp',52,'jgippc@mapquest.com','6765273268',2),(26,'Sissie','Sjostrom',42,'ssjostromd@dmoz.org','8265704126',1),(27,'Homere','Lideard',48,'hlidearde@sbwire.com','1713725913',4),(28,'Chancey','McLorinan',27,'cmclorinanf@sakura.ne.jp','8856301654',2),(29,'Aloisia','Goward',60,'agowardg@mayoclinic.com','4015366247',5),(30,'Margo','Skrzynski',55,'mskrzynskih@moonfruit.com','8418838576',6);
 /*!40000 ALTER TABLE `employees` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -131,18 +131,18 @@ UNLOCK TABLES;
 
 LOCK TABLES `projects` WRITE;
 /*!40000 ALTER TABLE `projects` DISABLE KEYS */;
-INSERT INTO `projects` VALUES (1,'Homeland',4,1,'2023-05-29',NULL,1,1),(2,'Project Z',2,NULL,NULL,NULL,NULL,NULL),(3,'Abe\'s Hotel',5,NULL,NULL,NULL,NULL,NULL),(4,'Speaker warehouse',6,NULL,NULL,NULL,NULL,NULL),(5,'Miami High school',1,NULL,NULL,NULL,NULL,NULL),(6,'Shoe store',3,NULL,NULL,NULL,NULL,NULL),(7,'Dream garage',7,NULL,NULL,NULL,NULL,NULL),(8,'Fedex center',8,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `projects` VALUES (1,'Homeland',4,1,'2023-05-29',NULL,1,1),(2,'Project Z',2,NULL,NULL,NULL,NULL,NULL),(3,'Abe\'s Hotel',5,NULL,NULL,NULL,NULL,NULL),(4,'Speaker warehouse',6,NULL,NULL,NULL,NULL,1),(5,'Miami High school',1,NULL,NULL,NULL,NULL,NULL),(6,'Shoe store',3,NULL,NULL,NULL,NULL,NULL),(7,'Dream garage',7,NULL,NULL,NULL,NULL,NULL),(8,'Fedex center',8,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `projects` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Dumping data for table `site`
+-- Dumping data for table `sites`
 --
 
-LOCK TABLES `site` WRITE;
-/*!40000 ALTER TABLE `site` DISABLE KEYS */;
-INSERT INTO `site` VALUES (1,'1100 e northern ave',2,85020);
-/*!40000 ALTER TABLE `site` ENABLE KEYS */;
+LOCK TABLES `sites` WRITE;
+/*!40000 ALTER TABLE `sites` DISABLE KEYS */;
+INSERT INTO `sites` VALUES (1,'1100 e northern ave',2,85020);
+/*!40000 ALTER TABLE `sites` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -174,4 +174,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-02  3:35:32
+-- Dump completed on 2023-06-06  8:40:46

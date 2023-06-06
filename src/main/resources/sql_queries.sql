@@ -7,7 +7,7 @@ INSERT INTO `building`.`clients` (client_id, first_name, last_name, email, phone
 INSERT INTO `building`.`teams` (`team_id`, `team_name`) VALUES ('1', 'Team A');
 INSERT INTO `building`.`emp_teams` (`emp_id`, `team_id`) VALUES ('11', '2');
 INSERT INTO `building`.`phases` (`phase_id`, `phase_name`) VALUES ('1', 'Initiation');
-INSERT INTO `building`.`building_type` (`building_type_id`, `building_name`) VALUES ('2', 'Office');
+INSERT INTO `building`.`building_types` (`building_type_id`, `building_name`) VALUES ('2', 'Office');
 INSERT INTO `building`.`materials` (`material_id`, `material_name`, `material_desc`, `material_price`) VALUES ('1', 'Wood', '1 cord of wood', '500');
 
 -- 10 update statments
@@ -23,7 +23,7 @@ UPDATE `building`.`client_projects` SET `client_id` = '4' WHERE (`client_id` = '
 UPDATE `building`.`package_details` SET `quantity` = '9' WHERE (`package_id` = '1') and (`material_id` = '4');
 
 -- 10 deletion statements
-DELETE FROM `building`.`building_type` WHERE (`building_type_id` = '5');
+DELETE FROM `building`.`building_types` WHERE (`building_type_id` = '5');
 DELETE FROM `building`.`cities` WHERE (`city_id` = '6');
 DELETE FROM `building`.`client_projects` WHERE (`client_id` = '2') and (`project_id` = '1');
 DELETE FROM `building`.`clients` WHERE (`client_id` = '6');
@@ -48,7 +48,7 @@ ADD INDEX `fk_project_btype_idx` (`building_type` ASC) VISIBLE;
 ALTER TABLE `building`.`projects` 
 ADD CONSTRAINT `fk_project_btype`
   FOREIGN KEY (`building_type`)
-  REFERENCES `building`.`building_type` (`building_type_id`)
+  REFERENCES `building`.`building_types` (`building_type_id`)
   ON DELETE RESTRICT
   ON UPDATE RESTRICT;
 ALTER TABLE `building`.`packages` 
@@ -61,10 +61,10 @@ ADD COLUMN `team_details` VARCHAR(45) NULL AFTER `team_name`;
 SELECT projects.project_id, clients.first_name, clients.last_name, project_name, building_name, phase_name, site.site_id, zip, cities.name, states.name, packages.package_id, material_name, quantity, teams.team_name, employees.first_name, employees.last_name, job_title FROM projects
 LEFT JOIN building_type ON projects.building_type = building_type.building_type_id
 LEFT JOIN phases ON projects.phase_id = phases.phase_id
-LEFT JOIN site ON projects.site_id = site.site_id
-LEFT JOIN cities ON site.city_id = cities.city_id
+LEFT JOIN sites ON projects.site_id = sites.site_id
+LEFT JOIN cities ON sites.city_id = cities.city_id
 LEFT JOIN states ON cities.state_id = states.state_id
-LEFT JOIN packages ON site.site_id = packages.site_id
+LEFT JOIN packages ON sites.site_id = packages.site_id
 LEFT JOIN package_details ON packages.package_id = package_details.package_id
 LEFT JOIN materials ON package_details.material_id = materials.material_id
 LEFT JOIN client_projects ON projects.project_id = client_projects.project_id
@@ -84,17 +84,17 @@ LEFT JOIN employees ON jobs.job_id = employees.job_id;
 SELECT cities.name, states.name
 FROM cities
 LEFT JOIN states ON cities.state_id = states.state_id;
-SELECT site.site_id, site.address, name
-FROM site
-LEFT JOIN cities ON site.city_id = cities.city_id;
-SELECT project_name, phase_, building_name
+SELECT sites.site_id, sites.address, name
+FROM sites
+LEFT JOIN cities ON sites.city_id = cities.city_id;
+SELECT project_name, phase_id, building_name
 FROM projects
-LEFT JOIN building_type ON projects.building_type = building_type.building_type_id;
+LEFT JOIN building_types ON projects.building_type = building_types.building_type_id;
 
 -- 5 statements with right outer join
-SELECT cities.name, site_id, site.address
-FROM site
-RIGHT JOIN cities ON site.city_id = cities.city_id;
+SELECT cities.name, site_id, sites.address
+FROM sites
+RIGHT JOIN cities ON sites.city_id = cities.city_id;
 SELECT clients.first_name, clients.last_name, client_projects.project_id
 FROM client_projects
 RIGHT JOIN clients ON client_projects.client_id = clients.client_id;
@@ -121,10 +121,10 @@ INNER JOIN package_details ON packages.package_id = package_details.package_id;
 SELECT team_name, emp_id
 FROM teams
 INNER JOIN emp_teams ON teams.team_id = emp_teams.team_id;
-SELECT site.site_id, packages.package_id, project_name
-FROM site
-INNER JOIN packages ON site.site_id = packages.site_id
-INNER JOIN projects ON site.site_id = projects.project_id;
+SELECT sites.site_id, packages.package_id, project_name
+FROM sites
+INNER JOIN packages ON sites.site_id = packages.site_id
+INNER JOIN projects ON sites.site_id = projects.project_id;
 
 -- 7 statements with aggregate functions and group by and without having
 -- youngest age of each job

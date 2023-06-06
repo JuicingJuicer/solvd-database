@@ -18,13 +18,13 @@ USE `building`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `building_type`
+-- Table structure for table `building_types`
 --
 
-DROP TABLE IF EXISTS `building_type`;
+DROP TABLE IF EXISTS `building_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `building_type` (
+CREATE TABLE `building_types` (
   `building_type_id` int NOT NULL,
   `building_name` varchar(45) NOT NULL,
   `building_tag` enum('RESIDENTIAL','EDUCATIONAL','BUSINESS','INDUSTRIAL','STORAGE') DEFAULT NULL,
@@ -188,7 +188,7 @@ CREATE TABLE `packages` (
   `site_id` int NOT NULL,
   PRIMARY KEY (`package_id`),
   KEY `fk_package_site_idx` (`site_id`),
-  CONSTRAINT `fk_package_site` FOREIGN KEY (`site_id`) REFERENCES `site` (`site_id`)
+  CONSTRAINT `fk_package_site` FOREIGN KEY (`site_id`) REFERENCES `sites` (`site_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -227,21 +227,21 @@ CREATE TABLE `projects` (
   KEY `fk_project_site_idx` (`site_id`),
   KEY `fk_project_team_idx` (`team_id`),
   KEY `fk_project_btype_idx` (`building_type`),
-  CONSTRAINT `fk_project_btype` FOREIGN KEY (`building_type`) REFERENCES `building_type` (`building_type_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_project_btype` FOREIGN KEY (`building_type`) REFERENCES `building_types` (`building_type_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_project_phases` FOREIGN KEY (`phase_id`) REFERENCES `phases` (`phase_id`) ON DELETE SET NULL ON UPDATE SET NULL,
-  CONSTRAINT `fk_project_site` FOREIGN KEY (`site_id`) REFERENCES `site` (`site_id`) ON DELETE SET NULL ON UPDATE SET NULL,
+  CONSTRAINT `fk_project_site` FOREIGN KEY (`site_id`) REFERENCES `sites` (`site_id`) ON DELETE SET NULL ON UPDATE SET NULL,
   CONSTRAINT `fk_project_team` FOREIGN KEY (`team_id`) REFERENCES `teams` (`team_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `site`
+-- Table structure for table `sites`
 --
 
-DROP TABLE IF EXISTS `site`;
+DROP TABLE IF EXISTS `sites`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `site` (
+CREATE TABLE `sites` (
   `site_id` int NOT NULL AUTO_INCREMENT,
   `address` varchar(45) NOT NULL,
   `city_id` int NOT NULL,
@@ -290,4 +290,4 @@ CREATE TABLE `teams` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-02  3:38:08
+-- Dump completed on 2023-06-06  8:35:21
