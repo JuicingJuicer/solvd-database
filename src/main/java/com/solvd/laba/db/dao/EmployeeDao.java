@@ -1,13 +1,15 @@
 package main.java.com.solvd.laba.db.dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import main.java.com.solvd.laba.db.ConnectionUlti;
+import main.java.com.solvd.laba.db.interfaces.IEmployeeDao;
 import main.java.com.solvd.laba.db.model.Employee;
 
-public class EmployeeDao extends Dao<Employee> {
-	JobDao jb = new JobDao();
+public class EmployeeDao extends Dao<Employee> implements IEmployeeDao {
 
 	protected String getStatement() {
 		return "SELECT * FROM EMPLOYEES WHERE emp_id=?";
@@ -31,7 +33,7 @@ public class EmployeeDao extends Dao<Employee> {
 
 	protected Employee create(ResultSet rs) throws SQLException {
 		return new Employee(rs.getInt("emp_id"), rs.getString("first_name"), rs.getString("last_name"),
-				rs.getInt("age"), rs.getString("email"), rs.getString("phone_number"), jb.get(rs.getInt("job_id")));
+				rs.getInt("age"), rs.getString("email"), rs.getString("phone_number"));
 	}
 
 	protected void addValue(Employee emp, PreparedStatement ps, boolean b) throws SQLException {
@@ -55,5 +57,18 @@ public class EmployeeDao extends Dao<Employee> {
 		ps.setString(6, emp.getPhoneNumber());
 		ps.setInt(7, emp.getJob().getJobId());
 		ps.setInt(8, emp.getEmpId());
+	}
+
+	@Override
+	public int getJId(int id) throws SQLException {
+		try (Connection c = ConnectionUlti.getConnection()) {
+			PreparedStatement ps = c.prepareStatement("SELECT job_id FROM EMPLOYEES WHERE emp_id=?");
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				return rs.getInt("job_id");
+			}
+		}
+		return 0;
 	}
 }

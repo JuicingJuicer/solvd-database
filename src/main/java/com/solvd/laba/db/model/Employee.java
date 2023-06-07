@@ -1,5 +1,7 @@
 package main.java.com.solvd.laba.db.model;
 
+import java.util.ArrayList;
+
 public class Employee {
 	private int empId;
 	private String firstName;
@@ -8,15 +10,15 @@ public class Employee {
 	private String email;
 	private String phoneNumber;
 	private Job job;
+	private ArrayList<Team> teams;
 
-	public Employee(int empId, String firstName, String lastName, int age, String email, String phoneNumber, Job job) {
+	public Employee(int empId, String firstName, String lastName, int age, String email, String phoneNumber) {
 		this.setEmpId(empId);
 		this.setFirstName(firstName);
 		this.setLastName(lastName);
 		this.setAge(age);
 		this.setEmail(email);
 		this.setPhoneNumber(phoneNumber);
-		this.setJob(job);
 	}
 
 	public void setEmpId(int empId) {
@@ -47,6 +49,10 @@ public class Employee {
 		this.job = job;
 	}
 
+	public void setTeams(ArrayList<Team> teams) {
+		this.teams = teams;
+	}
+
 	public int getEmpId() {
 		return empId;
 	}
@@ -75,10 +81,14 @@ public class Employee {
 		return job;
 	}
 
+	public ArrayList<Team> getTeams() {
+		return teams;
+	}
+
 	@Override
 	public String toString() {
 		return "Employee{empId=" + empId + ", firstName=" + firstName + ", lastName=" + lastName + ", age=" + age
-				+ ", email=" + email + ", phoneNumber=" + phoneNumber + ", jobId=" + job.getJobId() + "}\n";
+				+ ", email=" + email + ", phoneNumber=" + phoneNumber + ", Job=" + job + "}\n";
 	}
 
 }
