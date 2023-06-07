@@ -13,7 +13,7 @@ public class Main {
 
 	public static void main(String[] args) throws SQLException {
 		EmployeeService es = new EmployeeService();
-		Employee emp = es.getEmployee(1);
+		Employee emp = es.getEmployee(2);
 		LOGGER.info(emp);
 	}
 }

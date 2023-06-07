@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import main.java.com.solvd.laba.db.ConnectionUlti;
 import main.java.com.solvd.laba.db.interfaces.IEmployeeDao;
@@ -65,10 +66,24 @@ public class EmployeeDao extends Dao<Employee> implements IEmployeeDao {
 			PreparedStatement ps = c.prepareStatement("SELECT job_id FROM EMPLOYEES WHERE emp_id=?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
+			if (rs.next()) {
 				return rs.getInt("job_id");
 			}
 		}
 		return 0;
+	}
+
+	@Override
+	public ArrayList<Integer> getTId(int id) throws SQLException {
+		ArrayList<Integer> tIds = new ArrayList<>();
+		try (Connection c = ConnectionUlti.getConnection()) {
+			PreparedStatement ps = c.prepareStatement("SELECT team_id FROM emp_teams WHERE emp_id=?");
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				tIds.add(rs.getInt("team_id"));
+			}
+		}
+		return tIds;
 	}
 }

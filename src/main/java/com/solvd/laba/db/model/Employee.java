@@ -88,7 +88,7 @@ public class Employee {
 	@Override
 	public String toString() {
 		return "Employee{empId=" + empId + ", firstName=" + firstName + ", lastName=" + lastName + ", age=" + age
-				+ ", email=" + email + ", phoneNumber=" + phoneNumber + ", Job=" + job + "}\n";
+				+ ", email=" + email + ", phoneNumber=" + phoneNumber + ", Job=" + job + "Team(s)=" + teams + "}\n";
 	}
 
 }
