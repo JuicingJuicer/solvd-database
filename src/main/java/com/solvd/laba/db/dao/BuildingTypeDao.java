@@ -8,19 +8,19 @@ import main.java.com.solvd.laba.db.model.BuildingType;
 
 public class BuildingTypeDao extends Dao<BuildingType> {
 	protected String getStatement() {
-		return "SELECT * FROM BUILDING_TYPE WHERE building_type_id=?";
+		return "SELECT * FROM BUILDING_TYPES WHERE building_type_id=?";
 	}
 
 	protected String getAllStatement() {
-		return "SELECT * FROM BUILDING_TYPE";
+		return "SELECT * FROM BUILDING_TYPES";
 	}
 
 	protected String insertStatement() {
-		return "INSERT INTO BUILDING_TYPE (building_type_id, building_name, building_tag, additional_details) VALUES (?, ?, ?, ?)";
+		return "INSERT INTO BUILDING_TYPES (building_type_id, building_name, building_tag, additional_details) VALUES (?, ?, ?, ?)";
 	}
 
 	protected String updateStatement() {
-		return "UPDATE BUILDING_TYPE SET building_type_id = ?, building_name = ?, building_tag = ?, additional_details = ? WHERE building_type_id = ?";
+		return "UPDATE BUILDING_TYPES SET building_type_id = ?, building_name = ?, building_tag = ?, additional_details = ? WHERE building_type_id = ?";
 	}
 
 	protected String deleteStatement() {

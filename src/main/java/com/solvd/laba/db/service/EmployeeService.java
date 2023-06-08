@@ -7,36 +7,31 @@ import main.java.com.solvd.laba.db.dao.EmployeeDao;
 import main.java.com.solvd.laba.db.dao.JobDao;
 import main.java.com.solvd.laba.db.dao.TeamDao;
 import main.java.com.solvd.laba.db.model.Employee;
-import main.java.com.solvd.laba.db.model.Job;
 import main.java.com.solvd.laba.db.model.Team;
 
 public class EmployeeService {
-	private EmployeeDao ed;
-	private JobDao jd;
-	private TeamDao td;
+	private EmployeeDao employeeDao;
+	private JobDao jobDao;
+	private TeamDao teamDao;
 
 	public EmployeeService() {
-		ed = new EmployeeDao();
-		jd = new JobDao();
-		td = new TeamDao();
+		employeeDao = new EmployeeDao();
+		jobDao = new JobDao();
+		teamDao = new TeamDao();
 	}
 
 	public Employee getEmployee(int id) throws SQLException {
-		Employee employee = ed.get(id);
-		employee.setJob(getJob(id));
+		Employee employee = employeeDao.get(id);
+		employee.setJob(jobDao.get(employeeDao.getJId(id)));
 		employee.setTeams(getEmpTeams(id));
 		return employee;
 	}
 
-	public Job getJob(int id) throws SQLException {
-		return jd.get(ed.getJId(id));
-	}
-
 	public ArrayList<Team> getEmpTeams(int id) throws SQLException {
 		ArrayList<Team> teams = new ArrayList<>();
-		ArrayList<Integer> ids = ed.getTId(id);
+		ArrayList<Integer> ids = employeeDao.getTId(id);
 		for (int tid : ids) {
-			teams.add(td.get(tid));
+			teams.add(teamDao.get(tid));
 		}
 		return teams;
 	}

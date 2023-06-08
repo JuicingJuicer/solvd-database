@@ -48,6 +48,6 @@ public class Material {
 	@Override
 	public String toString() {
 		return "Material{materialId=" + materialId + ", materialName=" + materialName + ", materialDesc=" + materialDesc
-				+ ", materialPrice" + materialPrice + "}\n";
+				+ ", materialPrice=" + materialPrice + "}";
 	}
 }

@@ -5,10 +5,9 @@ public class City {
 	private String name;
 	private State state;
 
-	public City(int cityId, String name, State state) {
+	public City(int cityId, String name) {
 		this.cityId = cityId;
 		this.name = name;
-		this.state = state;
 	}
 
 	public void setCityId(int cityId) {
@@ -37,6 +36,6 @@ public class City {
 
 	@Override
 	public String toString() {
-		return "City{cityId=" + cityId + ", name=" + name + ", stateId=" + state.getStateId() + "}\n";
+		return "City{cityId=" + cityId + ", name=" + name + ", state=" + state + "}";
 	}
 }

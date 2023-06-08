@@ -1,16 +1,16 @@
 package main.java.com.solvd.laba.db.dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import main.java.com.solvd.laba.db.ConnectionUlti;
+import main.java.com.solvd.laba.db.interfaces.IProjectDao;
 import main.java.com.solvd.laba.db.model.Project;
 
-public class ProjectDao extends Dao<Project> {
-	BuildingTypeDao btd = new BuildingTypeDao();
-	PhaseDao pd = new PhaseDao();
-	SiteDao sd = new SiteDao();
-	TeamDao td = new TeamDao();
+public class ProjectDao extends Dao<Project> implements IProjectDao {
 
 	protected String getStatement() {
 		return "SELECT * FROM PROJECTS WHERE project_id=?";
@@ -33,9 +33,8 @@ public class ProjectDao extends Dao<Project> {
 	}
 
 	protected Project create(ResultSet rs) throws SQLException {
-		return new Project(rs.getInt("project_id"), rs.getString("project_name"), btd.get(rs.getInt("building_type")),
-				pd.get(rs.getInt("phase_id")), rs.getDate("start_date"), rs.getDate("end_date"),
-				sd.get(rs.getInt("site_id")), td.get(rs.getInt("team_id")));
+		return new Project(rs.getInt("project_id"), rs.getString("project_name"), rs.getDate("start_date"),
+				rs.getDate("end_date"));
 	}
 
 	protected void addValue(Project project, PreparedStatement ps, boolean b) throws SQLException {
@@ -63,9 +62,32 @@ public class ProjectDao extends Dao<Project> {
 		ps.setInt(9, project.getProjectId());
 	}
 
-	public static void main(String[] args) throws SQLException {
-		ProjectDao a = new ProjectDao();
-		Project p = a.get(1);
-		System.out.println(p);
+	@Override
+	public int getIdByCol(String col, int id) throws SQLException {
+		try (Connection c = ConnectionUlti.getConnection()) {
+			String query = "SELECT " + col + " FROM PROJECTS WHERE project_id=?";
+			PreparedStatement ps = c.prepareStatement(query);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				return rs.getInt(col);
+			}
+		}
+		return 0;
 	}
+
+	@Override
+	public ArrayList<Integer> getCId(int id) throws SQLException {
+		ArrayList<Integer> cIds = new ArrayList<>();
+		try (Connection c = ConnectionUlti.getConnection()) {
+			PreparedStatement ps = c.prepareStatement("SELECT client_id FROM client_projects WHERE project_id=?");
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				cIds.add(rs.getInt("client_id"));
+			}
+		}
+		return cIds;
+	}
+
 }

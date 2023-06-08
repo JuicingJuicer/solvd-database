@@ -27,6 +27,6 @@ public class Job {
 
 	@Override
 	public String toString() {
-		return "Job{jobId=" + jobId + ", jobTitle=" + jobTitle + "}\n";
+		return "Job{jobId=" + jobId + ", jobTitle=" + jobTitle + "}";
 	}
 }

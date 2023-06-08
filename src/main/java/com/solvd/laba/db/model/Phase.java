@@ -27,6 +27,6 @@ public class Phase {
 
 	@Override
 	public String toString() {
-		return "Phase{phaseId=" + phaseId + ", phaseName=" + phaseName + "}\n";
+		return "Phase{phaseId=" + phaseId + ", phaseName=" + phaseName + "}";
 	}
 }

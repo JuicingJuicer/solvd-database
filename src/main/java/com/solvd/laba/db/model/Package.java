@@ -1,18 +1,19 @@
 package main.java.com.solvd.laba.db.model;
 
 import java.util.Date;
+import java.util.HashMap;
 
 public class Package {
 	private int packageId;
 	private java.util.Date purchaseDate;
 	private String status;
 	private Site site;
+	private HashMap<Material, Integer> materialQuantity;
 
-	public Package(int packageId, Date purchaseDate, String status, Site site) {
+	public Package(int packageId, Date purchaseDate, String status) {
 		this.packageId = packageId;
 		this.purchaseDate = purchaseDate;
 		this.status = status;
-		this.site = site;
 	}
 
 	public void setPackageId(int packageId) {
@@ -31,6 +32,10 @@ public class Package {
 		this.site = site;
 	}
 
+	public void setMaterialQuantity(HashMap<Material, Integer> materialQuantity) {
+		this.materialQuantity = materialQuantity;
+	}
+
 	public int getPackageId() {
 		return packageId;
 	}
@@ -47,9 +52,13 @@ public class Package {
 		return site;
 	}
 
+	public HashMap<Material, Integer> getMaterialQuantity() {
+		return materialQuantity;
+	}
+
 	@Override
 	public String toString() {
-		return "Package{packageId=" + packageId + ", purchaseDate=" + purchaseDate + ", status=" + status + ", siteId"
-				+ site.getSiteId() + "}\n";
+		return "Package{packageId=" + packageId + ", purchaseDate=" + purchaseDate + ", status=" + status + ", site="
+				+ site + ", materialQuantity=" + materialQuantity + "}";
 	}
 }

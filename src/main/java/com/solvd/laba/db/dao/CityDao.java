@@ -1,13 +1,15 @@
 package main.java.com.solvd.laba.db.dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import main.java.com.solvd.laba.db.ConnectionUlti;
+import main.java.com.solvd.laba.db.interfaces.ICityDao;
 import main.java.com.solvd.laba.db.model.City;
 
-public class CityDao extends Dao<City> {
-	StateDao sd = new StateDao();
+public class CityDao extends Dao<City> implements ICityDao {
 
 	protected String getStatement() {
 		return "SELECT * FROM CITIES WHERE city_id=?";
@@ -30,7 +32,7 @@ public class CityDao extends Dao<City> {
 	}
 
 	protected City create(ResultSet rs) throws SQLException {
-		return new City(rs.getInt("city_id"), rs.getString("name"), sd.get(rs.getInt("city_id")));
+		return new City(rs.getInt("city_id"), rs.getString("name"));
 	}
 
 	protected void addValue(City city, PreparedStatement ps, boolean b) throws SQLException {
@@ -46,5 +48,18 @@ public class CityDao extends Dao<City> {
 		ps.setString(2, city.getName());
 		ps.setInt(3, city.getState().getStateId());
 		ps.setInt(4, city.getCityId());
+	}
+
+	@Override
+	public int getSId(int id) throws SQLException {
+		try (Connection c = ConnectionUlti.getConnection()) {
+			PreparedStatement ps = c.prepareStatement("SELECT state_id FROM CITIES WHERE city_id=?");
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				return rs.getInt("state_id");
+			}
+		}
+		return 0;
 	}
 }

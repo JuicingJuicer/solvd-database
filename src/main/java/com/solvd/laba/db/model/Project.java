@@ -1,27 +1,24 @@
 package main.java.com.solvd.laba.db.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Project {
 	private int projectId;
 	private String projectName;
-	private BuildingType buildingType;
-	private Phase phase;
 	private java.util.Date startDate;
 	private java.util.Date endDate;
+	private BuildingType buildingType;
+	private Phase phase;
 	private Site site;
 	private Team team;
+	private ArrayList<Client> clients;
 
-	public Project(int projectId, String projectName, BuildingType buildingType, Phase phase, Date startDate,
-			Date endDate, Site site, Team team) {
+	public Project(int projectId, String projectName, Date startDate, Date endDate) {
 		this.projectId = projectId;
 		this.projectName = projectName;
-		this.buildingType = buildingType;
-		this.phase = phase;
 		this.startDate = startDate;
 		this.endDate = endDate;
-		this.site = site;
-		this.team = team;
 	}
 
 	public void setProjectId(int projectId) {
@@ -56,6 +53,10 @@ public class Project {
 		this.team = team;
 	}
 
+	public void setClients(ArrayList<Client> clients) {
+		this.clients = clients;
+	}
+
 	public int getProjectId() {
 		return projectId;
 	}
@@ -88,10 +89,14 @@ public class Project {
 		return team;
 	}
 
+	public ArrayList<Client> getClients() {
+		return clients;
+	}
+
 	@Override
 	public String toString() {
-		return "Project{projectName=" + projectName + ", buildingType=" + buildingType.getBuildingTypeId()
-				+ ", phaseId=" + phase.getPhaseId() + ", startDate=" + startDate + ", endDate=" + endDate + ", siteId="
-				+ site.getSiteId() + ", teamId=" + team.getTeamId() + "}\n";
+		return "Project{projectName=" + projectName + ", buildingType=" + buildingType + ", phase=" + phase
+				+ ", startDate=" + startDate + ", endDate=" + endDate + ", site=" + site + ", Team=" + team
+				+ ", Client(s)" + clients + "}";
 	}
 }

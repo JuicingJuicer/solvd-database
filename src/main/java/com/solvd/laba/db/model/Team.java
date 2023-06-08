@@ -37,6 +37,6 @@ public class Team {
 
 	@Override
 	public String toString() {
-		return "Team{teamId=" + teamId + ", teamName=" + teamName + ", teamDetails=" + teamDetails + "}\n";
+		return "Team{teamId=" + teamId + ", teamName=" + teamName + ", teamDetails=" + teamDetails + "}";
 	}
 }

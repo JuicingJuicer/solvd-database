@@ -48,6 +48,6 @@ public class PackageDetail {
 	@Override
 	public String toString() {
 		return "PackageDetail{packageDetailId=" + packageDetailId + ", packageId=" + pack.getPackageId()
-				+ ", materialId=" + material.getMaterialId() + ", quantity" + quantity + "}\n";
+				+ ", materialId=" + material.getMaterialId() + ", quantity" + quantity + "}";
 	}
 }

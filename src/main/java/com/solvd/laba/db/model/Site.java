@@ -6,10 +6,9 @@ public class Site {
 	private City city;
 	private int zip;
 
-	public Site(int siteId, String address, City city, int zip) {
+	public Site(int siteId, String address, int zip) {
 		this.siteId = siteId;
 		this.address = address;
-		this.city = city;
 		this.zip = zip;
 	}
 
@@ -47,7 +46,6 @@ public class Site {
 
 	@Override
 	public String toString() {
-		return "Site{siteId=" + siteId + ", address=" + address + ", cityId=" + city.getCityId() + ", zip" + zip
-				+ "}\n";
+		return "Site{siteId=" + siteId + ", address=" + address + ", city=" + city + ", zip=" + zip + "}";
 	}
 }

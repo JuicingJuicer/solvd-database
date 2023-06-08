@@ -48,6 +48,6 @@ public class BuildingType {
 	@Override
 	public String toString() {
 		return "BuildingType{buildingTypeId=" + buildingTypeId + ", buildingName=" + buildingName + ", buildingTag="
-				+ buildingTag + ", additionalDetails=" + additionalDetails + "}\n";
+				+ buildingTag + ", additionalDetails=" + additionalDetails + "}";
 	}
 }
