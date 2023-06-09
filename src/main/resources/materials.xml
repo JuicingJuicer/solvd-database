@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<materials xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="materials.xsd">
+	<material>
+		<materialId>1</materialId>
+		<materialName>Wood</materialName>
+		<materialDesc>1 cord of wood</materialDesc>
+		<materialPrice>500</materialPrice>
+	</material>
+	<material>
+		<materialId>2</materialId>
+		<materialName>Granite</materialName>
+		<materialDesc>per cubic yard</materialDesc>
+		<materialPrice>80</materialPrice>
+	</material>
+	<material>
+		<materialId>3</materialId>
+		<materialName>Glass</materialName>
+		<materialDesc>per square foot</materialDesc>
+		<materialPrice>25</materialPrice>
+	</material>
+</materials>
