@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<employees xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="employees.xsd">
+	<employee>
+		<empId>1</empId>
+		<firstName>Gene</firstName>
+		<lastName>Cousineau</lastName>
+		<age>60</age>
+		<email>gcousineau@gmail.com</email>
+		<phoneNumber>20995175348</phoneNumber>
+		<job>
+			<jobId>1</jobId>
+			<jobTitle>Construction Manager</jobTitle>
+		</job>
+	</employee>
+	<employee>
+		<empId>2</empId>
+		<firstName>Barry</firstName>
+		<lastName>Block</lastName>
+		<age>40</age>
+		<email>bblock@gmail.com</email>
+		<phoneNumber>2099514725</phoneNumber>
+		<job>
+			<jobId>2</jobId>
+			<jobTitle>Civil Engineer</jobTitle>
+		</job>
+	</employee>
+</employees>

@@ -6,6 +6,9 @@ public class Material {
 	private String materialDesc;
 	private int materialPrice;
 
+	public Material() {
+	}
+
 	public Material(int materialId, String materialName, String materialDesc, int materialPrice) {
 		this.materialId = materialId;
 		this.materialName = materialName;
