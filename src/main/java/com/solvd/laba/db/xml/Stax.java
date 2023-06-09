@@ -140,6 +140,106 @@ public class Stax {
 		}
 	}
 
+	static void parseClients() throws FileNotFoundException, XMLStreamException {
+		XMLEventReader reader = getReader("src/main/resources/clients.xml");
+
+		while (reader.hasNext()) {
+			XMLEvent next = reader.nextEvent();
+			if (next.isStartElement()) {
+				StartElement startElement = next.asStartElement();
+				switch (startElement.getName().getLocalPart()) {
+				case "client":
+					LOGGER.info("Client:");
+					break;
+				case "clientId":
+					next = reader.nextEvent();
+					LOGGER.info("Id " + Integer.parseInt(next.asCharacters().getData()));
+					break;
+				case "firstName":
+					next = reader.nextEvent();
+					LOGGER.info("First Name " + next.asCharacters().getData());
+					break;
+				case "lastName":
+					next = reader.nextEvent();
+					LOGGER.info("Last Name " + next.asCharacters().getData());
+					break;
+				case "email":
+					next = reader.nextEvent();
+					LOGGER.info("Email " + next.asCharacters().getData());
+					break;
+				case "phoneNumber":
+					next = reader.nextEvent();
+					LOGGER.info("Phone Number " + next.asCharacters().getData());
+					break;
+				case "companyName":
+					next = reader.nextEvent();
+					LOGGER.info("Company Name " + next.asCharacters().getData());
+					break;
+				}
+			}
+			if (next.isEndElement()) {
+				EndElement end = next.asEndElement();
+				if (end.getName().getLocalPart().equals("client")) {
+					LOGGER.info("----------------------");
+				}
+			}
+		}
+	}
+
+	static void parseSites() throws FileNotFoundException, XMLStreamException {
+		XMLEventReader reader = getReader("src/main/resources/sites.xml");
+
+		while (reader.hasNext()) {
+			XMLEvent next = reader.nextEvent();
+			if (next.isStartElement()) {
+				StartElement startElement = next.asStartElement();
+				switch (startElement.getName().getLocalPart()) {
+				case "site":
+					LOGGER.info("Site:");
+					break;
+				case "siteId":
+					next = reader.nextEvent();
+					LOGGER.info("Site Id " + Integer.parseInt(next.asCharacters().getData()));
+					break;
+				case "address":
+					next = reader.nextEvent();
+					LOGGER.info("Address " + next.asCharacters().getData());
+					break;
+				case "city":
+					next = reader.nextEvent();
+					LOGGER.info("City " + next.asCharacters().getData());
+					break;
+				case "cityId":
+					next = reader.nextEvent();
+					LOGGER.info("City Id " + Integer.parseInt(next.asCharacters().getData()));
+					break;
+				case "cityName":
+					next = reader.nextEvent();
+					LOGGER.info("City Name " + next.asCharacters().getData());
+					break;
+				case "state":
+					next = reader.nextEvent();
+					LOGGER.info("State " + next.asCharacters().getData());
+					break;
+				case "stateId":
+					next = reader.nextEvent();
+					LOGGER.info("State Id " + next.asCharacters().getData());
+					break;
+				case "stateName":
+					next = reader.nextEvent();
+					LOGGER.info("State Name " + next.asCharacters().getData());
+					break;
+				}
+			}
+			if (next.isEndElement()) {
+				EndElement end = next.asEndElement();
+				if (end.getName().getLocalPart().equals("site")) {
+					LOGGER.info("----------------------");
+				}
+			}
+		}
+	}
+
 	public static void main(String[] args) throws SQLException, SAXException, IOException, XMLStreamException {
 		String xsdPM = "src/main/resources/materials.xsd";
 		String xmlPM = "src/main/resources/materials.xml";
@@ -151,5 +251,14 @@ public class Stax {
 		validate(xsdPE, xmlPE);
 		parseEmployees();
 
+		String xsdPC = "src/main/resources/clients.xsd";
+		String xmlPC = "src/main/resources/clients.xml";
+		validate(xsdPC, xmlPC);
+		parseClients();
+
+		String xsdPS = "src/main/resources/sites.xsd";
+		String xmlPS = "src/main/resources/sites.xml";
+		validate(xsdPS, xmlPS);
+		parseSites();
 	}
 }

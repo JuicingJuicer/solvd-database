@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clients xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="clients.xsd">
+	<client>
+		<clientId>1</clientId>
+		<firstName>Jesse</firstName>
+		<lastName>Pinkman</lastName>
+		<email>jpinkman@gmail.com</email>
+		<phoneNumber>4089412537</phoneNumber>
+		<companyName>City of San Jose</companyName>
+	</client>
+	<client>
+		<clientId>2</clientId>
+		<firstName>Walter</firstName>
+		<lastName>White</lastName>
+		<email>wwhite@gmail.com</email>
+		<phoneNumber>5059425138</phoneNumber>
+		<companyName> </companyName>
+	</client>
+	<client>
+		<clientId>3</clientId>
+		<firstName>Jimmy</firstName>
+		<lastName>McGill</lastName>
+		<email>jmorgan@gmail.com</email>
+		<phoneNumber>5056412587</phoneNumber>
+		<companyName>Cinnabon</companyName>
+	</client>
+</clients>

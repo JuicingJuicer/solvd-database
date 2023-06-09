@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sites xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="sites.xsd">
+	<site>
+		<siteId>1</siteId>
+		<address>308 Negra Arroyo Lane</address>
+		<city>
+			<cityId>1</cityId>
+			<cityName>Albuquerque</cityName>
+			<state>
+				<stateId>2</stateId>
+				<stateName>New Mexico</stateName>
+			</state>
+		</city>
+		<zip>87111</zip>
+	</site>
+</sites>

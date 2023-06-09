@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="sites">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="site">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="siteId" type="xs:int"/>
+              <xs:element name="address" type="xs:string"/>
+              <xs:element name="city">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="cityId" type="xs:int"/>
+                    <xs:element name="cityName" type="xs:string"/>
+                    <xs:element name="state">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="stateId" type="xs:int"/>
+                          <xs:element name="stateName" type="xs:string"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="zip" type="xs:int"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
