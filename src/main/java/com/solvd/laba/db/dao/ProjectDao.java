@@ -69,6 +69,7 @@ public class ProjectDao extends Dao<Project> implements IProjectDao {
 			PreparedStatement ps = c.prepareStatement(query);
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
+//			ConnectionUlti.releaseConnection(c);
 			if (rs.next()) {
 				return rs.getInt(col);
 			}
@@ -87,6 +88,7 @@ public class ProjectDao extends Dao<Project> implements IProjectDao {
 				cIds.add(rs.getInt("client_id"));
 			}
 		}
+//		ConnectionUlti.releaseConnection(c);
 		return cIds;
 	}
 

@@ -66,6 +66,7 @@ public class EmployeeDao extends Dao<Employee> implements IEmployeeDao {
 			PreparedStatement ps = c.prepareStatement("SELECT job_id FROM EMPLOYEES WHERE emp_id=?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
+			ConnectionUlti.releaseConnection(c);
 			if (rs.next()) {
 				return rs.getInt("job_id");
 			}
@@ -80,6 +81,7 @@ public class EmployeeDao extends Dao<Employee> implements IEmployeeDao {
 			PreparedStatement ps = c.prepareStatement("SELECT team_id FROM emp_teams WHERE emp_id=?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
+			ConnectionUlti.releaseConnection(c);
 			while (rs.next()) {
 				tIds.add(rs.getInt("team_id"));
 			}

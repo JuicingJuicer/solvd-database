@@ -56,6 +56,7 @@ public class CityDao extends Dao<City> implements ICityDao {
 			PreparedStatement ps = c.prepareStatement("SELECT state_id FROM CITIES WHERE city_id=?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
+//			ConnectionUlti.releaseConnection(c);
 			if (rs.next()) {
 				return rs.getInt("state_id");
 			}

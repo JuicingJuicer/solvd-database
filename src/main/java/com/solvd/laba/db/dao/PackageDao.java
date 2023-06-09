@@ -58,6 +58,7 @@ public class PackageDao extends Dao<Package> implements IPackageDao {
 			PreparedStatement ps = c.prepareStatement("SELECT site_id FROM PACKAGES WHERE package_id=?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
+//			ConnectionUlti.releaseConnection(c);
 			if (rs.next()) {
 				return rs.getInt("site_id");
 			}
@@ -77,6 +78,7 @@ public class PackageDao extends Dao<Package> implements IPackageDao {
 				map.put(rs.getInt("material_id"), rs.getInt("quantity"));
 			}
 		}
+//		ConnectionUlti.releaseConnection(c);
 		return map;
 	}
 }

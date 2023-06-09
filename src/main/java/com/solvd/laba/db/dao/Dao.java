@@ -16,6 +16,7 @@ public abstract class Dao<T> implements IDao<T> {
 			PreparedStatement ps = c.prepareStatement(getStatement());
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
+//			ConnectionUlti.releaseConnection(c);
 			while (rs.next()) {
 				return create(rs);
 			}
@@ -29,6 +30,7 @@ public abstract class Dao<T> implements IDao<T> {
 		try (Connection c = ConnectionUlti.getConnection()) {
 			PreparedStatement ps = c.prepareStatement(getAllStatement());
 			ResultSet rs = ps.executeQuery();
+//			ConnectionUlti.releaseConnection(c);
 			while (rs.next()) {
 				all.add(create(rs));
 			}
@@ -42,6 +44,7 @@ public abstract class Dao<T> implements IDao<T> {
 			PreparedStatement ps = c.prepareStatement(insertStatement());
 			addValue(t, ps, true);
 			ps.executeUpdate();
+//			ConnectionUlti.releaseConnection(c);
 		}
 	}
 
@@ -51,6 +54,7 @@ public abstract class Dao<T> implements IDao<T> {
 			PreparedStatement ps = c.prepareStatement(updateStatement());
 			addUpdatedValue(t, ps);
 			ps.executeUpdate();
+//			ConnectionUlti.releaseConnection(c);
 		}
 	}
 
@@ -60,6 +64,7 @@ public abstract class Dao<T> implements IDao<T> {
 			PreparedStatement ps = c.prepareStatement(deleteStatement());
 			addValue(t, ps, false);
 			ps.executeUpdate();
+//			ConnectionUlti.releaseConnection(c);
 		}
 	}
 
