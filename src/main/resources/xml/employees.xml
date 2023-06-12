@@ -11,6 +11,18 @@
 			<jobId>1</jobId>
 			<jobTitle>Construction Manager</jobTitle>
 		</job>
+		<teams>
+			<team>
+				<teamId>1</teamId>
+				<teamName>Team A</teamName>
+				<teamDetails> </teamDetails>
+			</team>
+			<team>
+				<teamId>2</teamId>
+				<teamName>Team B</teamName>
+				<teamDetails>Elite</teamDetails>
+			</team>
+		</teams>>
 	</employee>
 	<employee>
 		<empId>2</empId>
@@ -23,5 +35,12 @@
 			<jobId>2</jobId>
 			<jobTitle>Civil Engineer</jobTitle>
 		</job>
+		<teams>
+			<team>
+				<teamId>2</teamId>
+				<teamName>Team B</teamName>
+				<teamDetails>Elite</teamDetails>
+			</team>
+		</teams>
 	</employee>
 </employees>

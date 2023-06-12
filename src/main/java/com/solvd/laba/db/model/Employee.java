@@ -12,6 +12,9 @@ public class Employee {
 	private Job job;
 	private ArrayList<Team> teams;
 
+	public Employee() {
+	}
+
 	public Employee(int empId, String firstName, String lastName, int age, String email, String phoneNumber) {
 		this.setEmpId(empId);
 		this.setFirstName(firstName);

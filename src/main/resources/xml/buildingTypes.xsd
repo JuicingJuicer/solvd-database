@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="buildingTypes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="buildingType" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="buildingTypeId" type="xs:int"/>
+              <xs:element name="buildingName" type="xs:string"/>
+              <xs:element name="buildingTag" type="xs:string"/>
+              <xs:element name="additionalDetails" type="xs:string"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

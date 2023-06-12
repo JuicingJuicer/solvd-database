@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildingTypes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="buildingTypes.xsd">
+	<buildingType>
+		<buildingTypeId>1</buildingTypeId>
+		<buildingName>Office</buildingName>
+		<buildingTag>BUSINESS</buildingTag>
+		<additionalDetails> </additionalDetails>
+	</buildingType>
+	<buildingType>
+		<buildingTypeId>2</buildingTypeId>
+		<buildingName>House</buildingName>
+		<buildingTag>RESIDENTIAL</buildingTag>
+		<additionalDetails>1 story</additionalDetails>
+	</buildingType>
+	<buildingType>
+		<buildingTypeId>3</buildingTypeId>
+		<buildingName>WareHouse</buildingName>
+		<buildingTag>STORAGE</buildingTag>
+		<additionalDetails>cold storage</additionalDetails>
+	</buildingType>
+</buildingTypes>

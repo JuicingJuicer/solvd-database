@@ -4,6 +4,9 @@ public class Job {
 	private int jobId;
 	private String jobTitle;
 
+	public Job() {
+	}
+
 	public Job(int jobId, String jobTitle) {
 		this.setJobId(jobId);
 		this.setJobTitle(jobTitle);

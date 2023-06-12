@@ -5,6 +5,9 @@ public class Team {
 	private String teamName;
 	private String teamDetails;
 
+	public Team() {
+	}
+
 	public Team(int teamId, String teamName, String teamDetails) {
 		this.setTeamId(teamId);
 		this.setTeamName(teamName);

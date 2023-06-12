@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="employees">
     <xs:complexType>
       <xs:sequence>
         <xs:element name="employee" maxOccurs="unbounded">
-          <xs:complexType>
+          <xs:complexType mixed="true">
             <xs:sequence>
               <xs:element name="empId" type="xs:int"/>
               <xs:element name="firstName" type="xs:string"/>
@@ -17,6 +16,21 @@
                   <xs:sequence>
                     <xs:element name="jobId" type="xs:int"/>
                     <xs:element name="jobTitle" type="xs:string"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="teams">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="team" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="teamId" type="xs:int"/>
+                          <xs:element name="teamName" type="xs:string"/>
+                          <xs:element name="teamDetails" type="xs:string"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
