@@ -62,7 +62,8 @@ public class EmployeeDao extends Dao<Employee> implements IEmployeeDao {
 
 	@Override
 	public int getJId(int id) throws SQLException {
-		try (Connection c = ConnectionUlti.getConnection()) {
+		Connection c = ConnectionUlti.getConnection();
+		try {
 			PreparedStatement ps = c.prepareStatement("SELECT job_id FROM EMPLOYEES WHERE emp_id=?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
@@ -70,6 +71,8 @@ public class EmployeeDao extends Dao<Employee> implements IEmployeeDao {
 			if (rs.next()) {
 				return rs.getInt("job_id");
 			}
+		} finally {
+			ConnectionUlti.releaseConnection(c);
 		}
 		return 0;
 	}
@@ -77,7 +80,8 @@ public class EmployeeDao extends Dao<Employee> implements IEmployeeDao {
 	@Override
 	public ArrayList<Integer> getTId(int id) throws SQLException {
 		ArrayList<Integer> tIds = new ArrayList<>();
-		try (Connection c = ConnectionUlti.getConnection()) {
+		Connection c = ConnectionUlti.getConnection();
+		try {
 			PreparedStatement ps = c.prepareStatement("SELECT team_id FROM emp_teams WHERE emp_id=?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
@@ -85,6 +89,8 @@ public class EmployeeDao extends Dao<Employee> implements IEmployeeDao {
 			while (rs.next()) {
 				tIds.add(rs.getInt("team_id"));
 			}
+		} finally {
+			ConnectionUlti.releaseConnection(c);
 		}
 		return tIds;
 	}

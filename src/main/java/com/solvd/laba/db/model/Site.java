@@ -1,10 +1,24 @@
 package main.java.com.solvd.laba.db.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "site")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Site {
+	@XmlElement(name = "siteId")
 	private int siteId;
+	@XmlElement(name = "address")
 	private String address;
+	@XmlElement(name = "city")
 	private City city;
+	@XmlElement(name = "zip")
 	private int zip;
+
+	public Site() {
+	}
 
 	public Site(int siteId, String address, int zip) {
 		this.siteId = siteId;

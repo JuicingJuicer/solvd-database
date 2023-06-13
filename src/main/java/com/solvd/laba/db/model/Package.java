@@ -3,12 +3,32 @@ package main.java.com.solvd.laba.db.model;
 import java.util.Date;
 import java.util.HashMap;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import main.java.com.solvd.laba.db.xml.DateAdapter;
+
+@XmlRootElement(name = "package")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Package {
+	@XmlElement(name = "packageId")
 	private int packageId;
+	@XmlElement(name = "purchaseDate")
+	@XmlJavaTypeAdapter(DateAdapter.class)
 	private java.util.Date purchaseDate;
+	@XmlElement(name = "status")
 	private String status;
+	@XmlElement(name = "site")
 	private Site site;
+	@XmlTransient
 	private HashMap<Material, Integer> materialQuantity;
+
+	public Package() {
+	}
 
 	public Package(int packageId, Date purchaseDate, String status) {
 		this.packageId = packageId;

@@ -64,15 +64,17 @@ public class ProjectDao extends Dao<Project> implements IProjectDao {
 
 	@Override
 	public int getIdByCol(String col, int id) throws SQLException {
-		try (Connection c = ConnectionUlti.getConnection()) {
+		Connection c = ConnectionUlti.getConnection();
+		try {
 			String query = "SELECT " + col + " FROM PROJECTS WHERE project_id=?";
 			PreparedStatement ps = c.prepareStatement(query);
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
-//			ConnectionUlti.releaseConnection(c);
 			if (rs.next()) {
 				return rs.getInt(col);
 			}
+		} finally {
+			ConnectionUlti.releaseConnection(c);
 		}
 		return 0;
 	}
@@ -80,15 +82,17 @@ public class ProjectDao extends Dao<Project> implements IProjectDao {
 	@Override
 	public ArrayList<Integer> getCId(int id) throws SQLException {
 		ArrayList<Integer> cIds = new ArrayList<>();
-		try (Connection c = ConnectionUlti.getConnection()) {
+		Connection c = ConnectionUlti.getConnection();
+		try {
 			PreparedStatement ps = c.prepareStatement("SELECT client_id FROM client_projects WHERE project_id=?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				cIds.add(rs.getInt("client_id"));
 			}
+		} finally {
+			ConnectionUlti.releaseConnection(c);
 		}
-//		ConnectionUlti.releaseConnection(c);
 		return cIds;
 	}
 

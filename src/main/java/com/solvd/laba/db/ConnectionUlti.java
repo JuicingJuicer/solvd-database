@@ -11,31 +11,32 @@ import java.util.Properties;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ConnectionUlti {
-	private final static int SIZE = 15;
+	private final static int SIZE = 5;
 	private static CopyOnWriteArrayList<Connection> pool = new CopyOnWriteArrayList<>();
 	private static CopyOnWriteArrayList<Connection> usedPool = new CopyOnWriteArrayList<>();
+	private static boolean isInitialized = false;
 	private static Object lock = new Object();
 
-	static {
-		try {
-			populatePool();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
 	public static Connection getConnection() throws SQLException {
-		Properties props = new Properties();
-		try (InputStream input = new FileInputStream("src/main/resources/db.properties")) {
-			props.load(input);
-		} catch (FileNotFoundException e) {
-			throw new RuntimeException(e);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
+		// gets new connection
+		if (!isInitialized) {
+			Properties props = new Properties();
+			try (InputStream input = new FileInputStream("src/main/resources/db.properties")) {
+				props.load(input);
+			} catch (FileNotFoundException e) {
+				throw new RuntimeException(e);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+			isInitialized = true;
+			Connection c = DriverManager.getConnection(props.getProperty("db.url"), props.getProperty("db.user"),
+					props.getProperty("db.password"));
+			return c;
+		} else { // gets connection from pool
+			Connection c = pool.remove(0);
+			usedPool.add(c);
+			return c;
 		}
-		Connection c = DriverManager.getConnection(props.getProperty("db.url"), props.getProperty("db.user"),
-				props.getProperty("db.password"));
-		return c;
 	}
 
 //	public static Connection getConnection() {
@@ -52,22 +53,6 @@ public class ConnectionUlti {
 //		usedPool.add(c);
 //		return c;
 //	}
-
-	public static void populatePool() throws SQLException {
-		Properties props = new Properties();
-		try (InputStream input = new FileInputStream("src/main/resources/db.properties")) {
-			props.load(input);
-		} catch (FileNotFoundException e) {
-			throw new RuntimeException(e);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-		for (int i = 0; i < SIZE; i++) {
-			Connection c = DriverManager.getConnection(props.getProperty("db.url"), props.getProperty("db.user"),
-					props.getProperty("db.password"));
-			pool.add(c);
-		}
-	}
 
 	public static void releaseConnection(Connection c) {
 		synchronized (lock) {
