@@ -39,5 +39,26 @@ public class Main {
 		PackageService packService = new PackageService();
 		Package pack = packService.getPackage(1);
 		LOGGER.info(pack);
+
+		// Connection pool test 7 threads try to get connections
+//		ExecutorService ex = Executors.newFixedThreadPool(7);
+//		Runnable task = new Runnable() {
+//			@Override
+//			public void run() {
+//				try {
+//					Connection c = ConnectionUlti.getConnection();
+//					Thread.sleep(2000);
+//					LOGGER.info("Job done!");
+//					ConnectionUlti.releaseConnection(c);
+//				} catch (InterruptedException | SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		};
+//
+//		for (int i = 0; i < 7; i++) {
+//			ex.execute(task);
+//		}
+//		ex.shutdown();
 	}
 }
