@@ -54,13 +54,16 @@ public class SiteDao extends Dao<Site> implements ISiteDao {
 
 	@Override
 	public int getCId(int id) throws SQLException {
-		try (Connection c = ConnectionUlti.getConnection()) {
+		Connection c = ConnectionUlti.getConnection();
+		try {
 			PreparedStatement ps = c.prepareStatement("SELECT city_id FROM SITES WHERE site_id=?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				return rs.getInt("city_id");
 			}
+		} finally {
+			ConnectionUlti.releaseConnection(c);
 		}
 		return 0;
 	}

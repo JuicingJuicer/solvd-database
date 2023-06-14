@@ -1,7 +1,16 @@
 package main.java.com.solvd.laba.db.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "job")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Job {
+	@XmlElement(name = "jobId")
 	private int jobId;
+	@XmlElement(name = "jobTitle")
 	private String jobTitle;
 
 	public Job() {

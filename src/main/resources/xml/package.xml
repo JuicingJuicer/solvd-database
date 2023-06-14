@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package>
+		<packageId>1</packageId>
+		<purchaseDate>2023-05-29</purchaseDate>
+		<status>Invoiced</status>
+		<site>
+			<siteId>1</siteId>
+			<address>123 Hello Street</address>
+			<city>
+				<cityId>1</cityId>
+				<name>San Jose</name>
+				<state>
+					<stateId>5</stateId>
+					<stateName>California</stateName>
+				</state>
+			</city>
+			<zip>95408</zip>
+		</site>
+</package>

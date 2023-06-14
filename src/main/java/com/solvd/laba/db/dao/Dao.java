@@ -12,14 +12,16 @@ import main.java.com.solvd.laba.db.interfaces.IDao;
 public abstract class Dao<T> implements IDao<T> {
 	@Override
 	public T get(int id) throws SQLException {
-		try (Connection c = ConnectionUlti.getConnection()) {
+		Connection c = ConnectionUlti.getConnection();
+		try {
 			PreparedStatement ps = c.prepareStatement(getStatement());
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
-//			ConnectionUlti.releaseConnection(c);
 			while (rs.next()) {
 				return create(rs);
 			}
+		} finally {
+			ConnectionUlti.releaseConnection(c);
 		}
 		return null;
 	}
@@ -27,44 +29,52 @@ public abstract class Dao<T> implements IDao<T> {
 	@Override
 	public ArrayList<T> getAll() throws SQLException {
 		ArrayList<T> all = new ArrayList<>();
-		try (Connection c = ConnectionUlti.getConnection()) {
+		Connection c = ConnectionUlti.getConnection();
+		try {
 			PreparedStatement ps = c.prepareStatement(getAllStatement());
 			ResultSet rs = ps.executeQuery();
-//			ConnectionUlti.releaseConnection(c);
 			while (rs.next()) {
 				all.add(create(rs));
 			}
+		} finally {
+			ConnectionUlti.releaseConnection(c);
 		}
 		return all;
 	}
 
 	@Override
 	public void insert(T t) throws SQLException {
-		try (Connection c = ConnectionUlti.getConnection()) {
+		Connection c = ConnectionUlti.getConnection();
+		try {
 			PreparedStatement ps = c.prepareStatement(insertStatement());
 			addValue(t, ps, true);
 			ps.executeUpdate();
-//			ConnectionUlti.releaseConnection(c);
+		} finally {
+			ConnectionUlti.releaseConnection(c);
 		}
 	}
 
 	@Override
 	public void update(T t) throws SQLException {
-		try (Connection c = ConnectionUlti.getConnection()) {
+		Connection c = ConnectionUlti.getConnection();
+		try {
 			PreparedStatement ps = c.prepareStatement(updateStatement());
 			addUpdatedValue(t, ps);
 			ps.executeUpdate();
-//			ConnectionUlti.releaseConnection(c);
+		} finally {
+			ConnectionUlti.releaseConnection(c);
 		}
 	}
 
 	@Override
 	public void delete(T t) throws SQLException {
-		try (Connection c = ConnectionUlti.getConnection()) {
+		Connection c = ConnectionUlti.getConnection();
+		try {
 			PreparedStatement ps = c.prepareStatement(deleteStatement());
 			addValue(t, ps, false);
 			ps.executeUpdate();
-//			ConnectionUlti.releaseConnection(c);
+		} finally {
+			ConnectionUlti.releaseConnection(c);
 		}
 	}
 
