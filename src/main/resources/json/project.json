@@ -1,0 +1,44 @@
+{
+  "projectId":6,
+  "projectName":"My Home",
+  "startDate":"2023-04-01",
+  "endDate":"2023-12-10",
+  "buildingType":{
+    "buildingTypeId":2,
+    "buildingName":"House",
+    "buildingTag":"RESIDENTIAL",
+    "additionalDetails":"Two Story"
+  },
+  "phase":{
+    "phaseId":4,
+    "phaseName":"Construction"
+  },
+  "site":{
+    "siteId":4,
+    "address":"123 Hello Street",
+    "city":{
+      "cityId":1,
+      "name":"San Jose",
+      "state":{
+        "stateId":5,
+        "name":"California"
+      }
+    },
+    "zip":95408
+  },
+  "team":{
+    "teamId":5,
+    "teamName":"Team E",
+    "teamDetails":"Efficient"
+  },
+  "clients":[
+    {
+      "clientId":1,
+      "firstName":"John",
+      "lastName":"Wick",
+      "email":"jwick@gmail.com",
+      "phoneNumber":"4059125475",
+      "companyName":"None"
+    }
+  ]
+}

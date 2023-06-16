@@ -3,16 +3,33 @@ package main.java.com.solvd.laba.db.model;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Project {
+	@JsonProperty("projectId")
 	private int projectId;
+	@JsonProperty("projectName")
 	private String projectName;
+	@JsonProperty("startDate")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private java.util.Date startDate;
+	@JsonProperty("endDate")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private java.util.Date endDate;
+	@JsonProperty("buildingType")
 	private BuildingType buildingType;
+	@JsonProperty("phase")
 	private Phase phase;
+	@JsonProperty("site")
 	private Site site;
+	@JsonProperty("team")
 	private Team team;
+	@JsonProperty("clients")
 	private ArrayList<Client> clients;
+
+	public Project() {
+	}
 
 	public Project(int projectId, String projectName, Date startDate, Date endDate) {
 		this.projectId = projectId;
@@ -95,8 +112,8 @@ public class Project {
 
 	@Override
 	public String toString() {
-		return "Project{projectName=" + projectName + ", buildingType=" + buildingType + ", phase=" + phase
-				+ ", startDate=" + startDate + ", endDate=" + endDate + ", site=" + site + ", Team=" + team
-				+ ", Client(s)" + clients + "}";
+		return "Project{projectId" + projectId + ", projectName=" + projectName + ", startDate=" + startDate
+				+ ", endDate=" + endDate + ", buildingType=" + buildingType + ", phase=" + phase + ", site=" + site
+				+ ", Team=" + team + ", Client(s)" + clients + "}";
 	}
 }

@@ -8,25 +8,35 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @XmlRootElement(name = "employee")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Employee {
 	@XmlElement(name = "empId")
+	@JsonProperty("empId")
 	private int empId;
 	@XmlElement(name = "firstName")
+	@JsonProperty("firstName")
 	private String firstName;
 	@XmlElement(name = "lastName")
+	@JsonProperty("lastName")
 	private String lastName;
 	@XmlElement(name = "age")
+	@JsonProperty("age")
 	private int age;
 	@XmlElement(name = "email")
+	@JsonProperty("email")
 	private String email;
 	@XmlElement(name = "phoneNumber")
+	@JsonProperty("phoneNumber")
 	private String phoneNumber;
 	@XmlElement(name = "job")
+	@JsonProperty("job")
 	private Job job;
 	@XmlElement(name = "team")
 	@XmlElementWrapper(name = "teams")
+	@JsonProperty("teams")
 	private ArrayList<Team> teams;
 
 	public Employee() {

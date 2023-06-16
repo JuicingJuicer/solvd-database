@@ -1,10 +1,19 @@
 package main.java.com.solvd.laba.db.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class BuildingType {
+	@JsonProperty("buildingTypeId")
 	private int buildingTypeId;
+	@JsonProperty("buildingName")
 	private String buildingName;
+	@JsonProperty("buildingTag")
 	private String buildingTag;
+	@JsonProperty("additionalDetails")
 	private String additionalDetails;
+
+	public BuildingType() {
+	}
 
 	public BuildingType(int buildingTypeId, String buildingName, String buildingTag, String additionalDetails) {
 		this.buildingTypeId = buildingTypeId;

@@ -1,0 +1,8 @@
+{
+  "cityId":20,
+  "name":"Denver",
+  "state":{
+    "stateId":6,
+    "name":"Colorado"
+  }
+}
