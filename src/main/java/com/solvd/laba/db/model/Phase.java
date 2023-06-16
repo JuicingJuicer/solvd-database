@@ -1,8 +1,15 @@
 package main.java.com.solvd.laba.db.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Phase {
+	@JsonProperty("phaseId")
 	private int phaseId;
+	@JsonProperty("phaseName")
 	private String phaseName;
+
+	public Phase() {
+	}
 
 	public Phase(int phaseId, String phaseName) {
 		this.phaseId = phaseId;

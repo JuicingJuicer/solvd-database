@@ -1,0 +1,13 @@
+{
+  "siteId":10,
+  "address":"408 Arroyo Lane",
+  "city":{
+    "cityId":5,
+    "name":"Albuquerque",
+    "state":{
+      "stateId":31,
+      "name":"New Mexico"
+    }
+  },
+  "zip":87101
+}

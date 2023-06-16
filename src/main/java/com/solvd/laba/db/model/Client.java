@@ -1,12 +1,23 @@
 package main.java.com.solvd.laba.db.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Client {
+	@JsonProperty("clientId")
 	private int clientId;
+	@JsonProperty("firstName")
 	private String firstName;
+	@JsonProperty("lastName")
 	private String lastName;
+	@JsonProperty("email")
 	private String email;
+	@JsonProperty("phoneNumber")
 	private String phoneNumber;
+	@JsonProperty("companyName")
 	private String companyName;
+
+	public Client() {
+	}
 
 	public Client(int clientId, String firstName, String lastName, String email, String phoneNumber,
 			String companyName) {

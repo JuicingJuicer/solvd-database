@@ -1,0 +1,24 @@
+{
+  "empId":5,
+  "firstName":"Walter",
+  "lastName":"White",
+  "age":"52",
+  "email":"wwhite@gmail.com",
+  "phoneNumber":"4086142548",
+  "job":{
+    "jobId":2,
+    "jobTitle":"Civil Engineer"
+  },
+  "teams":[
+    {
+      "teamId":4,
+      "teamName":"Team D",
+      "teamDetails":"Fun"
+    },
+    {
+      "teamId":5,
+      "teamName":"Team E",
+      "teamDetails":"Efficient"
+    }
+  ]
+}

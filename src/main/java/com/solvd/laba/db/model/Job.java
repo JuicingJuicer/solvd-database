@@ -5,12 +5,16 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @XmlRootElement(name = "job")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Job {
 	@XmlElement(name = "jobId")
+	@JsonProperty("jobId")
 	private int jobId;
 	@XmlElement(name = "jobTitle")
+	@JsonProperty("jobTitle")
 	private String jobTitle;
 
 	public Job() {

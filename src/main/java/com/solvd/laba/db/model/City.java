@@ -5,14 +5,19 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @XmlRootElement(name = "city")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class City {
 	@XmlElement(name = "cityId")
+	@JsonProperty("cityId")
 	private int cityId;
 	@XmlElement(name = "name")
+	@JsonProperty("name")
 	private String name;
 	@XmlElement(name = "state")
+	@JsonProperty("state")
 	private State state;
 
 	public City() {
