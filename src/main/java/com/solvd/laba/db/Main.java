@@ -40,8 +40,8 @@ public class Main {
 		Package pack = packService.getPackage(1);
 		LOGGER.info(pack);
 
-		// Connection pool test 7 threads try to get connections
-//		ExecutorService ex = Executors.newFixedThreadPool(7);
+		// Connection pool test 10 threads try to get connections
+//		ExecutorService ex = Executors.newFixedThreadPool(10);
 //		Runnable task = new Runnable() {
 //			@Override
 //			public void run() {
@@ -56,7 +56,7 @@ public class Main {
 //			}
 //		};
 //
-//		for (int i = 0; i < 7; i++) {
+//		for (int i = 0; i < 10; i++) {
 //			ex.execute(task);
 //		}
 //		ex.shutdown();
