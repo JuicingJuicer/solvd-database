@@ -10,6 +10,14 @@ public class Material {
 	public Material() {
 	}
 
+	public Material(int materialId, String materialName, String materialDesc, int materialPrice) {
+		this.materialId = materialId;
+		this.materialName = materialName;
+		this.materialDesc = materialDesc;
+		this.materialPrice = materialPrice;
+		this.quantity = 0;
+	}
+
 	public Material(int materialId, String materialName, String materialDesc, int materialPrice, int quantity) {
 		this.materialId = materialId;
 		this.materialName = materialName;

@@ -33,6 +33,7 @@ import main.java.com.solvd.laba.db.model.Project;
 import main.java.com.solvd.laba.db.model.Site;
 import main.java.com.solvd.laba.db.model.State;
 import main.java.com.solvd.laba.db.model.Team;
+import main.java.com.solvd.laba.db.service.EmployeeService;
 
 public class MyBatisMain {
 	private static final Logger LOGGER = LogManager.getLogger(MyBatisMain.class);
@@ -87,6 +88,12 @@ public class MyBatisMain {
 			ProjectMapper projectMapper = session.getMapper(ProjectMapper.class);
 			Project project = projectMapper.selectProjectById(1);
 			LOGGER.info(project);
+
+			// service test
+			EmployeeMapper employeeMapper2 = session.getMapper(EmployeeMapper.class);
+			EmployeeService es = new EmployeeService(employeeMapper2);
+			Employee emp2 = es.getEmployee(3);
+			LOGGER.info(emp2);
 		}
 	}
 
