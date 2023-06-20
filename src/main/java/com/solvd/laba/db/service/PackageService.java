@@ -32,7 +32,7 @@ public class PackageService {
 	public Package getPackage(int id) throws SQLException {
 		Package pack = packageDao.get(id);
 		pack.setSite(getPackageSite(packageDao.getSId(id)));
-		pack.setMaterialQuantity(getMatQuantity(id));
+//		pack.setMaterialQuantity(getMatQuantity(id));
 		return pack;
 	}
 

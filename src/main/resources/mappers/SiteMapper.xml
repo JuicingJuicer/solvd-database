@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="main.java.com.solvd.laba.db.mapper.SiteMapper">
+	
+  <select id="selectSiteById" resultMap="main.java.com.solvd.laba.db.mapper.SiteMapper.siteResultMap">
+	select *
+	from sites S
+	join cities C on S.city_id = C.city_id
+	join states ST on C.state_id = ST.state_id
+	where S.site_id = #{id}
+  </select>
+  
+  <resultMap id="siteResultMap" type="main.java.com.solvd.laba.db.model.Site" autoMapping="false">
+	  <id property="siteId" column="site_id"/>
+	  <result property="address" column="address"/>
+	  <result property="zip" column="zip"/>
+	  <association property="city" resultMap="main.java.com.solvd.laba.db.mapper.CityMapper.cityResultMap"></association>
+  </resultMap>
+  
+</mapper>

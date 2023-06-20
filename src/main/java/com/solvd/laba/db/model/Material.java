@@ -5,15 +5,17 @@ public class Material {
 	private String materialName;
 	private String materialDesc;
 	private int materialPrice;
+	private int quantity;
 
 	public Material() {
 	}
 
-	public Material(int materialId, String materialName, String materialDesc, int materialPrice) {
+	public Material(int materialId, String materialName, String materialDesc, int materialPrice, int quantity) {
 		this.materialId = materialId;
 		this.materialName = materialName;
 		this.materialDesc = materialDesc;
 		this.materialPrice = materialPrice;
+		this.quantity = quantity;
 	}
 
 	public void setMaterialId(int materialId) {
@@ -32,6 +34,10 @@ public class Material {
 		this.materialPrice = materialPrice;
 	}
 
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
 	public int getMaterialId() {
 		return materialId;
 	}
@@ -48,9 +54,13 @@ public class Material {
 		return materialPrice;
 	}
 
+	public int getQuantity() {
+		return quantity;
+	}
+
 	@Override
 	public String toString() {
 		return "Material{materialId=" + materialId + ", materialName=" + materialName + ", materialDesc=" + materialDesc
-				+ ", materialPrice=" + materialPrice + "}";
+				+ ", materialPrice=" + materialPrice + ", quantity=" + quantity + "}";
 	}
 }

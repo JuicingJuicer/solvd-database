@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="main.java.com.solvd.laba.db.mapper.ProjectMapper">
+	
+  <select id="selectProjectById" resultMap="main.java.com.solvd.laba.db.mapper.ProjectMapper.projectResultMap">
+    select *
+    from projects P
+    join building_types BT on P.building_type = BT.building_type_id
+    join phases PH on P.phase_id = PH.phase_id
+    join sites S on P.site_id = S.site_id
+    join cities C on S.city_id = C.city_id
+	join states ST on C.state_id = ST.state_id
+	join teams T on P.team_id = T.team_id
+	join client_projects CP on P.project_id = CP.project_id
+	join clients CL on CP.client_id = CL.client_id
+    where P.project_id = #{id}
+
+  </select>
+  
+  <resultMap id="projectResultMap" type="main.java.com.solvd.laba.db.model.Project" autoMapping="false">
+	  <id property="projectId" column="project_id"/>
+	  <result property="projectName" column="project_name"/>
+	  <result property="startDate" column="start_date"/>
+	  <result property="endDate" column="end_date"/>
+	  <association property="buildingType" resultMap="main.java.com.solvd.laba.db.mapper.BuildingTypeMapper.buildingTypeResultMap"></association>
+	  <association property="phase" resultMap="main.java.com.solvd.laba.db.mapper.PhaseMapper.phaseResultMap"></association>
+	  <association property="site" resultMap="main.java.com.solvd.laba.db.mapper.SiteMapper.siteResultMap"></association>
+	  <association property="team" resultMap="main.java.com.solvd.laba.db.mapper.TeamMapper.teamResultMap"></association>
+	  <collection property="clients" resultMap="main.java.com.solvd.laba.db.mapper.ClientMapper.clientResultMap"/>
+  </resultMap>
+  
+</mapper>

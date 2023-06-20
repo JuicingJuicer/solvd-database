@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="main.java.com.solvd.laba.db.mapper.PackageMapper">
+	
+  <select id="selectPackageById" resultMap="main.java.com.solvd.laba.db.mapper.PackageMapper.packageResultMap">
+	select *
+	from packages P
+	join package_details PD on P.package_id = PD.Package_id
+	join materials M on PD.material_id = M.material_id
+	join sites S on P.site_id = S.site_id
+	join cities C on S.city_id = C.city_id
+	join states ST on C.state_id = ST.state_id
+	where P.package_id = #{id}
+  </select>
+  
+  <resultMap id="packageResultMap" type="main.java.com.solvd.laba.db.model.Package" autoMapping="false">
+	  <id property="packageId" column="package_id"/>
+	  <result property="purchaseDate" column="purchase_date"/>
+	  <result property="status" column="status"/>
+	  <association property="site" resultMap="main.java.com.solvd.laba.db.mapper.SiteMapper.siteResultMap"></association>
+	  <collection property="materials" resultMap="main.java.com.solvd.laba.db.mapper.MaterialMapper.materialResultMap"/>
+  </resultMap>
+  
+</mapper>

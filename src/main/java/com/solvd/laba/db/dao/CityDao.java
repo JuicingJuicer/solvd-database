@@ -38,14 +38,14 @@ public class CityDao extends Dao<City> implements ICityDao {
 	protected void addValue(City city, PreparedStatement ps, boolean b) throws SQLException {
 		ps.setInt(1, city.getCityId());
 		if (b) {
-			ps.setString(2, city.getName());
+			ps.setString(2, city.getCityName());
 			ps.setInt(3, city.getState().getStateId());
 		}
 	}
 
 	protected void addUpdatedValue(City city, PreparedStatement ps) throws SQLException {
 		ps.setInt(1, city.getCityId());
-		ps.setString(2, city.getName());
+		ps.setString(2, city.getCityName());
 		ps.setInt(3, city.getState().getStateId());
 		ps.setInt(4, city.getCityId());
 	}

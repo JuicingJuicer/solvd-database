@@ -1,7 +1,7 @@
 package main.java.com.solvd.laba.db.model;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -25,7 +25,7 @@ public class Package {
 	@XmlElement(name = "site")
 	private Site site;
 	@XmlTransient
-	private HashMap<Material, Integer> materialQuantity;
+	private ArrayList<Material> materials;
 
 	public Package() {
 	}
@@ -52,8 +52,8 @@ public class Package {
 		this.site = site;
 	}
 
-	public void setMaterialQuantity(HashMap<Material, Integer> materialQuantity) {
-		this.materialQuantity = materialQuantity;
+	public void setMaterials(ArrayList<Material> materials) {
+		this.materials = materials;
 	}
 
 	public int getPackageId() {
@@ -72,13 +72,13 @@ public class Package {
 		return site;
 	}
 
-	public HashMap<Material, Integer> getMaterialQuantity() {
-		return materialQuantity;
+	public ArrayList<Material> getMaterials() {
+		return materials;
 	}
 
 	@Override
 	public String toString() {
 		return "Package{packageId=" + packageId + ", purchaseDate=" + purchaseDate + ", status=" + status + ", site="
-				+ site + ", materialQuantity=" + materialQuantity + "}";
+				+ site + ", materials=" + materials + "}";
 	}
 }

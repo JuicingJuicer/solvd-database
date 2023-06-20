@@ -34,13 +34,13 @@ public class StateDao extends Dao<State> {
 	protected void addValue(State state, PreparedStatement ps, boolean b) throws SQLException {
 		ps.setInt(1, state.getStateId());
 		if (b) {
-			ps.setString(2, state.getName());
+			ps.setString(2, state.getStateName());
 		}
 	}
 
 	protected void addUpdatedValue(State state, PreparedStatement ps) throws SQLException {
 		ps.setInt(1, state.getStateId());
-		ps.setString(2, state.getName());
+		ps.setString(2, state.getStateName());
 		ps.setInt(3, state.getStateId());
 	}
 }
