@@ -11,6 +11,35 @@
 	where C.city_id = #{id}
   </select>
   
+   <select id="selectCityByName" resultMap="main.java.com.solvd.laba.db.mapper.CityMapper.cityResultMap">
+    select *
+	from cities C
+	join states S on C.state_id = S.state_id
+	where C.city_name = #{name}
+  </select>
+  
+   <select id="selectCities" resultMap="main.java.com.solvd.laba.db.mapper.CityMapper.cityResultMap">
+    select *
+	from cities C
+	join states S on C.state_id = S.state_id
+  </select>
+  
+  <insert id="insertCity">
+	  insert into cities (city_name, state_id)
+	  values (#{cityName}, #{state.stateId})
+  </insert>
+  
+  <update id="updateCity">
+	  update cities SET
+	  city_name = #{cityName},
+	  state_id = #{state.stateId}
+	  where city_id = #{cityId}
+  </update>
+  
+  <delete id="deleteEmployee">
+	  DELETE FROM cities where city_id = #{cityId}
+  </delete>
+  
   <resultMap id="cityResultMap" type="main.java.com.solvd.laba.db.model.City" autoMapping="false">
 	  <id property="cityId" column="city_id"/>
 	  <result property="cityName" column="city_name"/>

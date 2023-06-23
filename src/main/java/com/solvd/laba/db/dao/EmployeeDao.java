@@ -94,4 +94,21 @@ public class EmployeeDao extends Dao<Employee> implements IEmployeeDao {
 		}
 		return tIds;
 	}
+
+	@Override
+	public ArrayList<Employee> getEmployeeByJobId(int id) throws SQLException {
+		ArrayList<Employee> emps = new ArrayList<>();
+		Connection c = ConnectionUlti.getConnection();
+		try {
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM EMPLOYEES WHERE job_id=?");
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				emps.add(create(rs));
+			}
+		} finally {
+			ConnectionUlti.releaseConnection(c);
+		}
+		return emps;
+	}
 }

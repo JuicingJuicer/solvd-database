@@ -7,12 +7,48 @@
   <select id="selectEmployeeById" resultMap="main.java.com.solvd.laba.db.mapper.EmployeeMapper.employeeResultMap">
     select *
     from employees E
-    join jobs J on E.job_id = J.job_id
-    join emp_teams ET on E.emp_id = ET.emp_id
-    join teams T on ET.team_id = T.team_id
+    LEFT join jobs J on E.job_id = J.job_id
+    LEFT join emp_teams ET on E.emp_id = ET.emp_id
+    LEFT join teams T on ET.team_id = T.team_id
     where E.emp_id = #{id}
-
   </select>
+  
+  <select id="selectEmployees" resultMap="main.java.com.solvd.laba.db.mapper.EmployeeMapper.employeeResultMap">
+    select *
+    from employees E
+    LEFT join jobs J on E.job_id = J.job_id
+    LEFT join emp_teams ET on E.emp_id = ET.emp_id
+    LEFT join teams T on ET.team_id = T.team_id
+  </select>
+  
+  <select id="selectEmployeeByJobId" resultMap="main.java.com.solvd.laba.db.mapper.EmployeeMapper.employeeResultMap">
+    select *
+    from employees E
+    LEFT join jobs J on E.job_id = J.job_id
+    LEFT join emp_teams ET on E.emp_id = ET.emp_id
+    LEFT join teams T on ET.team_id = T.team_id
+    where E.job_id = #{id}
+  </select>
+  
+  <insert id="insertEmployee">
+	  insert into employees (first_name, last_name, age, email, phone_number, job_id)
+	  values (#{firstName},#{lastName},#{age},#{email},#{phoneNumber},#{job.jobId})
+  </insert>
+  
+  <update id="updateEmployee">
+	  update employees SET
+	  first_name = #{firstName},
+	  last_name = #{lastName},
+	  age = #{age},
+	  email = #{email},
+	  phone_number = #{phoneNumber},
+	  job_id = #{job.jobId}
+	  where emp_id = #{empId}
+  </update>
+  
+  <delete id="deleteEmployee">
+	  DELETE FROM employees where emp_id = #{empId}
+  </delete>
   
   <resultMap id="employeeResultMap" type="main.java.com.solvd.laba.db.model.Employee" autoMapping="false">
 	  <id property="empId" column="emp_id"/>

@@ -7,10 +7,42 @@
   <select id="selectSiteById" resultMap="main.java.com.solvd.laba.db.mapper.SiteMapper.siteResultMap">
 	select *
 	from sites S
-	join cities C on S.city_id = C.city_id
-	join states ST on C.state_id = ST.state_id
+	LEFT join cities C on S.city_id = C.city_id
+	LEFT join states ST on C.state_id = ST.state_id
 	where S.site_id = #{id}
   </select>
+  
+    <select id="selectSites" resultMap="main.java.com.solvd.laba.db.mapper.SiteMapper.siteResultMap">
+	select *
+	from sites S
+	LEFT join cities C on S.city_id = C.city_id
+	LEFT join states ST on C.state_id = ST.state_id
+  </select>
+  
+  <select id="selectSiteByCityId" resultMap="main.java.com.solvd.laba.db.mapper.SiteMapper.siteResultMap">
+	select *
+	from sites S
+	LEFT join cities C on S.city_id = C.city_id
+	LEFT join states ST on C.state_id = ST.state_id
+	where S.city_id = #{id}
+  </select>
+  
+  <insert id="insertSite">
+	  insert into sites (address, city_id, zip)
+	  values (#{address},#{city.cityId},#{zip})
+  </insert>
+  
+  <update id="updateSite">
+	  update sites SET
+	  address = #{address},
+	  city_id = #{city.cityId},
+	  zip = #{zip}
+	  where site_id = #{siteId}
+  </update>
+  
+  <delete id="deleteSite">
+	  DELETE FROM sites where site_id = #{siteId}
+  </delete>
   
   <resultMap id="siteResultMap" type="main.java.com.solvd.laba.db.model.Site" autoMapping="false">
 	  <id property="siteId" column="site_id"/>

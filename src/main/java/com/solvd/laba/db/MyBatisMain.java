@@ -1,100 +1,65 @@
 package main.java.com.solvd.laba.db;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import main.java.com.solvd.laba.db.mapper.BuildingTypeMapper;
-import main.java.com.solvd.laba.db.mapper.CityMapper;
-import main.java.com.solvd.laba.db.mapper.ClientMapper;
-import main.java.com.solvd.laba.db.mapper.EmployeeMapper;
-import main.java.com.solvd.laba.db.mapper.JobMapper;
-import main.java.com.solvd.laba.db.mapper.MaterialMapper;
-import main.java.com.solvd.laba.db.mapper.PackageMapper;
-import main.java.com.solvd.laba.db.mapper.PhaseMapper;
-import main.java.com.solvd.laba.db.mapper.ProjectMapper;
-import main.java.com.solvd.laba.db.mapper.SiteMapper;
-import main.java.com.solvd.laba.db.mapper.StateMapper;
-import main.java.com.solvd.laba.db.mapper.TeamMapper;
-import main.java.com.solvd.laba.db.model.BuildingType;
 import main.java.com.solvd.laba.db.model.City;
-import main.java.com.solvd.laba.db.model.Client;
 import main.java.com.solvd.laba.db.model.Employee;
-import main.java.com.solvd.laba.db.model.Job;
-import main.java.com.solvd.laba.db.model.Material;
 import main.java.com.solvd.laba.db.model.Package;
-import main.java.com.solvd.laba.db.model.Phase;
 import main.java.com.solvd.laba.db.model.Project;
 import main.java.com.solvd.laba.db.model.Site;
-import main.java.com.solvd.laba.db.model.State;
-import main.java.com.solvd.laba.db.model.Team;
-import main.java.com.solvd.laba.db.service.EmployeeService;
+import main.java.com.solvd.laba.db.service.CityServiceMyBatis;
+import main.java.com.solvd.laba.db.service.EmployeeServiceMyBatis;
+import main.java.com.solvd.laba.db.service.PackageServiceMyBatis;
+import main.java.com.solvd.laba.db.service.ProjectServiceMyBatis;
+import main.java.com.solvd.laba.db.service.SiteServiceMyBatis;
 
 public class MyBatisMain {
 	private static final Logger LOGGER = LogManager.getLogger(MyBatisMain.class);
 
-	public static void main(String[] args) throws IOException {
-		try (InputStream stream = Resources.getResourceAsStream("mybatis-config.xml");
-				SqlSession session = new SqlSessionFactoryBuilder().build(stream).openSession()) {
-			JobMapper jobMapper = session.getMapper(JobMapper.class);
-			Job job = jobMapper.selectJobById(1);
-			LOGGER.info(job);
+	public static void main(String[] args) throws IOException, SQLException {
+		EmployeeServiceMyBatis es = new EmployeeServiceMyBatis();
+		Employee emp = es.getEmployee(2);
+		LOGGER.info(emp);
 
-			TeamMapper teamMapper = session.getMapper(TeamMapper.class);
-			Team team = teamMapper.selectTeamById(1);
-			LOGGER.info(team);
+		ArrayList<Employee> emps = new ArrayList<>();
+		emps = es.getEmployeeByJobId(2);
+		LOGGER.info(emps);
 
-			EmployeeMapper employeeMapper = session.getMapper(EmployeeMapper.class);
-			Employee emp = employeeMapper.selectEmployeeById(1);
-			LOGGER.info(emp);
+		CityServiceMyBatis cs = new CityServiceMyBatis();
+		City city = cs.getCityByName("Denver");
+		LOGGER.info(city);
 
-			StateMapper stateMapper = session.getMapper(StateMapper.class);
-			State state = stateMapper.selectStateById(5);
-			LOGGER.info(state);
+		City city2 = cs.getCity(2);
+		LOGGER.info(city2);
 
-			CityMapper cityMapper = session.getMapper(CityMapper.class);
-			City city = cityMapper.selectCityById(3);
-			LOGGER.info(city);
+		PackageServiceMyBatis ps = new PackageServiceMyBatis();
+		Package pack = ps.getPackage(1);
+		LOGGER.info(pack);
 
-			BuildingTypeMapper buildingTypeMapper = session.getMapper(BuildingTypeMapper.class);
-			BuildingType buildingType = buildingTypeMapper.selectBuildingTypeById(4);
-			LOGGER.info(buildingType);
+		ArrayList<Package> packs = new ArrayList<>();
+		packs = ps.getPackages();
+		LOGGER.info(packs);
 
-			PhaseMapper phaseMapper = session.getMapper(PhaseMapper.class);
-			Phase phase = phaseMapper.selectPhaseById(4);
-			LOGGER.info(phase);
+		ProjectServiceMyBatis projS = new ProjectServiceMyBatis();
+		Project project = projS.getProject(1);
+		LOGGER.info(project);
 
-			ClientMapper clientMapper = session.getMapper(ClientMapper.class);
-			Client client = clientMapper.selectClientById(3);
-			LOGGER.info(client);
+		ArrayList<Project> projects = new ArrayList<>();
+		projects = projS.getProjectByBuildingTypeId(2);
+		LOGGER.info(projects);
 
-			MaterialMapper materialMapper = session.getMapper(MaterialMapper.class);
-			Material material = materialMapper.selectMaterialById(3);
-			LOGGER.info(material);
+		SiteServiceMyBatis ss = new SiteServiceMyBatis();
+		Site site = ss.getSite(1);
+		LOGGER.info(site);
 
-			PackageMapper packageMapper = session.getMapper(PackageMapper.class);
-			Package pack = packageMapper.selectPackageById(1);
-			LOGGER.info(pack);
-
-			SiteMapper siteMapper = session.getMapper(SiteMapper.class);
-			Site site = siteMapper.selectSiteById(2);
-			LOGGER.info(site);
-
-			ProjectMapper projectMapper = session.getMapper(ProjectMapper.class);
-			Project project = projectMapper.selectProjectById(1);
-			LOGGER.info(project);
-
-			// service test
-			EmployeeMapper employeeMapper2 = session.getMapper(EmployeeMapper.class);
-			EmployeeService es = new EmployeeService(employeeMapper2);
-			Employee emp2 = es.getEmployee(3);
-			LOGGER.info(emp2);
-		}
+		ArrayList<Site> sites = new ArrayList<>();
+		sites = ss.getSiteByCityId(5);
+		LOGGER.info(sites);
 	}
 
 }

@@ -11,12 +11,13 @@ import main.java.com.solvd.laba.db.dao.ProjectDao;
 import main.java.com.solvd.laba.db.dao.SiteDao;
 import main.java.com.solvd.laba.db.dao.StateDao;
 import main.java.com.solvd.laba.db.dao.TeamDao;
+import main.java.com.solvd.laba.db.interfaces.IProjectService;
 import main.java.com.solvd.laba.db.model.City;
 import main.java.com.solvd.laba.db.model.Client;
 import main.java.com.solvd.laba.db.model.Project;
 import main.java.com.solvd.laba.db.model.Site;
 
-public class ProjectService {
+public class ProjectService implements IProjectService {
 	ProjectDao projectDao;
 	BuildingTypeDao buildingTypeDao;
 	PhaseDao phaseDao;
@@ -47,7 +48,6 @@ public class ProjectService {
 		return project;
 	}
 
-	// Q: Can service classes use other service class methods
 	public Site getProjectSite(int id) throws SQLException {
 		Site site = siteDao.get(id);
 		City city = cityDao.get(site.getSiteId());
@@ -63,5 +63,33 @@ public class ProjectService {
 			clients.add(clientDao.get(cid));
 		}
 		return clients;
+	}
+
+	@Override
+	public ArrayList<Project> getProjects() throws SQLException {
+		ArrayList<Project> projects = new ArrayList<>();
+		projects = projectDao.getAll();
+		return projects;
+	}
+
+	@Override
+	public ArrayList<Project> getProjectByBuildingTypeId(int buildingTypeId) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addProject(Project project) throws SQLException {
+		projectDao.insert(project);
+	}
+
+	@Override
+	public void updateProject(Project project) throws SQLException {
+		projectDao.update(project);
+	}
+
+	@Override
+	public void deleteProject(Project project) throws SQLException {
+		projectDao.delete(project);
 	}
 }
