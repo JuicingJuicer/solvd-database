@@ -8,23 +8,23 @@ import main.java.com.solvd.laba.db.model.Team;
 
 public class TeamDao extends Dao<Team> {
 	protected String getStatement() {
-		return "SELECT * FROM TEAMS WHERE team_id=?";
+		return "SELECT * FROM teams WHERE team_id=?";
 	}
 
 	protected String getAllStatement() {
-		return "SELECT * FROM TEAMS";
+		return "SELECT * FROM teams";
 	}
 
 	protected String insertStatement() {
-		return "INSERT INTO TEAMS (team_id, team_name, team_details) VALUES (?, ?, ?)";
+		return "INSERT INTO teams (team_id, team_name, team_details) VALUES (?, ?, ?)";
 	}
 
 	protected String updateStatement() {
-		return "UPDATE TEAMS SET team_id = ?, tean_name = ?, team_details = ? WHERE team_id = ?";
+		return "UPDATE teams SET team_id = ?, tean_name = ?, team_details = ? WHERE team_id = ?";
 	}
 
 	protected String deleteStatement() {
-		return "DELETE FROM TEAMS WHERE team_id =?";
+		return "DELETE FROM teams WHERE team_id =?";
 	}
 
 	protected Team create(ResultSet rs) throws SQLException {

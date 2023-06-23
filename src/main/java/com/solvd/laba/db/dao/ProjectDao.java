@@ -13,23 +13,23 @@ import main.java.com.solvd.laba.db.model.Project;
 public class ProjectDao extends Dao<Project> implements IProjectDao {
 
 	protected String getStatement() {
-		return "SELECT * FROM PROJECTS WHERE project_id=?";
+		return "SELECT * FROM projects WHERE project_id=?";
 	}
 
 	protected String getAllStatement() {
-		return "SELECT * FROM PROJECTS";
+		return "SELECT * FROM projects";
 	}
 
 	protected String insertStatement() {
-		return "INSERT INTO PROJECTS (project_id, project_name, building_type, phase_id, start_date, end_date, site_id, team_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		return "INSERT INTO projects (project_id, project_name, building_type, phase_id, start_date, end_date, site_id, team_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 	}
 
 	protected String updateStatement() {
-		return "UPDATE PROJECTS SET project_id = ?, project_name = ?, building_type = ?, phase_id = ?, start_date = ?, end_date = ?, site_id = ?, team_id = ? WHERE project_id = ?";
+		return "UPDATE projects SET project_id = ?, project_name = ?, building_type = ?, phase_id = ?, start_date = ?, end_date = ?, site_id = ?, team_id = ? WHERE project_id = ?";
 	}
 
 	protected String deleteStatement() {
-		return "DELETE FROM PROJECTS WHERE project_id =?";
+		return "DELETE FROM projects WHERE project_id =?";
 	}
 
 	protected Project create(ResultSet rs) throws SQLException {
@@ -66,7 +66,7 @@ public class ProjectDao extends Dao<Project> implements IProjectDao {
 	public int getIdByCol(String col, int id) throws SQLException {
 		Connection c = ConnectionUlti.getConnection();
 		try {
-			String query = "SELECT " + col + " FROM PROJECTS WHERE project_id=?";
+			String query = "SELECT " + col + " FROM projects WHERE project_id=?";
 			PreparedStatement ps = c.prepareStatement(query);
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();

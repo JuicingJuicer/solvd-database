@@ -12,23 +12,23 @@ import main.java.com.solvd.laba.db.model.Site;
 public class SiteDao extends Dao<Site> implements ISiteDao {
 
 	protected String getStatement() {
-		return "SELECT * FROM SITES WHERE site_id=?";
+		return "SELECT * FROM sites WHERE site_id=?";
 	}
 
 	protected String getAllStatement() {
-		return "SELECT * FROM SITES";
+		return "SELECT * FROM sites";
 	}
 
 	protected String insertStatement() {
-		return "INSERT INTO SITES (site_id, address, city_id, zip) VALUES (?, ?, ?, ?)";
+		return "INSERT INTO sites (site_id, address, city_id, zip) VALUES (?, ?, ?, ?)";
 	}
 
 	protected String updateStatement() {
-		return "UPDATE SITES SET site_id = ?, address = ?, city_id = ?, zip = ? WHERE site_id = ?";
+		return "UPDATE sites SET site_id = ?, address = ?, city_id = ?, zip = ? WHERE site_id = ?";
 	}
 
 	protected String deleteStatement() {
-		return "DELETE FROM SITES WHERE site_id =?";
+		return "DELETE FROM sites WHERE site_id =?";
 	}
 
 	protected Site create(ResultSet rs) throws SQLException {
@@ -56,7 +56,7 @@ public class SiteDao extends Dao<Site> implements ISiteDao {
 	public int getCId(int id) throws SQLException {
 		Connection c = ConnectionUlti.getConnection();
 		try {
-			PreparedStatement ps = c.prepareStatement("SELECT city_id FROM SITES WHERE site_id=?");
+			PreparedStatement ps = c.prepareStatement("SELECT city_id FROM sites WHERE site_id=?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {

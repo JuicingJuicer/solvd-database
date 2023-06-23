@@ -8,23 +8,23 @@ import main.java.com.solvd.laba.db.model.Phase;
 
 public class PhaseDao extends Dao<Phase> {
 	protected String getStatement() {
-		return "SELECT * FROM PHASES WHERE phase_id=?";
+		return "SELECT * FROM phases WHERE phase_id=?";
 	}
 
 	protected String getAllStatement() {
-		return "SELECT * FROM PHASES";
+		return "SELECT * FROM phases";
 	}
 
 	protected String insertStatement() {
-		return "INSERT INTO PHASES (phase_id, phase_name) VALUES (?, ?)";
+		return "INSERT INTO phases (phase_id, phase_name) VALUES (?, ?)";
 	}
 
 	protected String updateStatement() {
-		return "UPDATE PHASES SET phase_id = ?, phase_name = ? WHERE phase_id = ?";
+		return "UPDATE phases SET phase_id = ?, phase_name = ? WHERE phase_id = ?";
 	}
 
 	protected String deleteStatement() {
-		return "DELETE FROM PHASES WHERE phase_id =?";
+		return "DELETE FROM phases WHERE phase_id =?";
 	}
 
 	protected Phase create(ResultSet rs) throws SQLException {

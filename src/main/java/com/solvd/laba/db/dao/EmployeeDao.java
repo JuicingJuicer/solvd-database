@@ -13,23 +13,23 @@ import main.java.com.solvd.laba.db.model.Employee;
 public class EmployeeDao extends Dao<Employee> implements IEmployeeDao {
 
 	protected String getStatement() {
-		return "SELECT * FROM EMPLOYEES WHERE emp_id=?";
+		return "SELECT * FROM employees WHERE emp_id=?";
 	}
 
 	protected String getAllStatement() {
-		return "SELECT * FROM EMPLOYEES";
+		return "SELECT * FROM employees";
 	}
 
 	protected String insertStatement() {
-		return "INSERT INTO EMPLOYEES (emp_id, first_name, last_name, age, email, phone_number, job_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		return "INSERT INTO employees (emp_id, first_name, last_name, age, email, phone_number, job_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
 	}
 
 	protected String updateStatement() {
-		return "UPDATE EMPLOYEES SET emp_id = ?, first_name = ?, last_name = ?, age = ?, email = ?, phone_number = ?, job_id = ? WHERE emp_id = ?";
+		return "UPDATE employees SET emp_id = ?, first_name = ?, last_name = ?, age = ?, email = ?, phone_number = ?, job_id = ? WHERE emp_id = ?";
 	}
 
 	protected String deleteStatement() {
-		return "DELETE FROM EMPLOYEES WHERE emp_id =?";
+		return "DELETE FROM employees WHERE emp_id =?";
 	}
 
 	protected Employee create(ResultSet rs) throws SQLException {
@@ -64,7 +64,7 @@ public class EmployeeDao extends Dao<Employee> implements IEmployeeDao {
 	public int getJId(int id) throws SQLException {
 		Connection c = ConnectionUlti.getConnection();
 		try {
-			PreparedStatement ps = c.prepareStatement("SELECT job_id FROM EMPLOYEES WHERE emp_id=?");
+			PreparedStatement ps = c.prepareStatement("SELECT job_id FROM employees WHERE emp_id=?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			ConnectionUlti.releaseConnection(c);
@@ -100,7 +100,7 @@ public class EmployeeDao extends Dao<Employee> implements IEmployeeDao {
 		ArrayList<Employee> emps = new ArrayList<>();
 		Connection c = ConnectionUlti.getConnection();
 		try {
-			PreparedStatement ps = c.prepareStatement("SELECT * FROM EMPLOYEES WHERE job_id=?");
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM employees WHERE job_id=?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {

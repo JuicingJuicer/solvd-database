@@ -8,23 +8,23 @@ import main.java.com.solvd.laba.db.model.Job;
 
 public class JobDao extends Dao<Job> {
 	protected String getStatement() {
-		return "SELECT * FROM JOBS WHERE job_id=?";
+		return "SELECT * FROM jobs WHERE job_id=?";
 	}
 
 	protected String getAllStatement() {
-		return "SELECT * FROM JOBS";
+		return "SELECT * FROM jobs";
 	}
 
 	protected String insertStatement() {
-		return "INSERT INTO JOBS (job_id, job_title) VALUES (?, ?)";
+		return "INSERT INTO jobs (job_id, job_title) VALUES (?, ?)";
 	}
 
 	protected String updateStatement() {
-		return "UPDATE JOBS SET job_id = ?, job_title = ?";
+		return "UPDATE jobs SET job_id = ?, job_title = ?";
 	}
 
 	protected String deleteStatement() {
-		return "DELETE FROM JOBS WHERE job_id =?";
+		return "DELETE FROM jobs WHERE job_id =?";
 	}
 
 	protected Job create(ResultSet rs) throws SQLException {

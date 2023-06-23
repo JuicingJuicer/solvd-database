@@ -8,23 +8,23 @@ import main.java.com.solvd.laba.db.model.Material;
 
 public class MaterialDao extends Dao<Material> {
 	protected String getStatement() {
-		return "SELECT * FROM MATERIALS WHERE material_id=?";
+		return "SELECT * FROM materials WHERE material_id=?";
 	}
 
 	protected String getAllStatement() {
-		return "SELECT * FROM MATERIALS";
+		return "SELECT * FROM materials";
 	}
 
 	protected String insertStatement() {
-		return "INSERT INTO MATERIALS (material_id, material_name, material_desc, material_price) VALUES (?, ?, ?, ?)";
+		return "INSERT INTO materials (material_id, material_name, material_desc, material_price) VALUES (?, ?, ?, ?)";
 	}
 
 	protected String updateStatement() {
-		return "UPDATE MATERIALS SET material_id = ?, material_name = ?, material_desc = ?, material_price = ? WHERE package_id = ?";
+		return "UPDATE materials SET material_id = ?, material_name = ?, material_desc = ?, material_price = ? WHERE package_id = ?";
 	}
 
 	protected String deleteStatement() {
-		return "DELETE FROM MATERIALS WHERE material_id =?";
+		return "DELETE FROM materials WHERE material_id =?";
 	}
 
 	protected Material create(ResultSet rs) throws SQLException {
