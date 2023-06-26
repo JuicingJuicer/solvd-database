@@ -15,7 +15,7 @@ public class City {
 	private int cityId;
 	@XmlElement(name = "name")
 	@JsonProperty("name")
-	private String name;
+	private String cityName;
 	@XmlElement(name = "state")
 	@JsonProperty("state")
 	private State state;
@@ -23,17 +23,17 @@ public class City {
 	public City() {
 	}
 
-	public City(int cityId, String name) {
+	public City(int cityId, String cityName) {
 		this.cityId = cityId;
-		this.name = name;
+		this.cityName = cityName;
 	}
 
 	public void setCityId(int cityId) {
 		this.cityId = cityId;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
 	}
 
 	public void setState(State state) {
@@ -44,8 +44,8 @@ public class City {
 		return cityId;
 	}
 
-	public String getName() {
-		return name;
+	public String getCityName() {
+		return cityName;
 	}
 
 	public State getState() {
@@ -54,6 +54,6 @@ public class City {
 
 	@Override
 	public String toString() {
-		return "City{cityId=" + cityId + ", name=" + name + ", state=" + state + "}";
+		return "City{cityId=" + cityId + ", cityName=" + cityName + ", state=" + state + "}";
 	}
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="main.java.com.solvd.laba.db.mapper.MaterialMapper">
+	
+  <select id="selectMaterialById" resultMap="main.java.com.solvd.laba.db.mapper.MaterialMapper.materialResultMap">
+	select * from materials where material_id = #{id}
+  </select>
+  
+  <resultMap id="materialResultMap" type="main.java.com.solvd.laba.db.model.Material" autoMapping="false">
+	  <id property="materialId" column="material_id"/>
+	  <result property="materialName" column="Material_name"/>
+	  <result property="materialDesc" column="Material_desc"/>
+	  <result property="materialPrice" column="Material_price"/>
+	  <result property="quantity" column="quantity"/>
+  </resultMap>
+  
+</mapper>

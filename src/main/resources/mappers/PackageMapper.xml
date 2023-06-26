@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="main.java.com.solvd.laba.db.mapper.PackageMapper">
+	
+  <select id="selectPackageById" resultMap="main.java.com.solvd.laba.db.mapper.PackageMapper.packageResultMap">
+	select *
+	from packages P
+	LEFT join package_details PD on P.package_id = PD.Package_id
+	LEFT join materials M on PD.material_id = M.material_id
+	LEFT join sites S on P.site_id = S.site_id
+	LEFT join cities C on S.city_id = C.city_id
+	LEFT join states ST on C.state_id = ST.state_id
+	where P.package_id = #{id}
+  </select>
+    
+  <select id="selectPackages" resultMap="main.java.com.solvd.laba.db.mapper.PackageMapper.packageResultMap">
+	select *
+	from packages P
+	LEFT join package_details PD on P.package_id = PD.Package_id
+	LEFT join materials M on PD.material_id = M.material_id
+	LEFT join sites S on P.site_id = S.site_id
+	LEFT join cities C on S.city_id = C.city_id
+	LEFT join states ST on C.state_id = ST.state_id
+  </select>
+  
+  <insert id="insertPackage">
+	  insert into employees (purchase_date, status, site_id)
+	  values (#{purchaseDate},#{status},#{site.siteId})
+  </insert>
+  
+  <update id="updatePackage">
+	  update packages SET
+	  purchase_date = #{purchaseDate},
+	  status = #{status},
+	  site_id = #{site.siteId}
+	  where package_id = #{packageId}
+  </update>
+  
+  <delete id="deletePackage">
+	  DELETE FROM packages where package_id = #{packageId}
+  </delete>
+  
+  <resultMap id="packageResultMap" type="main.java.com.solvd.laba.db.model.Package" autoMapping="false">
+	  <id property="packageId" column="package_id"/>
+	  <result property="purchaseDate" column="purchase_date"/>
+	  <result property="status" column="status"/>
+	  <association property="site" resultMap="main.java.com.solvd.laba.db.mapper.SiteMapper.siteResultMap"></association>
+	  <collection property="materials" resultMap="main.java.com.solvd.laba.db.mapper.MaterialMapper.materialResultMap"/>
+  </resultMap>
+  
+</mapper>

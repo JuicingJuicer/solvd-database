@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="main.java.com.solvd.laba.db.mapper.PhaseMapper">
+	
+  <select id="selectPhaseById" resultMap="main.java.com.solvd.laba.db.mapper.PhaseMapper.phaseResultMap">
+    select * from phases where phase_id = #{id}
+  </select>
+  
+  <resultMap id="phaseResultMap" type="main.java.com.solvd.laba.db.model.Phase" autoMapping="false">
+	  <id property="phaseId" column="phase_id"/>
+	  <result property="phaseName" column="phase_name"/>
+  </resultMap>
+  
+</mapper>

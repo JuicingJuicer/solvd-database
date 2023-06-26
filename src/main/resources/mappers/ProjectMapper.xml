@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="main.java.com.solvd.laba.db.mapper.ProjectMapper">
+	
+  <select id="selectProjectById" resultMap="main.java.com.solvd.laba.db.mapper.ProjectMapper.projectResultMap">
+    select *
+    from projects P
+    LEFT join building_types BT on P.building_type = BT.building_type_id
+    LEFT join phases PH on P.phase_id = PH.phase_id
+    LEFT join sites S on P.site_id = S.site_id
+    LEFT join cities C on S.city_id = C.city_id
+	LEFT join states ST on C.state_id = ST.state_id
+	LEFT join teams T on P.team_id = T.team_id
+	LEFT join client_projects CP on P.project_id = CP.project_id
+	LEFT join clients CL on CP.client_id = CL.client_id
+    where P.project_id = #{id}
+  </select>
+  
+    <select id="selectProjects" resultMap="main.java.com.solvd.laba.db.mapper.ProjectMapper.projectResultMap">
+    select *
+    from projects P
+    LEFT join building_types BT on P.building_type = BT.building_type_id
+    LEFT join phases PH on P.phase_id = PH.phase_id
+    LEFT join sites S on P.site_id = S.site_id
+    LEFT join cities C on S.city_id = C.city_id
+	LEFT join states ST on C.state_id = ST.state_id
+	LEFT join teams T on P.team_id = T.team_id
+	LEFT join client_projects CP on P.project_id = CP.project_id
+	LEFT join clients CL on CP.client_id = CL.client_id
+  </select>
+  
+  <select id="selectProjectByBuildingTypeId" resultMap="main.java.com.solvd.laba.db.mapper.ProjectMapper.projectResultMap">
+    select *
+    from projects P
+    LEFT join building_types BT on P.building_type = BT.building_type_id
+    LEFT join phases PH on P.phase_id = PH.phase_id
+    LEFT join sites S on P.site_id = S.site_id
+    LEFT join cities C on S.city_id = C.city_id
+	LEFT join states ST on C.state_id = ST.state_id
+	LEFT join teams T on P.team_id = T.team_id
+	LEFT join client_projects CP on P.project_id = CP.project_id
+	LEFT join clients CL on CP.client_id = CL.client_id
+	where P.building_type = #{id}
+  </select>
+  
+  <insert id="insertProject">
+	  insert into projects (project_name, building_type, phase_id, start_date, end_date, site_id, team_id)
+	  values (#{projectName},#{buildingType.buildingTypeId},#{phase.phaseId},#{startDate},#{endDate},#{site.siteId},#{team.teamId})
+  </insert>
+  
+  <update id="updateProject">
+	  update projects SET
+	  project_name = #{projectName},
+	  building_type = #{buildingType.buildingTypeId},
+	  phase_id = #{phase.phaseId},
+	  start_date = #{stateDate},
+	  end_date = #{endDate},
+	  site_id = #{site.siteId},
+	  team_id = #{team.teamId}
+	  where project_id = #{projectId}
+  </update>
+  
+  <delete id="deleteProject">
+	  DELETE FROM projects where project_id = #{projectId}
+  </delete>
+  
+  <resultMap id="projectResultMap" type="main.java.com.solvd.laba.db.model.Project" autoMapping="false">
+	  <id property="projectId" column="project_id"/>
+	  <result property="projectName" column="project_name"/>
+	  <result property="startDate" column="start_date"/>
+	  <result property="endDate" column="end_date"/>
+	  <association property="buildingType" resultMap="main.java.com.solvd.laba.db.mapper.BuildingTypeMapper.buildingTypeResultMap"></association>
+	  <association property="phase" resultMap="main.java.com.solvd.laba.db.mapper.PhaseMapper.phaseResultMap"></association>
+	  <association property="site" resultMap="main.java.com.solvd.laba.db.mapper.SiteMapper.siteResultMap"></association>
+	  <association property="team" resultMap="main.java.com.solvd.laba.db.mapper.TeamMapper.teamResultMap"></association>
+	  <collection property="clients" resultMap="main.java.com.solvd.laba.db.mapper.ClientMapper.clientResultMap"/>
+  </resultMap>
+  
+</mapper>

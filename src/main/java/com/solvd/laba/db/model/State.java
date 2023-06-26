@@ -15,34 +15,34 @@ public class State {
 	private int stateId;
 	@XmlElement(name = "name")
 	@JsonProperty("name")
-	private String name;
+	private String stateName;
 
 	public State() {
 	}
 
-	public State(int stateId, String name) {
+	public State(int stateId, String stateName) {
 		this.stateId = stateId;
-		this.name = name;
+		this.stateName = stateName;
 	}
 
 	public void setStateId(int stateId) {
 		this.stateId = stateId;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String stateName) {
+		this.stateName = stateName;
 	}
 
 	public int getStateId() {
 		return stateId;
 	}
 
-	public String getName() {
-		return name;
+	public String getStateName() {
+		return stateName;
 	}
 
 	@Override
 	public String toString() {
-		return "State{stateId=" + stateId + ", name=" + name + "}";
+		return "State{stateId=" + stateId + ", stateName=" + stateName + "}";
 	}
 }

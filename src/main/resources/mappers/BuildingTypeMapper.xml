@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="main.java.com.solvd.laba.db.mapper.BuildingTypeMapper">
+	
+  <select id="selectBuildingTypeById" resultMap="main.java.com.solvd.laba.db.mapper.BuildingTypeMapper.buildingTypeResultMap">
+    select * from building_types where building_type_id = #{id}
+  </select>
+  
+  <resultMap id="buildingTypeResultMap" type="main.java.com.solvd.laba.db.model.BuildingType" autoMapping="false">
+	  <id property="buildingTypeId" column="building_type_id"/>
+	  <result property="buildingName" column="building_name"/>
+	  <result property="buildingTag" column="building_tag"/>
+	  <result property="additionalDetails" column="additional_details"/>
+  </resultMap>
+  
+</mapper>

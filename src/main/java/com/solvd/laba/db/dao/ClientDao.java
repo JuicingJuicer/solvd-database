@@ -8,23 +8,23 @@ import main.java.com.solvd.laba.db.model.Client;
 
 public class ClientDao extends Dao<Client> {
 	protected String getStatement() {
-		return "SELECT * FROM CLIENTS WHERE client_id=?";
+		return "SELECT * FROM clients WHERE client_id=?";
 	}
 
 	protected String getAllStatement() {
-		return "SELECT * FROM CLIENTS";
+		return "SELECT * FROM clients";
 	}
 
 	protected String insertStatement() {
-		return "INSERT INTO CLIENTS (client_id, first_name, last_name, email, phone_number, company_name) VALUES (?, ?, ?, ?, ?, ?)";
+		return "INSERT INTO clients (client_id, first_name, last_name, email, phone_number, company_name) VALUES (?, ?, ?, ?, ?, ?)";
 	}
 
 	protected String updateStatement() {
-		return "UPDATE CLIENTS SET client_id = ?, first_name = ?, last_name = ?, email = ?, phone_number = ?, company_name = ?, job_id = ? WHERE client_id = ?";
+		return "UPDATE clients SET client_id = ?, first_name = ?, last_name = ?, email = ?, phone_number = ?, company_name = ?, job_id = ? WHERE client_id = ?";
 	}
 
 	protected String deleteStatement() {
-		return "DELETE FROM CLIENTS WHERE client_id =?";
+		return "DELETE FROM clients WHERE client_id =?";
 	}
 
 	protected Client create(ResultSet rs) throws SQLException {

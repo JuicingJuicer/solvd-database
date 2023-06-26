@@ -1,4 +1,4 @@
-package main.java.com.solvd.laba.db;
+package main.java.com.solvd.laba.db.ulti;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class ConnectionUlti {
+public class ConnectionUtil {
 	private final static int SIZE = 5;
 	private static int count = 0;
 	private static CopyOnWriteArrayList<Connection> pool = new CopyOnWriteArrayList<>();

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="main.java.com.solvd.laba.db.mapper.StateMapper">
+	
+  <select id="selectStateById" resultMap="main.java.com.solvd.laba.db.mapper.StateMapper.stateResultMap">
+    select * from states where state_id = #{id}
+  </select>
+  
+  <resultMap id="stateResultMap" type="main.java.com.solvd.laba.db.model.State" autoMapping="false">
+	  <id property="stateId" column="state_id"/>
+	  <result property="stateName" column="state_name"/>
+  </resultMap>
+  
+</mapper>

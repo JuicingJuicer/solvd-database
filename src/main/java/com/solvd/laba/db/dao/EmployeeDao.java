@@ -6,30 +6,30 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import main.java.com.solvd.laba.db.ConnectionUlti;
 import main.java.com.solvd.laba.db.interfaces.IEmployeeDao;
 import main.java.com.solvd.laba.db.model.Employee;
+import main.java.com.solvd.laba.db.ulti.ConnectionUtil;
 
 public class EmployeeDao extends Dao<Employee> implements IEmployeeDao {
 
 	protected String getStatement() {
-		return "SELECT * FROM EMPLOYEES WHERE emp_id=?";
+		return "SELECT * FROM employees WHERE emp_id=?";
 	}
 
 	protected String getAllStatement() {
-		return "SELECT * FROM EMPLOYEES";
+		return "SELECT * FROM employees";
 	}
 
 	protected String insertStatement() {
-		return "INSERT INTO EMPLOYEES (emp_id, first_name, last_name, age, email, phone_number, job_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		return "INSERT INTO employees (emp_id, first_name, last_name, age, email, phone_number, job_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
 	}
 
 	protected String updateStatement() {
-		return "UPDATE EMPLOYEES SET emp_id = ?, first_name = ?, last_name = ?, age = ?, email = ?, phone_number = ?, job_id = ? WHERE emp_id = ?";
+		return "UPDATE employees SET emp_id = ?, first_name = ?, last_name = ?, age = ?, email = ?, phone_number = ?, job_id = ? WHERE emp_id = ?";
 	}
 
 	protected String deleteStatement() {
-		return "DELETE FROM EMPLOYEES WHERE emp_id =?";
+		return "DELETE FROM employees WHERE emp_id =?";
 	}
 
 	protected Employee create(ResultSet rs) throws SQLException {
@@ -62,17 +62,24 @@ public class EmployeeDao extends Dao<Employee> implements IEmployeeDao {
 
 	@Override
 	public int getJId(int id) throws SQLException {
-		Connection c = ConnectionUlti.getConnection();
+		Connection c = null;
+		PreparedStatement ps = null;
 		try {
-			PreparedStatement ps = c.prepareStatement("SELECT job_id FROM EMPLOYEES WHERE emp_id=?");
+			c = ConnectionUtil.getConnection();
+			ps = c.prepareStatement("SELECT job_id FROM employees WHERE emp_id=?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
-			ConnectionUlti.releaseConnection(c);
+			ConnectionUtil.releaseConnection(c);
 			if (rs.next()) {
 				return rs.getInt("job_id");
 			}
 		} finally {
-			ConnectionUlti.releaseConnection(c);
+			if (c != null) {
+				ConnectionUtil.releaseConnection(c);
+			}
+			if (ps != null) {
+				ps.close();
+			}
 		}
 		return 0;
 	}
@@ -80,18 +87,49 @@ public class EmployeeDao extends Dao<Employee> implements IEmployeeDao {
 	@Override
 	public ArrayList<Integer> getTId(int id) throws SQLException {
 		ArrayList<Integer> tIds = new ArrayList<>();
-		Connection c = ConnectionUlti.getConnection();
+		Connection c = null;
+		PreparedStatement ps = null;
 		try {
-			PreparedStatement ps = c.prepareStatement("SELECT team_id FROM emp_teams WHERE emp_id=?");
+			c = ConnectionUtil.getConnection();
+			ps = c.prepareStatement("SELECT team_id FROM emp_teams WHERE emp_id=?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
-			ConnectionUlti.releaseConnection(c);
+			ConnectionUtil.releaseConnection(c);
 			while (rs.next()) {
 				tIds.add(rs.getInt("team_id"));
 			}
 		} finally {
-			ConnectionUlti.releaseConnection(c);
+			if (c != null) {
+				ConnectionUtil.releaseConnection(c);
+			}
+			if (ps != null) {
+				ps.close();
+			}
 		}
 		return tIds;
+	}
+
+	@Override
+	public ArrayList<Employee> getEmployeeByJobId(int id) throws SQLException {
+		ArrayList<Employee> emps = new ArrayList<>();
+		Connection c = null;
+		PreparedStatement ps = null;
+		try {
+			c = ConnectionUtil.getConnection();
+			ps = c.prepareStatement("SELECT * FROM employees WHERE job_id=?");
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				emps.add(create(rs));
+			}
+		} finally {
+			if (c != null) {
+				ConnectionUtil.releaseConnection(c);
+			}
+			if (ps != null) {
+				ps.close();
+			}
+		}
+		return emps;
 	}
 }

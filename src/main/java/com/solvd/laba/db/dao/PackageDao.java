@@ -6,29 +6,29 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-import main.java.com.solvd.laba.db.ConnectionUlti;
 import main.java.com.solvd.laba.db.interfaces.IPackageDao;
 import main.java.com.solvd.laba.db.model.Package;
+import main.java.com.solvd.laba.db.ulti.ConnectionUtil;
 
 public class PackageDao extends Dao<Package> implements IPackageDao {
 	protected String getStatement() {
-		return "SELECT * FROM PACKAGES WHERE package_id=?";
+		return "SELECT * FROM packages WHERE package_id=?";
 	}
 
 	protected String getAllStatement() {
-		return "SELECT * FROM PACKAGES";
+		return "SELECT * FROM packages";
 	}
 
 	protected String insertStatement() {
-		return "INSERT INTO PACKAGES (package_id, purchase_date, status, site_id) VALUES (?, ?, ?, ?)";
+		return "INSERT INTO packages (package_id, purchase_date, status, site_id) VALUES (?, ?, ?, ?)";
 	}
 
 	protected String updateStatement() {
-		return "UPDATE PACKAGES SET package_id = ?, purchase_date = ?, status = ?, site_id = ? WHERE package_id = ?";
+		return "UPDATE packages SET package_id = ?, purchase_date = ?, status = ?, site_id = ? WHERE package_id = ?";
 	}
 
 	protected String deleteStatement() {
-		return "DELETE FROM PACKAGES WHERE package_id =?";
+		return "DELETE FROM packages WHERE package_id =?";
 	}
 
 	protected Package create(ResultSet rs) throws SQLException {
@@ -54,16 +54,23 @@ public class PackageDao extends Dao<Package> implements IPackageDao {
 
 	@Override
 	public int getSId(int id) throws SQLException {
-		Connection c = ConnectionUlti.getConnection();
+		Connection c = null;
+		PreparedStatement ps = null;
 		try {
-			PreparedStatement ps = c.prepareStatement("SELECT site_id FROM PACKAGES WHERE package_id=?");
+			c = ConnectionUtil.getConnection();
+			ps = c.prepareStatement("SELECT site_id FROM packages WHERE package_id=?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				return rs.getInt("site_id");
 			}
 		} finally {
-			ConnectionUlti.releaseConnection(c);
+			if (c != null) {
+				ConnectionUtil.releaseConnection(c);
+			}
+			if (ps != null) {
+				ps.close();
+			}
 		}
 		return 0;
 	}
@@ -71,17 +78,23 @@ public class PackageDao extends Dao<Package> implements IPackageDao {
 	@Override
 	public HashMap<Integer, Integer> getIdQuantity(int id) throws SQLException {
 		HashMap<Integer, Integer> map = new HashMap<>();
-		Connection c = ConnectionUlti.getConnection();
+		Connection c = null;
+		PreparedStatement ps = null;
 		try {
-			PreparedStatement ps = c
-					.prepareStatement("SELECT material_id, quantity FROM PACKAGE_DETAILS WHERE package_id=?");
+			c = ConnectionUtil.getConnection();
+			ps = c.prepareStatement("SELECT material_id, quantity FROM package_details WHERE package_id=?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				map.put(rs.getInt("material_id"), rs.getInt("quantity"));
 			}
 		} finally {
-			ConnectionUlti.releaseConnection(c);
+			if (c != null) {
+				ConnectionUtil.releaseConnection(c);
+			}
+			if (ps != null) {
+				ps.close();
+			}
 		}
 		return map;
 	}
