@@ -1,63 +1,72 @@
 package main.java.com.solvd.laba.db.service;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import main.java.com.solvd.laba.db.interfaces.IProjectService;
 import main.java.com.solvd.laba.db.mapper.ProjectMapper;
 import main.java.com.solvd.laba.db.model.Project;
+import main.java.com.solvd.laba.db.ulti.SessionUtil;
 
 public class ProjectServiceMyBatis implements IProjectService {
-	private SqlSession session;
 	private ProjectMapper projectMapper;
 
-	public ProjectServiceMyBatis() throws IOException {
-		InputStream stream = Resources.getResourceAsStream("mybatis-config.xml");
-		session = new SqlSessionFactoryBuilder().build(stream).openSession();
-		projectMapper = session.getMapper(ProjectMapper.class);
+	public ProjectServiceMyBatis() {
 	}
 
 	@Override
-	public Project getProject(int id) throws SQLException {
-		Project project = projectMapper.selectProjectById(id);
-		return project;
+	public Project getProject(int id) throws IOException {
+		try (SqlSession session = SessionUtil.openSession()) {
+			projectMapper = session.getMapper(ProjectMapper.class);
+			Project project = projectMapper.selectProjectById(id);
+			return project;
+		}
 	}
 
 	@Override
-	public ArrayList<Project> getProjects() throws SQLException {
-		ArrayList<Project> projects = new ArrayList<>();
-		projects = projectMapper.selectProjects();
-		return projects;
+	public ArrayList<Project> getProjects() throws IOException {
+		try (SqlSession session = SessionUtil.openSession()) {
+			projectMapper = session.getMapper(ProjectMapper.class);
+			ArrayList<Project> projects = projectMapper.selectProjects();
+			return projects;
+		}
 	}
 
 	@Override
-	public ArrayList<Project> getProjectByBuildingTypeId(int buildingTypeId) throws SQLException {
-		ArrayList<Project> projects = new ArrayList<>();
-		projects = projectMapper.selectProjectByBuildingTypeId(buildingTypeId);
-		return projects;
+	public ArrayList<Project> getProjectByBuildingTypeId(int buildingTypeId) throws IOException {
+		try (SqlSession session = SessionUtil.openSession()) {
+			projectMapper = session.getMapper(ProjectMapper.class);
+			ArrayList<Project> projects = projectMapper.selectProjectByBuildingTypeId(buildingTypeId);
+			return projects;
+		}
 	}
 
 	@Override
-	public void addProject(Project project) throws SQLException {
-		projectMapper.insertProject(project);
-		session.commit();
+	public void addProject(Project project) throws IOException {
+		try (SqlSession session = SessionUtil.openSession()) {
+			projectMapper = session.getMapper(ProjectMapper.class);
+			projectMapper.insertProject(project);
+			session.commit();
+		}
 	}
 
 	@Override
-	public void updateProject(Project project) throws SQLException {
-		projectMapper.updateProject(project);
-		session.commit();
+	public void updateProject(Project project) throws IOException {
+		try (SqlSession session = SessionUtil.openSession()) {
+			projectMapper = session.getMapper(ProjectMapper.class);
+			projectMapper.updateProject(project);
+			session.commit();
+		}
 	}
 
 	@Override
-	public void deleteProject(Project project) throws SQLException {
-		projectMapper.deleteProject(project);
-		session.commit();
+	public void deleteProject(Project project) throws IOException {
+		try (SqlSession session = SessionUtil.openSession()) {
+			projectMapper = session.getMapper(ProjectMapper.class);
+			projectMapper.deleteProject(project);
+			session.commit();
+		}
 	}
 }

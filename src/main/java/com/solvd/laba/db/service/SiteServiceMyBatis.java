@@ -1,63 +1,72 @@
 package main.java.com.solvd.laba.db.service;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import main.java.com.solvd.laba.db.interfaces.ISiteService;
 import main.java.com.solvd.laba.db.mapper.SiteMapper;
 import main.java.com.solvd.laba.db.model.Site;
+import main.java.com.solvd.laba.db.ulti.SessionUtil;
 
 public class SiteServiceMyBatis implements ISiteService {
-	private SqlSession session;
 	private SiteMapper siteMapper;
 
-	public SiteServiceMyBatis() throws IOException {
-		InputStream stream = Resources.getResourceAsStream("mybatis-config.xml");
-		session = new SqlSessionFactoryBuilder().build(stream).openSession();
-		siteMapper = session.getMapper(SiteMapper.class);
+	public SiteServiceMyBatis() {
 	}
 
 	@Override
-	public Site getSite(int id) throws SQLException {
-		Site site = siteMapper.selectSiteById(id);
-		return site;
+	public Site getSite(int id) throws IOException {
+		try (SqlSession session = SessionUtil.openSession()) {
+			siteMapper = session.getMapper(SiteMapper.class);
+			Site site = siteMapper.selectSiteById(id);
+			return site;
+		}
 	}
 
 	@Override
-	public ArrayList<Site> getSites() throws SQLException {
-		ArrayList<Site> sites = new ArrayList<>();
-		sites = siteMapper.selectSites();
-		return sites;
+	public ArrayList<Site> getSites() throws IOException {
+		try (SqlSession session = SessionUtil.openSession()) {
+			siteMapper = session.getMapper(SiteMapper.class);
+			ArrayList<Site> sites = siteMapper.selectSites();
+			return sites;
+		}
 	}
 
 	@Override
-	public ArrayList<Site> getSiteByCityId(int cityId) throws SQLException {
-		ArrayList<Site> sites = new ArrayList<>();
-		sites = siteMapper.selectSiteByCityId(cityId);
-		return sites;
+	public ArrayList<Site> getSiteByCityId(int cityId) throws IOException {
+		try (SqlSession session = SessionUtil.openSession()) {
+			siteMapper = session.getMapper(SiteMapper.class);
+			ArrayList<Site> sites = siteMapper.selectSiteByCityId(cityId);
+			return sites;
+		}
 	}
 
 	@Override
-	public void addSite(Site site) throws SQLException {
-		siteMapper.insertSite(site);
-		session.commit();
+	public void addSite(Site site) throws IOException {
+		try (SqlSession session = SessionUtil.openSession()) {
+			siteMapper = session.getMapper(SiteMapper.class);
+			siteMapper.insertSite(site);
+			session.commit();
+		}
 	}
 
 	@Override
-	public void updateSite(Site site) throws SQLException {
-		siteMapper.updateSite(site);
-		session.commit();
+	public void updateSite(Site site) throws IOException {
+		try (SqlSession session = SessionUtil.openSession()) {
+			siteMapper = session.getMapper(SiteMapper.class);
+			siteMapper.updateSite(site);
+			session.commit();
+		}
 	}
 
 	@Override
-	public void deleteSite(Site site) throws SQLException {
-		siteMapper.deleteSite(site);
-		session.commit();
+	public void deleteSite(Site site) throws IOException {
+		try (SqlSession session = SessionUtil.openSession()) {
+			siteMapper = session.getMapper(SiteMapper.class);
+			siteMapper.deleteSite(site);
+			session.commit();
+		}
 	}
 }

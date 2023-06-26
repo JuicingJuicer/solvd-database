@@ -7,22 +7,23 @@ import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import main.java.com.solvd.laba.db.factory.ServiceFactory;
+import main.java.com.solvd.laba.db.interfaces.ICityService;
+import main.java.com.solvd.laba.db.interfaces.IEmployeeService;
+import main.java.com.solvd.laba.db.interfaces.IPackageService;
+import main.java.com.solvd.laba.db.interfaces.IProjectService;
+import main.java.com.solvd.laba.db.interfaces.ISiteService;
 import main.java.com.solvd.laba.db.model.City;
 import main.java.com.solvd.laba.db.model.Employee;
 import main.java.com.solvd.laba.db.model.Package;
 import main.java.com.solvd.laba.db.model.Project;
 import main.java.com.solvd.laba.db.model.Site;
-import main.java.com.solvd.laba.db.service.CityServiceMyBatis;
-import main.java.com.solvd.laba.db.service.EmployeeServiceMyBatis;
-import main.java.com.solvd.laba.db.service.PackageServiceMyBatis;
-import main.java.com.solvd.laba.db.service.ProjectServiceMyBatis;
-import main.java.com.solvd.laba.db.service.SiteServiceMyBatis;
 
 public class MyBatisMain {
 	private static final Logger LOGGER = LogManager.getLogger(MyBatisMain.class);
 
 	public static void main(String[] args) throws IOException, SQLException {
-		EmployeeServiceMyBatis es = new EmployeeServiceMyBatis();
+		IEmployeeService es = ServiceFactory.createEmployeeService("mybatis");
 		Employee emp = es.getEmployee(2);
 		LOGGER.info(emp);
 
@@ -30,14 +31,14 @@ public class MyBatisMain {
 		emps = es.getEmployeeByJobId(2);
 		LOGGER.info(emps);
 
-		CityServiceMyBatis cs = new CityServiceMyBatis();
+		ICityService cs = ServiceFactory.createCityService("mybatis");
 		City city = cs.getCityByName("Denver");
 		LOGGER.info(city);
 
 		City city2 = cs.getCity(2);
 		LOGGER.info(city2);
 
-		PackageServiceMyBatis ps = new PackageServiceMyBatis();
+		IPackageService ps = ServiceFactory.createPackageService("mybatis");
 		Package pack = ps.getPackage(1);
 		LOGGER.info(pack);
 
@@ -45,7 +46,7 @@ public class MyBatisMain {
 		packs = ps.getPackages();
 		LOGGER.info(packs);
 
-		ProjectServiceMyBatis projS = new ProjectServiceMyBatis();
+		IProjectService projS = ServiceFactory.createProjectService("mybatis");
 		Project project = projS.getProject(1);
 		LOGGER.info(project);
 
@@ -53,7 +54,7 @@ public class MyBatisMain {
 		projects = projS.getProjectByBuildingTypeId(2);
 		LOGGER.info(projects);
 
-		SiteServiceMyBatis ss = new SiteServiceMyBatis();
+		ISiteService ss = ServiceFactory.createSiteService("mybatis");
 		Site site = ss.getSite(1);
 		LOGGER.info(site);
 

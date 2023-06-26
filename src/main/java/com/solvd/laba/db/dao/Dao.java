@@ -6,22 +6,30 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import main.java.com.solvd.laba.db.ConnectionUlti;
 import main.java.com.solvd.laba.db.interfaces.IDao;
+import main.java.com.solvd.laba.db.ulti.ConnectionUtil;
 
 public abstract class Dao<T> implements IDao<T> {
 	@Override
 	public T get(int id) throws SQLException {
-		Connection c = ConnectionUlti.getConnection();
+		Connection c = null;
+		PreparedStatement ps = null;
 		try {
-			PreparedStatement ps = c.prepareStatement(getStatement());
+			c = ConnectionUtil.getConnection();
+			ps = c.prepareStatement(getStatement());
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				return create(rs);
 			}
+			ps.close();
 		} finally {
-			ConnectionUlti.releaseConnection(c);
+			if (c != null) {
+				ConnectionUtil.releaseConnection(c);
+			}
+			if (ps != null) {
+				ps.close();
+			}
 		}
 		return null;
 	}
@@ -29,60 +37,82 @@ public abstract class Dao<T> implements IDao<T> {
 	@Override
 	public ArrayList<T> getAll() throws SQLException {
 		ArrayList<T> all = new ArrayList<>();
-		Connection c = ConnectionUlti.getConnection();
+		Connection c = null;
+		PreparedStatement ps = null;
 		try {
-			PreparedStatement ps = c.prepareStatement(getAllStatement());
+			c = ConnectionUtil.getConnection();
+			ps = c.prepareStatement(getAllStatement());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				all.add(create(rs));
 			}
 		} finally {
-			ConnectionUlti.releaseConnection(c);
+			if (c != null) {
+				ConnectionUtil.releaseConnection(c);
+			}
+			if (ps != null) {
+				ps.close();
+			}
 		}
 		return all;
 	}
 
 	@Override
 	public void insert(T t) throws SQLException {
-		Connection c = ConnectionUlti.getConnection();
+		Connection c = null;
+		PreparedStatement ps = null;
 		try {
-			PreparedStatement ps = c.prepareStatement(insertStatement());
+			c = ConnectionUtil.getConnection();
+			ps = c.prepareStatement(getAllStatement());
 			addValue(t, ps, true);
 			ps.executeUpdate();
 		} finally {
-			ConnectionUlti.releaseConnection(c);
+			if (c != null) {
+				ConnectionUtil.releaseConnection(c);
+			}
+			if (ps != null) {
+				ps.close();
+			}
 		}
 	}
 
 	@Override
 	public void update(T t) throws SQLException {
-		Connection c = ConnectionUlti.getConnection();
+		Connection c = null;
+		PreparedStatement ps = null;
 		try {
-			PreparedStatement ps = c.prepareStatement(updateStatement());
+			c = ConnectionUtil.getConnection();
+			ps = c.prepareStatement(getAllStatement());
 			addUpdatedValue(t, ps);
 			ps.executeUpdate();
 		} finally {
-			ConnectionUlti.releaseConnection(c);
+			if (c != null) {
+				ConnectionUtil.releaseConnection(c);
+			}
+			if (ps != null) {
+				ps.close();
+			}
 		}
 	}
 
 	@Override
 	public void delete(T t) throws SQLException {
-		Connection c = ConnectionUlti.getConnection();
+		Connection c = null;
+		PreparedStatement ps = null;
 		try {
-			PreparedStatement ps = c.prepareStatement(deleteStatement());
+			c = ConnectionUtil.getConnection();
+			ps = c.prepareStatement(getAllStatement());
 			addValue(t, ps, false);
 			ps.executeUpdate();
 		} finally {
-			ConnectionUlti.releaseConnection(c);
+			if (c != null) {
+				ConnectionUtil.releaseConnection(c);
+			}
+			if (ps != null) {
+				ps.close();
+			}
 		}
 	}
-
-//	@Override
-//	public ArrayList<String> getCol() throws SQLException {
-//		ArrayList<String> col = new ArrayList<>();
-//		return col;
-//	}
 
 	protected abstract String getStatement();
 

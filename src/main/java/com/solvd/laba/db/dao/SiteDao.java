@@ -5,9 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import main.java.com.solvd.laba.db.ConnectionUlti;
 import main.java.com.solvd.laba.db.interfaces.ISiteDao;
 import main.java.com.solvd.laba.db.model.Site;
+import main.java.com.solvd.laba.db.ulti.ConnectionUtil;
 
 public class SiteDao extends Dao<Site> implements ISiteDao {
 
@@ -54,16 +54,23 @@ public class SiteDao extends Dao<Site> implements ISiteDao {
 
 	@Override
 	public int getCId(int id) throws SQLException {
-		Connection c = ConnectionUlti.getConnection();
+		Connection c = null;
+		PreparedStatement ps = null;
 		try {
-			PreparedStatement ps = c.prepareStatement("SELECT city_id FROM sites WHERE site_id=?");
+			c = ConnectionUtil.getConnection();
+			ps = c.prepareStatement("SELECT city_id FROM sites WHERE site_id=?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				return rs.getInt("city_id");
 			}
 		} finally {
-			ConnectionUlti.releaseConnection(c);
+			if (c != null) {
+				ConnectionUtil.releaseConnection(c);
+			}
+			if (ps != null) {
+				ps.close();
+			}
 		}
 		return 0;
 	}
