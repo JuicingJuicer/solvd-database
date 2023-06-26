@@ -1,5 +1,6 @@
 package main.java.com.solvd.laba.db.service;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -65,6 +66,12 @@ public class EmployeeService implements IEmployeeService {
 	@Override
 	public void deleteEmployee(Employee emp) throws SQLException {
 		employeeDao.delete(emp);
+	}
+
+	@Override
+	public ArrayList<Employee> getEmployeeByTeamId(int teamId) throws SQLException, IOException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

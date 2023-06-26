@@ -7,17 +7,20 @@ import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import main.java.com.solvd.laba.db.decorator.TeamWithEmployee;
 import main.java.com.solvd.laba.db.factory.ServiceFactory;
 import main.java.com.solvd.laba.db.interfaces.ICityService;
 import main.java.com.solvd.laba.db.interfaces.IEmployeeService;
 import main.java.com.solvd.laba.db.interfaces.IPackageService;
 import main.java.com.solvd.laba.db.interfaces.IProjectService;
 import main.java.com.solvd.laba.db.interfaces.ISiteService;
+import main.java.com.solvd.laba.db.interfaces.ITeamModel;
 import main.java.com.solvd.laba.db.model.City;
 import main.java.com.solvd.laba.db.model.Employee;
 import main.java.com.solvd.laba.db.model.Package;
 import main.java.com.solvd.laba.db.model.Project;
 import main.java.com.solvd.laba.db.model.Site;
+import main.java.com.solvd.laba.db.model.Team;
 
 public class MyBatisMain {
 	private static final Logger LOGGER = LogManager.getLogger(MyBatisMain.class);
@@ -61,6 +64,13 @@ public class MyBatisMain {
 		ArrayList<Site> sites = new ArrayList<>();
 		sites = ss.getSiteByCityId(5);
 		LOGGER.info(sites);
+
+		// decorator
+		Team team = new Team(1, "Team A", "");
+		team.showDetails();
+		ITeamModel teamEmp = new TeamWithEmployee(team);
+		((TeamWithEmployee) teamEmp).setEmployees(es.getEmployeeByTeamId(team.getTeamId()));
+		teamEmp.showDetails();
 	}
 
 }

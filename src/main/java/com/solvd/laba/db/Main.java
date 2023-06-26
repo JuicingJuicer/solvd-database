@@ -42,10 +42,10 @@ public class Main {
 //			@Override
 //			public void run() {
 //				try {
-//					Connection c = ConnectionUlti.getConnection();
+//					Connection c = ConnectionUtil.getConnection();
 //					Thread.sleep(2000);
 //					LOGGER.info("Job done!");
-//					ConnectionUlti.releaseConnection(c);
+//					ConnectionUtil.releaseConnection(c);
 //				} catch (InterruptedException | SQLException e) {
 //					e.printStackTrace();
 //				}

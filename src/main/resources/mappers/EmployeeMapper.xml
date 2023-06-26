@@ -30,6 +30,15 @@
     where E.job_id = #{id}
   </select>
   
+  <select id="selectEmployeeByTeamId" resultMap="main.java.com.solvd.laba.db.mapper.EmployeeMapper.employeeResultMap">
+    select *
+    from employees E
+    LEFT join jobs J on E.job_id = J.job_id
+    LEFT join emp_teams ET on E.emp_id = ET.emp_id
+    LEFT join teams T on ET.team_id = T.team_id
+    where ET.team_id = #{id}
+  </select>
+  
   <insert id="insertEmployee">
 	  insert into employees (first_name, last_name, age, email, phone_number, job_id)
 	  values (#{firstName},#{lastName},#{age},#{email},#{phoneNumber},#{job.jobId})

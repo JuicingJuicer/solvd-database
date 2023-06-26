@@ -12,6 +12,8 @@ public interface EmployeeMapper {
 
 	ArrayList<Employee> selectEmployeeByJobId(int id);
 
+	ArrayList<Employee> selectEmployeeByTeamId(int id);
+
 	void insertEmployee(Employee emp);
 
 	void updateEmployee(Employee emp);

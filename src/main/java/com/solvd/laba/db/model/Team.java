@@ -5,11 +5,17 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import main.java.com.solvd.laba.db.interfaces.ITeamModel;
 
 @XmlRootElement(name = "team")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Team {
+public class Team implements ITeamModel {
+	private static final Logger LOGGER = LogManager.getLogger(Team.class);
 	@XmlElement(name = "teamId")
 	@JsonProperty("teamId")
 	private int teamId;
@@ -56,5 +62,10 @@ public class Team {
 	@Override
 	public String toString() {
 		return "Team{teamId=" + teamId + ", teamName=" + teamName + ", teamDetails=" + teamDetails + "}";
+	}
+
+	@Override
+	public void showDetails() {
+		LOGGER.info(this);
 	}
 }

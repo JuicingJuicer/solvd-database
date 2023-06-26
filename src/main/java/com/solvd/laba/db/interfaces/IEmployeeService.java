@@ -14,6 +14,8 @@ public interface IEmployeeService {
 
 	ArrayList<Employee> getEmployeeByJobId(int jobId) throws SQLException, IOException;
 
+	ArrayList<Employee> getEmployeeByTeamId(int teamId) throws SQLException, IOException;
+
 	void addEmployee(Employee emp) throws SQLException, IOException;
 
 	void updateEmployee(Employee emp) throws SQLException, IOException;
