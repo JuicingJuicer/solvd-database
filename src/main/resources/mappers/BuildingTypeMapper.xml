@@ -8,6 +8,10 @@
     select * from building_types where building_type_id = #{id}
   </select>
   
+  <select id="selectBuildingTypes" resultMap="main.java.com.solvd.laba.db.mapper.BuildingTypeMapper.buildingTypeResultMap">
+    select * from building_types
+  </select>
+  
   <resultMap id="buildingTypeResultMap" type="main.java.com.solvd.laba.db.model.BuildingType" autoMapping="false">
 	  <id property="buildingTypeId" column="building_type_id"/>
 	  <result property="buildingName" column="building_name"/>

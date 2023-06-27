@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import main.java.com.solvd.laba.db.interfaces.IProjectService;
 import main.java.com.solvd.laba.db.mapper.ProjectMapper;
+import main.java.com.solvd.laba.db.model.Phase;
 import main.java.com.solvd.laba.db.model.Project;
 import main.java.com.solvd.laba.db.ulti.SessionUtil;
 
@@ -68,5 +69,11 @@ public class ProjectServiceMyBatis implements IProjectService {
 			projectMapper.deleteProject(project);
 			session.commit();
 		}
+	}
+
+	@Override
+	public ArrayList<Phase> getPhases() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

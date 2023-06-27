@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import main.java.com.solvd.laba.db.model.Phase;
 import main.java.com.solvd.laba.db.model.Project;
 
 public interface IProjectService {
@@ -19,4 +20,6 @@ public interface IProjectService {
 	void updateProject(Project project) throws SQLException, IOException;
 
 	void deleteProject(Project project) throws SQLException, IOException;
+
+	ArrayList<Phase> getPhases() throws SQLException, IOException;
 }
