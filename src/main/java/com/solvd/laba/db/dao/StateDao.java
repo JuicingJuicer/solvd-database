@@ -1,12 +1,16 @@
 package main.java.com.solvd.laba.db.dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import main.java.com.solvd.laba.db.interfaces.IStateDao;
 import main.java.com.solvd.laba.db.model.State;
+import main.java.com.solvd.laba.db.ulti.ConnectionUtil;
 
-public class StateDao extends Dao<State> {
+public class StateDao extends Dao<State> implements IStateDao {
+
 	protected String getStatement() {
 		return "SELECT * FROM states WHERE state_id=?";
 	}
@@ -42,5 +46,28 @@ public class StateDao extends Dao<State> {
 		ps.setInt(1, state.getStateId());
 		ps.setString(2, state.getStateName());
 		ps.setInt(3, state.getStateId());
+	}
+
+	@Override
+	public State getStateByStateName(String name) throws SQLException {
+		Connection c = null;
+		PreparedStatement ps = null;
+		try {
+			c = ConnectionUtil.getConnection();
+			ps = c.prepareStatement("SELECT * FROM states WHERE state_name=?");
+			ps.setString(1, name);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				return create(rs);
+			}
+		} finally {
+			if (c != null) {
+				ConnectionUtil.releaseConnection(c);
+			}
+			if (ps != null) {
+				ps.close();
+			}
+		}
+		return null;
 	}
 }

@@ -1,7 +1,5 @@
 package main.java.com.solvd.laba.db.service;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.apache.ibatis.session.SqlSession;
@@ -15,7 +13,7 @@ public class MaterialServiceMyBatis implements IMaterialService {
 	private MaterialMapper materialMapper;
 
 	@Override
-	public Material getMaterial(int id) throws SQLException, IOException {
+	public Material getMaterial(int id) {
 		try (SqlSession session = SessionUtil.openSession()) {
 			materialMapper = session.getMapper(MaterialMapper.class);
 			Material material = materialMapper.selectMaterialById(id);
@@ -24,7 +22,7 @@ public class MaterialServiceMyBatis implements IMaterialService {
 	}
 
 	@Override
-	public ArrayList<Material> getMaterials() throws SQLException, IOException {
+	public ArrayList<Material> getMaterials() {
 		try (SqlSession session = SessionUtil.openSession()) {
 			materialMapper = session.getMapper(MaterialMapper.class);
 			ArrayList<Material> materials = materialMapper.selectMaterials();

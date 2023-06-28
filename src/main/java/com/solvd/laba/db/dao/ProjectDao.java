@@ -110,4 +110,27 @@ public class ProjectDao extends Dao<Project> implements IProjectDao {
 		return cIds;
 	}
 
+	@Override
+	public ArrayList<Project> getProjectByBuildingTypeId(int id) throws SQLException {
+		ArrayList<Project> projects = new ArrayList<>();
+		Connection c = null;
+		PreparedStatement ps = null;
+		try {
+			c = ConnectionUtil.getConnection();
+			ps = c.prepareStatement("SELECT * FROM projects WHERE building_type=?");
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				projects.add(create(rs));
+			}
+		} finally {
+			if (c != null) {
+				ConnectionUtil.releaseConnection(c);
+			}
+			if (ps != null) {
+				ps.close();
+			}
+		}
+		return projects;
+	}
 }

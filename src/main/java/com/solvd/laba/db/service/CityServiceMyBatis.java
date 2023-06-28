@@ -1,6 +1,5 @@
 package main.java.com.solvd.laba.db.service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import org.apache.ibatis.session.SqlSession;
@@ -17,7 +16,7 @@ public class CityServiceMyBatis implements ICityService {
 	}
 
 	@Override
-	public City getCity(int id) throws IOException {
+	public City getCity(int id) {
 		try (SqlSession session = SessionUtil.openSession()) {
 			cityMapper = session.getMapper(CityMapper.class);
 			City city = cityMapper.selectCityById(id);
@@ -26,7 +25,7 @@ public class CityServiceMyBatis implements ICityService {
 	}
 
 	@Override
-	public City getCityByName(String name) throws IOException {
+	public City getCityByName(String name) {
 		try (SqlSession session = SessionUtil.openSession()) {
 			cityMapper = session.getMapper(CityMapper.class);
 			City city = cityMapper.selectCityByName(name);
@@ -35,7 +34,7 @@ public class CityServiceMyBatis implements ICityService {
 	}
 
 	@Override
-	public ArrayList<City> getCities() throws IOException {
+	public ArrayList<City> getCities() {
 		try (SqlSession session = SessionUtil.openSession()) {
 			cityMapper = session.getMapper(CityMapper.class);
 			ArrayList<City> cities = cityMapper.selectCities();
@@ -44,7 +43,7 @@ public class CityServiceMyBatis implements ICityService {
 	}
 
 	@Override
-	public void addCity(City city) throws IOException {
+	public void addCity(City city) {
 		try (SqlSession session = SessionUtil.openSession()) {
 			cityMapper = session.getMapper(CityMapper.class);
 			cityMapper.insertCity(city);
@@ -53,7 +52,7 @@ public class CityServiceMyBatis implements ICityService {
 	}
 
 	@Override
-	public void updateCity(City city) throws IOException {
+	public void updateCity(City city) {
 		try (SqlSession session = SessionUtil.openSession()) {
 			cityMapper = session.getMapper(CityMapper.class);
 			cityMapper.updateCity(city);
@@ -62,7 +61,7 @@ public class CityServiceMyBatis implements ICityService {
 	}
 
 	@Override
-	public void deleteCity(City city) throws IOException {
+	public void deleteCity(City city) {
 		try (SqlSession session = SessionUtil.openSession()) {
 			cityMapper = session.getMapper(CityMapper.class);
 			cityMapper.deleteCity(city);

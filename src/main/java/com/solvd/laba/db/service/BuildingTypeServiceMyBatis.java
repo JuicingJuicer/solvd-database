@@ -1,6 +1,5 @@
 package main.java.com.solvd.laba.db.service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import org.apache.ibatis.session.SqlSession;
@@ -17,7 +16,7 @@ public class BuildingTypeServiceMyBatis implements IBuildingTypeService {
 	}
 
 	@Override
-	public BuildingType getBuildingType(int id) throws IOException {
+	public BuildingType getBuildingType(int id) {
 		try (SqlSession session = SessionUtil.openSession()) {
 			buildingTypeMapper = session.getMapper(BuildingTypeMapper.class);
 			BuildingType buildingType = buildingTypeMapper.selectBuildingTypeById(id);
@@ -26,7 +25,7 @@ public class BuildingTypeServiceMyBatis implements IBuildingTypeService {
 	}
 
 	@Override
-	public ArrayList<BuildingType> getBuildingTypes() throws IOException {
+	public ArrayList<BuildingType> getBuildingTypes() {
 		try (SqlSession session = SessionUtil.openSession()) {
 			buildingTypeMapper = session.getMapper(BuildingTypeMapper.class);
 			ArrayList<BuildingType> buildingTypes = buildingTypeMapper.selectBuildingTypes();

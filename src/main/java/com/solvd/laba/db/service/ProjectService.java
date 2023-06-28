@@ -39,64 +39,104 @@ public class ProjectService implements IProjectService {
 		stateDao = new StateDao();
 	}
 
-	public Project getProject(int id) throws SQLException {
-		Project project = projectDao.get(id);
-		project.setBuildingType(buildingTypeDao.get(projectDao.getIdByCol("building_type", id)));
-		project.setPhase(phaseDao.get(projectDao.getIdByCol("phase_id", id)));
-		project.setSite(getProjectSite(projectDao.getIdByCol("site_id", id)));
-		project.setTeam(teamDao.get(projectDao.getIdByCol("team_id", id)));
-		project.setClients(getProjectClients(id));
-		return project;
-	}
-
-	public Site getProjectSite(int id) throws SQLException {
-		Site site = siteDao.get(id);
-		City city = cityDao.get(site.getSiteId());
-		city.setState(stateDao.get(city.getCityId()));
-		site.setCity(city);
-		return site;
-	}
-
-	public ArrayList<Client> getProjectClients(int id) throws SQLException {
-		ArrayList<Client> clients = new ArrayList<>();
-		ArrayList<Integer> ids = projectDao.getCId(id);
-		for (int cid : ids) {
-			clients.add(clientDao.get(cid));
+	public Project getProject(int id) {
+		try {
+			Project project = projectDao.get(id);
+			project.setBuildingType(buildingTypeDao.get(projectDao.getIdByCol("building_type", id)));
+			project.setPhase(phaseDao.get(projectDao.getIdByCol("phase_id", id)));
+			project.setSite(getProjectSite(projectDao.getIdByCol("site_id", id)));
+			project.setTeam(teamDao.get(projectDao.getIdByCol("team_id", id)));
+			project.setClients(getProjectClients(id));
+			return project;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
 		}
-		return clients;
+	}
+
+	public Site getProjectSite(int id) {
+		try {
+			Site site = siteDao.get(id);
+			City city = cityDao.get(site.getSiteId());
+			city.setState(stateDao.get(city.getCityId()));
+			site.setCity(city);
+			return site;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public ArrayList<Client> getProjectClients(int id) {
+		try {
+			ArrayList<Client> clients = new ArrayList<>();
+			ArrayList<Integer> ids = projectDao.getCId(id);
+			for (int cid : ids) {
+				clients.add(clientDao.get(cid));
+			}
+			return clients;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
-	public ArrayList<Project> getProjects() throws SQLException {
-		ArrayList<Project> projects = new ArrayList<>();
-		projects = projectDao.getAll();
-		return projects;
+	public ArrayList<Project> getProjects() {
+		try {
+			ArrayList<Project> projects = projectDao.getAll();
+			return projects;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
-	public ArrayList<Project> getProjectByBuildingTypeId(int buildingTypeId) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Project> getProjectByBuildingTypeId(int buildingTypeId) {
+		try {
+			ArrayList<Project> projects = projectDao.getProjectByBuildingTypeId(buildingTypeId);
+			return projects;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
-	public void addProject(Project project) throws SQLException {
-		projectDao.insert(project);
+	public void addProject(Project project) {
+		try {
+			projectDao.insert(project);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public void updateProject(Project project) throws SQLException {
-		projectDao.update(project);
+	public void updateProject(Project project) {
+		try {
+			projectDao.update(project);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public void deleteProject(Project project) throws SQLException {
-		projectDao.delete(project);
+	public void deleteProject(Project project) {
+		try {
+			projectDao.delete(project);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
-	public ArrayList<Phase> getPhases() throws SQLException {
-		ArrayList<Phase> phases;
-		phases = phaseDao.getAll();
-		return phases;
+	public ArrayList<Phase> getPhases() {
+		try {
+			ArrayList<Phase> phases = phaseDao.getAll();
+			return phases;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

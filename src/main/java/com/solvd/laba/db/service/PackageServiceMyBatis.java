@@ -1,6 +1,5 @@
 package main.java.com.solvd.laba.db.service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import org.apache.ibatis.session.SqlSession;
@@ -13,11 +12,11 @@ import main.java.com.solvd.laba.db.ulti.SessionUtil;
 public class PackageServiceMyBatis implements IPackageService {
 	private PackageMapper packageMapper;
 
-	public PackageServiceMyBatis() throws IOException {
+	public PackageServiceMyBatis() {
 	}
 
 	@Override
-	public Package getPackage(int id) throws IOException {
+	public Package getPackage(int id) {
 		try (SqlSession session = SessionUtil.openSession()) {
 			packageMapper = session.getMapper(PackageMapper.class);
 			Package pack = packageMapper.selectPackageById(id);
@@ -26,7 +25,7 @@ public class PackageServiceMyBatis implements IPackageService {
 	}
 
 	@Override
-	public ArrayList<Package> getPackages() throws IOException {
+	public ArrayList<Package> getPackages() {
 		try (SqlSession session = SessionUtil.openSession()) {
 			packageMapper = session.getMapper(PackageMapper.class);
 			ArrayList<Package> packs = packageMapper.selectPackages();
@@ -35,7 +34,7 @@ public class PackageServiceMyBatis implements IPackageService {
 	}
 
 	@Override
-	public void addPackage(Package pack) throws IOException {
+	public void addPackage(Package pack) {
 		try (SqlSession session = SessionUtil.openSession()) {
 			packageMapper = session.getMapper(PackageMapper.class);
 			packageMapper.insertPackage(pack);
@@ -44,7 +43,7 @@ public class PackageServiceMyBatis implements IPackageService {
 	}
 
 	@Override
-	public void updatePackage(Package pack) throws IOException {
+	public void updatePackage(Package pack) {
 		try (SqlSession session = SessionUtil.openSession()) {
 			packageMapper = session.getMapper(PackageMapper.class);
 			packageMapper.updatePackage(pack);
@@ -53,7 +52,7 @@ public class PackageServiceMyBatis implements IPackageService {
 	}
 
 	@Override
-	public void deletePackage(Package pack) throws IOException {
+	public void deletePackage(Package pack) {
 		try (SqlSession session = SessionUtil.openSession()) {
 			packageMapper = session.getMapper(PackageMapper.class);
 			packageMapper.deletePackage(pack);

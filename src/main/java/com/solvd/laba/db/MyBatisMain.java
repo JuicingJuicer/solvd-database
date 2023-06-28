@@ -21,6 +21,7 @@ import main.java.com.solvd.laba.db.model.Package;
 import main.java.com.solvd.laba.db.model.Project;
 import main.java.com.solvd.laba.db.model.Site;
 import main.java.com.solvd.laba.db.model.Team;
+import main.java.com.solvd.laba.db.service.EmployeeServiceMyBatis;
 
 public class MyBatisMain {
 	private static final Logger LOGGER = LogManager.getLogger(MyBatisMain.class);
@@ -69,7 +70,7 @@ public class MyBatisMain {
 		Team team = new Team(1, "Team A", "");
 		team.showDetails();
 		ITeamModel teamEmp = new TeamWithEmployee(team);
-		((TeamWithEmployee) teamEmp).setEmployees(es.getEmployeeByTeamId(team.getTeamId()));
+		((TeamWithEmployee) teamEmp).setEmployees(((EmployeeServiceMyBatis) es).getEmployeeByTeamId(team.getTeamId()));
 		teamEmp.showDetails();
 	}
 

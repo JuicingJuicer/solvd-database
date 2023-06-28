@@ -1,13 +1,11 @@
 package main.java.com.solvd.laba.db.service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import org.apache.ibatis.session.SqlSession;
 
 import main.java.com.solvd.laba.db.interfaces.IProjectService;
 import main.java.com.solvd.laba.db.mapper.ProjectMapper;
-import main.java.com.solvd.laba.db.model.Phase;
 import main.java.com.solvd.laba.db.model.Project;
 import main.java.com.solvd.laba.db.ulti.SessionUtil;
 
@@ -18,7 +16,7 @@ public class ProjectServiceMyBatis implements IProjectService {
 	}
 
 	@Override
-	public Project getProject(int id) throws IOException {
+	public Project getProject(int id) {
 		try (SqlSession session = SessionUtil.openSession()) {
 			projectMapper = session.getMapper(ProjectMapper.class);
 			Project project = projectMapper.selectProjectById(id);
@@ -27,7 +25,7 @@ public class ProjectServiceMyBatis implements IProjectService {
 	}
 
 	@Override
-	public ArrayList<Project> getProjects() throws IOException {
+	public ArrayList<Project> getProjects() {
 		try (SqlSession session = SessionUtil.openSession()) {
 			projectMapper = session.getMapper(ProjectMapper.class);
 			ArrayList<Project> projects = projectMapper.selectProjects();
@@ -36,7 +34,7 @@ public class ProjectServiceMyBatis implements IProjectService {
 	}
 
 	@Override
-	public ArrayList<Project> getProjectByBuildingTypeId(int buildingTypeId) throws IOException {
+	public ArrayList<Project> getProjectByBuildingTypeId(int buildingTypeId) {
 		try (SqlSession session = SessionUtil.openSession()) {
 			projectMapper = session.getMapper(ProjectMapper.class);
 			ArrayList<Project> projects = projectMapper.selectProjectByBuildingTypeId(buildingTypeId);
@@ -45,7 +43,7 @@ public class ProjectServiceMyBatis implements IProjectService {
 	}
 
 	@Override
-	public void addProject(Project project) throws IOException {
+	public void addProject(Project project) {
 		try (SqlSession session = SessionUtil.openSession()) {
 			projectMapper = session.getMapper(ProjectMapper.class);
 			projectMapper.insertProject(project);
@@ -54,7 +52,7 @@ public class ProjectServiceMyBatis implements IProjectService {
 	}
 
 	@Override
-	public void updateProject(Project project) throws IOException {
+	public void updateProject(Project project) {
 		try (SqlSession session = SessionUtil.openSession()) {
 			projectMapper = session.getMapper(ProjectMapper.class);
 			projectMapper.updateProject(project);
@@ -63,17 +61,11 @@ public class ProjectServiceMyBatis implements IProjectService {
 	}
 
 	@Override
-	public void deleteProject(Project project) throws IOException {
+	public void deleteProject(Project project) {
 		try (SqlSession session = SessionUtil.openSession()) {
 			projectMapper = session.getMapper(ProjectMapper.class);
 			projectMapper.deleteProject(project);
 			session.commit();
 		}
-	}
-
-	@Override
-	public ArrayList<Phase> getPhases() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

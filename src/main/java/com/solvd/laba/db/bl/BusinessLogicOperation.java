@@ -28,6 +28,7 @@ import main.java.com.solvd.laba.db.model.Phase;
 import main.java.com.solvd.laba.db.model.Project;
 import main.java.com.solvd.laba.db.model.Site;
 import main.java.com.solvd.laba.db.model.State;
+import main.java.com.solvd.laba.db.service.ProjectService;
 
 public class BusinessLogicOperation {
 	private static final Logger LOGGER = LogManager.getLogger(BusinessLogicOperation.class);
@@ -58,7 +59,7 @@ public class BusinessLogicOperation {
 		LOGGER.info("Project info");
 		LOGGER.info(project);
 		LOGGER.info("The total price of the project is $" + packageCalc(pack));
-		LOGGER.info("It will also take approximately " + TimeRandom() + " years to complete.");
+		LOGGER.info("It will also take approximately " + timeRandom() + " years to complete.");
 		sc.close();
 	}
 
@@ -150,7 +151,7 @@ public class BusinessLogicOperation {
 				LOGGER.info("Okay today will be the start date!");
 				project.setStartDate(
 						Date.from(java.time.LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-				ArrayList<Phase> phases = projectService.getPhases();
+				ArrayList<Phase> phases = ((ProjectService) projectService).getPhases();
 				project.setPhase(phases.get(0));
 				LOGGER.info("Congrats the project is now in the " + project.getPhase().getPhaseName() + " phase");
 				valid = true;
@@ -218,7 +219,7 @@ public class BusinessLogicOperation {
 		return materials;
 	}
 
-	public int TimeRandom() {
+	public int timeRandom() {
 		Random random = new Random();
 		int years = 0;
 		years = random.nextInt(5 - 2) + 2;

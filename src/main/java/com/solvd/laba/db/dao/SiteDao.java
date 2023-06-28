@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import main.java.com.solvd.laba.db.interfaces.ISiteDao;
 import main.java.com.solvd.laba.db.model.Site;
@@ -73,5 +74,29 @@ public class SiteDao extends Dao<Site> implements ISiteDao {
 			}
 		}
 		return 0;
+	}
+
+	@Override
+	public ArrayList<Site> getSiteByCityId(int id) throws SQLException {
+		ArrayList<Site> sites = new ArrayList<>();
+		Connection c = null;
+		PreparedStatement ps = null;
+		try {
+			c = ConnectionUtil.getConnection();
+			ps = c.prepareStatement("SELECT * FROM sites WHERE city_id=?");
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				sites.add(create(rs));
+			}
+		} finally {
+			if (c != null) {
+				ConnectionUtil.releaseConnection(c);
+			}
+			if (ps != null) {
+				ps.close();
+			}
+		}
+		return sites;
 	}
 }

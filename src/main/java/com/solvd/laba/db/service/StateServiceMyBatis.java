@@ -1,8 +1,5 @@
 package main.java.com.solvd.laba.db.service;
 
-import java.io.IOException;
-import java.sql.SQLException;
-
 import org.apache.ibatis.session.SqlSession;
 
 import main.java.com.solvd.laba.db.interfaces.IStateService;
@@ -14,7 +11,7 @@ public class StateServiceMyBatis implements IStateService {
 	private StateMapper stateMapper;
 
 	@Override
-	public State getState(int id) throws SQLException, IOException {
+	public State getState(int id) {
 		try (SqlSession session = SessionUtil.openSession()) {
 			stateMapper = session.getMapper(StateMapper.class);
 			State state = stateMapper.selectStateById(id);
@@ -23,7 +20,7 @@ public class StateServiceMyBatis implements IStateService {
 	}
 
 	@Override
-	public State getStateByName(String name) throws SQLException, IOException {
+	public State getStateByName(String name) {
 		try (SqlSession session = SessionUtil.openSession()) {
 			stateMapper = session.getMapper(StateMapper.class);
 			State state = stateMapper.selectStateByStateName(name);
