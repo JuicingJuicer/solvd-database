@@ -17,4 +17,6 @@ public interface IEmployeeService {
 	void updateEmployee(Employee emp);
 
 	void deleteEmployee(Employee emp);
+
+	ArrayList<Employee> getEmployeeByTeamId(int teamId);
 }

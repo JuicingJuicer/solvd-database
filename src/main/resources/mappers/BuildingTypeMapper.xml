@@ -16,7 +16,7 @@
 	  <id property="buildingTypeId" column="building_type_id"/>
 	  <result property="buildingName" column="building_name"/>
 	  <result property="buildingTag" column="building_tag"/>
-	  <result property="additionalDetails" column="additional_details"/>
+	  <result property="time" column="time"/>
   </resultMap>
   
 </mapper>

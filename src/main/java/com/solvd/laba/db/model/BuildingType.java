@@ -9,17 +9,17 @@ public class BuildingType {
 	private String buildingName;
 	@JsonProperty("buildingTag")
 	private String buildingTag;
-	@JsonProperty("additionalDetails")
-	private String additionalDetails;
+	@JsonProperty("time")
+	private int time;
 
 	public BuildingType() {
 	}
 
-	public BuildingType(int buildingTypeId, String buildingName, String buildingTag, String additionalDetails) {
+	public BuildingType(int buildingTypeId, String buildingName, String buildingTag, int time) {
 		this.buildingTypeId = buildingTypeId;
 		this.buildingName = buildingName;
 		this.buildingTag = buildingTag;
-		this.additionalDetails = additionalDetails;
+		this.time = time;
 	}
 
 	public void setBuildingTypeId(int buildingTypeId) {
@@ -34,8 +34,8 @@ public class BuildingType {
 		this.buildingTag = buildingTag;
 	}
 
-	public void setAdditionalDetails(String additionalDetails) {
-		this.additionalDetails = additionalDetails;
+	public void setTime(int time) {
+		this.time = time;
 	}
 
 	public int getBuildingTypeId() {
@@ -50,13 +50,13 @@ public class BuildingType {
 		return buildingTag;
 	}
 
-	public String getAdditionalDetails() {
-		return additionalDetails;
+	public int getTime() {
+		return time;
 	}
 
 	@Override
 	public String toString() {
 		return "BuildingType{buildingTypeId=" + buildingTypeId + ", buildingName=" + buildingName + ", buildingTag="
-				+ buildingTag + ", additionalDetails=" + additionalDetails + "}";
+				+ buildingTag + ", time=" + time + "years}";
 	}
 }

@@ -58,6 +58,18 @@ public class EmployeeService implements IEmployeeService {
 		}
 	}
 
+	@Override
+	public ArrayList<Employee> getEmployeeByTeamId(int teamId) {
+		try {
+			ArrayList<Employee> emps = new ArrayList<>();
+			emps = employeeDao.getEmployeeByTeamId(teamId);
+			return emps;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 	public ArrayList<Team> getEmpTeams(int id) {
 		try {
 			ArrayList<Team> teams = new ArrayList<>();
@@ -98,4 +110,5 @@ public class EmployeeService implements IEmployeeService {
 			e.printStackTrace();
 		}
 	}
+
 }

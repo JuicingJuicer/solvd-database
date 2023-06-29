@@ -8,6 +8,10 @@
     select * from phases where phase_id = #{id}
   </select>
   
+  <select id="selectPhases" resultMap="main.java.com.solvd.laba.db.mapper.PhaseMapper.phaseResultMap">
+    select * from phases
+  </select>
+  
   <resultMap id="phaseResultMap" type="main.java.com.solvd.laba.db.model.Phase" autoMapping="false">
 	  <id property="phaseId" column="phase_id"/>
 	  <result property="phaseName" column="phase_name"/>

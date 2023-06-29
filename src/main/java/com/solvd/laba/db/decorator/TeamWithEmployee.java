@@ -19,7 +19,7 @@ public class TeamWithEmployee extends TeamDecorator {
 	@Override
 	public void showDetails() {
 		super.showDetails();
-		LOGGER.info("Employee(s): of team: " + getEmployees());
+		LOGGER.info("Employee(s) of team: " + getEmployees() + "\n");
 	}
 
 	public void setEmployees(ArrayList<Employee> employees) {

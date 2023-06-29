@@ -4,18 +4,18 @@
 		<buildingTypeId>1</buildingTypeId>
 		<buildingName>Office</buildingName>
 		<buildingTag>BUSINESS</buildingTag>
-		<additionalDetails> </additionalDetails>
+		<time>1</time>
 	</buildingType>
 	<buildingType>
 		<buildingTypeId>2</buildingTypeId>
 		<buildingName>House</buildingName>
 		<buildingTag>RESIDENTIAL</buildingTag>
-		<additionalDetails>1 story</additionalDetails>
+		<time>2</time>
 	</buildingType>
 	<buildingType>
 		<buildingTypeId>3</buildingTypeId>
 		<buildingName>WareHouse</buildingName>
 		<buildingTag>STORAGE</buildingTag>
-		<additionalDetails>cold storage</additionalDetails>
+		<time>3</time>
 	</buildingType>
 </buildingTypes>

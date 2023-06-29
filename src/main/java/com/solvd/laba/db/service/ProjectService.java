@@ -14,7 +14,6 @@ import main.java.com.solvd.laba.db.dao.TeamDao;
 import main.java.com.solvd.laba.db.interfaces.IProjectService;
 import main.java.com.solvd.laba.db.model.City;
 import main.java.com.solvd.laba.db.model.Client;
-import main.java.com.solvd.laba.db.model.Phase;
 import main.java.com.solvd.laba.db.model.Project;
 import main.java.com.solvd.laba.db.model.Site;
 
@@ -127,16 +126,6 @@ public class ProjectService implements IProjectService {
 			projectDao.delete(project);
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-	}
-
-	public ArrayList<Phase> getPhases() {
-		try {
-			ArrayList<Phase> phases = phaseDao.getAll();
-			return phases;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
 		}
 	}
 }

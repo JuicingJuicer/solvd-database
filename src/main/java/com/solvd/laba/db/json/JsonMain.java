@@ -14,8 +14,8 @@ import main.java.com.solvd.laba.db.model.Employee;
 import main.java.com.solvd.laba.db.model.Project;
 import main.java.com.solvd.laba.db.model.Site;
 
-public class Main {
-	private static final Logger LOGGER = LogManager.getLogger(Main.class);
+public class JsonMain {
+	private static final Logger LOGGER = LogManager.getLogger(JsonMain.class);
 
 	public static void main(String[] args) throws IOException {
 		ObjectMapper mapper = new ObjectMapper();

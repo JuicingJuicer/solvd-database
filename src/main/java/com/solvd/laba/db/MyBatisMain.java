@@ -27,7 +27,7 @@ public class MyBatisMain {
 	private static final Logger LOGGER = LogManager.getLogger(MyBatisMain.class);
 
 	public static void main(String[] args) throws IOException, SQLException {
-		IEmployeeService es = ServiceFactory.createEmployeeService("mybatis");
+		IEmployeeService es = ServiceFactory.createEmployeeService();
 		Employee emp = es.getEmployee(2);
 		LOGGER.info(emp);
 
@@ -35,14 +35,14 @@ public class MyBatisMain {
 		emps = es.getEmployeeByJobId(2);
 		LOGGER.info(emps);
 
-		ICityService cs = ServiceFactory.createCityService("mybatis");
+		ICityService cs = ServiceFactory.createCityService();
 		City city = cs.getCityByName("Denver");
 		LOGGER.info(city);
 
 		City city2 = cs.getCity(2);
 		LOGGER.info(city2);
 
-		IPackageService ps = ServiceFactory.createPackageService("mybatis");
+		IPackageService ps = ServiceFactory.createPackageService();
 		Package pack = ps.getPackage(1);
 		LOGGER.info(pack);
 
@@ -50,7 +50,7 @@ public class MyBatisMain {
 		packs = ps.getPackages();
 		LOGGER.info(packs);
 
-		IProjectService projS = ServiceFactory.createProjectService("mybatis");
+		IProjectService projS = ServiceFactory.createProjectService();
 		Project project = projS.getProject(1);
 		LOGGER.info(project);
 
@@ -58,7 +58,7 @@ public class MyBatisMain {
 		projects = projS.getProjectByBuildingTypeId(2);
 		LOGGER.info(projects);
 
-		ISiteService ss = ServiceFactory.createSiteService("mybatis");
+		ISiteService ss = ServiceFactory.createSiteService();
 		Site site = ss.getSite(1);
 		LOGGER.info(site);
 
