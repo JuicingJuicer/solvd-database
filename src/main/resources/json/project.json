@@ -7,7 +7,7 @@
     "buildingTypeId":2,
     "buildingName":"House",
     "buildingTag":"RESIDENTIAL",
-    "additionalDetails":"Two Story"
+    "time":"2"
   },
   "phase":{
     "phaseId":4,

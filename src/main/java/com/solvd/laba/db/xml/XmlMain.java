@@ -16,8 +16,8 @@ import org.xml.sax.SAXException;
 import main.java.com.solvd.laba.db.model.Employee;
 import main.java.com.solvd.laba.db.model.Package;
 
-public class Main {
-	private static final Logger LOGGER = LogManager.getLogger(Main.class);
+public class XmlMain {
+	private static final Logger LOGGER = LogManager.getLogger(XmlMain.class);
 
 	public static void main(String[] args)
 			throws SQLException, SAXException, IOException, XMLStreamException, JAXBException {

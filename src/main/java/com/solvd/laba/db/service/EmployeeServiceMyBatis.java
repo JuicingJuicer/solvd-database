@@ -1,6 +1,5 @@
 package main.java.com.solvd.laba.db.service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import org.apache.ibatis.session.SqlSession;
@@ -17,7 +16,7 @@ public class EmployeeServiceMyBatis implements IEmployeeService {
 	}
 
 	@Override
-	public Employee getEmployee(int id) throws IOException {
+	public Employee getEmployee(int id) {
 		try (SqlSession session = SessionUtil.openSession()) {
 			employeeMapper = session.getMapper(EmployeeMapper.class);
 			Employee emp = employeeMapper.selectEmployeeById(id);
@@ -26,7 +25,7 @@ public class EmployeeServiceMyBatis implements IEmployeeService {
 	}
 
 	@Override
-	public ArrayList<Employee> getEmployees() throws IOException {
+	public ArrayList<Employee> getEmployees() {
 		try (SqlSession session = SessionUtil.openSession()) {
 			employeeMapper = session.getMapper(EmployeeMapper.class);
 			ArrayList<Employee> emps = employeeMapper.selectEmployees();
@@ -35,7 +34,7 @@ public class EmployeeServiceMyBatis implements IEmployeeService {
 	}
 
 	@Override
-	public ArrayList<Employee> getEmployeeByJobId(int jobId) throws IOException {
+	public ArrayList<Employee> getEmployeeByJobId(int jobId) {
 		try (SqlSession session = SessionUtil.openSession()) {
 			employeeMapper = session.getMapper(EmployeeMapper.class);
 			ArrayList<Employee> emps = employeeMapper.selectEmployeeByJobId(jobId);
@@ -44,7 +43,16 @@ public class EmployeeServiceMyBatis implements IEmployeeService {
 	}
 
 	@Override
-	public void addEmployee(Employee emp) throws IOException {
+	public ArrayList<Employee> getEmployeeByTeamId(int teamId) {
+		try (SqlSession session = SessionUtil.openSession()) {
+			employeeMapper = session.getMapper(EmployeeMapper.class);
+			ArrayList<Employee> emps = employeeMapper.selectEmployeeByTeamId(teamId);
+			return emps;
+		}
+	}
+
+	@Override
+	public void addEmployee(Employee emp) {
 		try (SqlSession session = SessionUtil.openSession()) {
 			employeeMapper = session.getMapper(EmployeeMapper.class);
 			employeeMapper.insertEmployee(emp);
@@ -53,7 +61,7 @@ public class EmployeeServiceMyBatis implements IEmployeeService {
 	}
 
 	@Override
-	public void updateEmployee(Employee emp) throws IOException {
+	public void updateEmployee(Employee emp) {
 		try (SqlSession session = SessionUtil.openSession()) {
 			employeeMapper = session.getMapper(EmployeeMapper.class);
 			employeeMapper.updateEmployee(emp);
@@ -62,11 +70,12 @@ public class EmployeeServiceMyBatis implements IEmployeeService {
 	}
 
 	@Override
-	public void deleteEmployee(Employee emp) throws IOException {
+	public void deleteEmployee(Employee emp) {
 		try (SqlSession session = SessionUtil.openSession()) {
 			employeeMapper = session.getMapper(EmployeeMapper.class);
 			employeeMapper.deleteEmployee(emp);
 			session.commit();
 		}
 	}
+
 }

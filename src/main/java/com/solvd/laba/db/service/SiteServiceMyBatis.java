@@ -1,6 +1,5 @@
 package main.java.com.solvd.laba.db.service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import org.apache.ibatis.session.SqlSession;
@@ -17,7 +16,7 @@ public class SiteServiceMyBatis implements ISiteService {
 	}
 
 	@Override
-	public Site getSite(int id) throws IOException {
+	public Site getSite(int id) {
 		try (SqlSession session = SessionUtil.openSession()) {
 			siteMapper = session.getMapper(SiteMapper.class);
 			Site site = siteMapper.selectSiteById(id);
@@ -26,7 +25,7 @@ public class SiteServiceMyBatis implements ISiteService {
 	}
 
 	@Override
-	public ArrayList<Site> getSites() throws IOException {
+	public ArrayList<Site> getSites() {
 		try (SqlSession session = SessionUtil.openSession()) {
 			siteMapper = session.getMapper(SiteMapper.class);
 			ArrayList<Site> sites = siteMapper.selectSites();
@@ -35,7 +34,7 @@ public class SiteServiceMyBatis implements ISiteService {
 	}
 
 	@Override
-	public ArrayList<Site> getSiteByCityId(int cityId) throws IOException {
+	public ArrayList<Site> getSiteByCityId(int cityId) {
 		try (SqlSession session = SessionUtil.openSession()) {
 			siteMapper = session.getMapper(SiteMapper.class);
 			ArrayList<Site> sites = siteMapper.selectSiteByCityId(cityId);
@@ -44,7 +43,7 @@ public class SiteServiceMyBatis implements ISiteService {
 	}
 
 	@Override
-	public void addSite(Site site) throws IOException {
+	public void addSite(Site site) {
 		try (SqlSession session = SessionUtil.openSession()) {
 			siteMapper = session.getMapper(SiteMapper.class);
 			siteMapper.insertSite(site);
@@ -53,7 +52,7 @@ public class SiteServiceMyBatis implements ISiteService {
 	}
 
 	@Override
-	public void updateSite(Site site) throws IOException {
+	public void updateSite(Site site) {
 		try (SqlSession session = SessionUtil.openSession()) {
 			siteMapper = session.getMapper(SiteMapper.class);
 			siteMapper.updateSite(site);
@@ -62,7 +61,7 @@ public class SiteServiceMyBatis implements ISiteService {
 	}
 
 	@Override
-	public void deleteSite(Site site) throws IOException {
+	public void deleteSite(Site site) {
 		try (SqlSession session = SessionUtil.openSession()) {
 			siteMapper = session.getMapper(SiteMapper.class);
 			siteMapper.deleteSite(site);

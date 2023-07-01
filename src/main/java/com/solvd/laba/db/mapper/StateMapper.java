@@ -5,4 +5,6 @@ import main.java.com.solvd.laba.db.model.State;
 public interface StateMapper {
 
 	State selectStateById(int id);
+
+	State selectStateByStateName(String name);
 }

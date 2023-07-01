@@ -29,7 +29,7 @@ public class BuildingTypeDao extends Dao<BuildingType> {
 
 	protected BuildingType create(ResultSet rs) throws SQLException {
 		return new BuildingType(rs.getInt("building_type_id"), rs.getString("building_name"),
-				rs.getString("building_tag"), rs.getString("additional_details"));
+				rs.getString("building_tag"), rs.getInt("time"));
 	}
 
 	protected void addValue(BuildingType bType, PreparedStatement ps, boolean b) throws SQLException {
@@ -37,7 +37,7 @@ public class BuildingTypeDao extends Dao<BuildingType> {
 		if (b) {
 			ps.setString(2, bType.getBuildingName());
 			ps.setString(3, bType.getBuildingTag());
-			ps.setString(4, bType.getAdditionalDetails());
+			ps.setInt(4, bType.getTime());
 		}
 	}
 
@@ -45,7 +45,7 @@ public class BuildingTypeDao extends Dao<BuildingType> {
 		ps.setInt(1, bType.getBuildingTypeId());
 		ps.setString(2, bType.getBuildingName());
 		ps.setString(3, bType.getBuildingTag());
-		ps.setString(4, bType.getAdditionalDetails());
+		ps.setInt(4, bType.getTime());
 		ps.setInt(5, bType.getBuildingTypeId());
 	}
 }

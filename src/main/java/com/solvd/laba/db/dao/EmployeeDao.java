@@ -132,4 +132,29 @@ public class EmployeeDao extends Dao<Employee> implements IEmployeeDao {
 		}
 		return emps;
 	}
+
+	@Override
+	public ArrayList<Employee> getEmployeeByTeamId(int id) throws SQLException {
+		ArrayList<Employee> emps = new ArrayList<>();
+		Connection c = null;
+		PreparedStatement ps = null;
+		try {
+			c = ConnectionUtil.getConnection();
+			ps = c.prepareStatement(
+					"SELECT * FROM employees E LEFT join emp_teams ET on E.emp_id = ET.emp_id LEFT join teams T on ET.team_id = T.team_id WHERE ET.team_id=?");
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				emps.add(create(rs));
+			}
+		} finally {
+			if (c != null) {
+				ConnectionUtil.releaseConnection(c);
+			}
+			if (ps != null) {
+				ps.close();
+			}
+		}
+		return emps;
+	}
 }

@@ -78,7 +78,7 @@ public class Package {
 
 	@Override
 	public String toString() {
-		return "Package{packageId=" + packageId + ", purchaseDate=" + purchaseDate + ", status=" + status + ", site="
-				+ site + ", materials=" + materials + "}";
+		return "Package{packageId=" + packageId + ", purchaseDate=" + purchaseDate + ", status=" + status + ",\nSite="
+				+ site + ",\nMaterials=" + materials + "}";
 	}
 }

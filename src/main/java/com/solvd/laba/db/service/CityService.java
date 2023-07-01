@@ -17,37 +17,58 @@ public class CityService implements ICityService {
 		stateDao = new StateDao();
 	}
 
-	public City getCity(int id) throws SQLException {
-		City city = cityDao.get(id);
-		city.setState(stateDao.get(id));
-		return city;
+	public City getCity(int id) {
+		try {
+			City city = cityDao.get(id);
+			city.setState(stateDao.get(id));
+			return city;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
-	public City getCityByName(String name) throws SQLException {
+	public City getCityByName(String name) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<City> getCities() throws SQLException {
-		ArrayList<City> cities = new ArrayList<>();
-		cities = cityDao.getAll();
-		return cities;
+	public ArrayList<City> getCities() {
+		try {
+			ArrayList<City> cities = cityDao.getAll();
+			return cities;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
-	public void addCity(City city) throws SQLException {
-		cityDao.insert(city);
+	public void addCity(City city) {
+		try {
+			cityDao.insert(city);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public void updateCity(City city) throws SQLException {
-		cityDao.update(city);
+	public void updateCity(City city) {
+		try {
+			cityDao.update(city);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public void deleteCity(City city) throws SQLException {
-		cityDao.delete(city);
+	public void deleteCity(City city) {
+		try {
+			cityDao.delete(city);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

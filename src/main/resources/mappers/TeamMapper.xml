@@ -8,6 +8,10 @@
     select * from teams where team_id = #{id}
   </select>
   
+  <select id="selectTeams" resultMap="main.java.com.solvd.laba.db.mapper.TeamMapper.teamResultMap">
+    select * from teams
+  </select>
+  
   <resultMap id="teamResultMap" type="main.java.com.solvd.laba.db.model.Team" autoMapping="false">
 	  <id property="teamId" column="team_id"/>
 	  <result property="teamName" column="team_name"/>

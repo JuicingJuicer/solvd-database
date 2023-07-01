@@ -11,4 +11,6 @@ public interface IEmployeeDao extends IDao<Employee> {
 	ArrayList<Integer> getTId(int id) throws SQLException;
 
 	ArrayList<Employee> getEmployeeByJobId(int id) throws SQLException;
+
+	ArrayList<Employee> getEmployeeByTeamId(int id) throws SQLException;
 }

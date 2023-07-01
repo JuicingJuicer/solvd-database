@@ -9,7 +9,7 @@
               <xs:element name="buildingTypeId" type="xs:int"/>
               <xs:element name="buildingName" type="xs:string"/>
               <xs:element name="buildingTag" type="xs:string"/>
-              <xs:element name="additionalDetails" type="xs:string"/>
+              <xs:element name="time" type="xs:int"/>
             </xs:sequence>
           </xs:complexType>
         </xs:element>

@@ -8,6 +8,10 @@
 	select * from materials where material_id = #{id}
   </select>
   
+  <select id="selectMaterials" resultMap="main.java.com.solvd.laba.db.mapper.MaterialMapper.materialResultMap">
+	select * from materials
+  </select>
+  
   <resultMap id="materialResultMap" type="main.java.com.solvd.laba.db.model.Material" autoMapping="false">
 	  <id property="materialId" column="material_id"/>
 	  <result property="materialName" column="Material_name"/>

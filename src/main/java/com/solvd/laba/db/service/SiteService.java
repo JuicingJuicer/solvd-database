@@ -21,39 +21,67 @@ public class SiteService implements ISiteService {
 		stateDao = new StateDao();
 	}
 
-	public Site getSite(int id) throws SQLException {
-		Site site = siteDao.get(id);
-		City city = cityDao.get(siteDao.getCId(id));
-		city.setState(stateDao.get(city.getCityId()));
-		site.setCity(city);
-		return site;
+	public Site getSite(int id) {
+		try {
+			Site site = siteDao.get(id);
+			City city = cityDao.get(siteDao.getCId(id));
+			city.setState(stateDao.get(city.getCityId()));
+			site.setCity(city);
+			return site;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
-	public ArrayList<Site> getSites() throws SQLException {
-		ArrayList<Site> sites = new ArrayList<>();
-		sites = siteDao.getAll();
-		return sites;
+	public ArrayList<Site> getSites() {
+		try {
+			ArrayList<Site> sites = new ArrayList<>();
+			sites = siteDao.getAll();
+			return sites;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
-	public ArrayList<Site> getSiteByCityId(int cityId) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Site> getSiteByCityId(int cityId) {
+		try {
+			ArrayList<Site> sites = new ArrayList<>();
+			sites = siteDao.getSiteByCityId(cityId);
+			return sites;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
-	public void addSite(Site site) throws SQLException {
-		siteDao.insert(site);
+	public void addSite(Site site) {
+		try {
+			siteDao.insert(site);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public void updateSite(Site site) throws SQLException {
-		siteDao.update(site);
+	public void updateSite(Site site) {
+		try {
+			siteDao.update(site);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public void deleteSite(Site site) throws SQLException {
-		siteDao.delete(site);
+	public void deleteSite(Site site) {
+		try {
+			siteDao.delete(site);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

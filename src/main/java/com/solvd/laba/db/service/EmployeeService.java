@@ -22,49 +22,93 @@ public class EmployeeService implements IEmployeeService {
 	}
 
 	@Override
-	public Employee getEmployee(int id) throws SQLException {
-		Employee employee = employeeDao.get(id);
-		employee.setJob(jobDao.get(employeeDao.getJId(id)));
-		employee.setTeams(getEmpTeams(id));
-		return employee;
-	}
-
-	@Override
-	public ArrayList<Employee> getEmployeeByJobId(int jobId) throws SQLException {
-		ArrayList<Employee> emps = new ArrayList<>();
-		emps = employeeDao.getEmployeeByJobId(jobId);
-		return emps;
-	}
-
-	@Override
-	public ArrayList<Employee> getEmployees() throws SQLException {
-		ArrayList<Employee> emps = new ArrayList<>();
-		emps = employeeDao.getAll();
-		return emps;
-	}
-
-	public ArrayList<Team> getEmpTeams(int id) throws SQLException {
-		ArrayList<Team> teams = new ArrayList<>();
-		ArrayList<Integer> ids = employeeDao.getTId(id);
-		for (int tid : ids) {
-			teams.add(teamDao.get(tid));
+	public Employee getEmployee(int id) {
+		try {
+			Employee employee = employeeDao.get(id);
+			employee.setJob(jobDao.get(employeeDao.getJId(id)));
+			employee.setTeams(getEmpTeams(id));
+			return employee;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
 		}
-		return teams;
 	}
 
 	@Override
-	public void addEmployee(Employee emp) throws SQLException {
-		employeeDao.insert(emp);
+	public ArrayList<Employee> getEmployeeByJobId(int jobId) {
+		try {
+			ArrayList<Employee> emps = new ArrayList<>();
+			emps = employeeDao.getEmployeeByJobId(jobId);
+			return emps;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
-	public void updateEmployee(Employee emp) throws SQLException {
-		employeeDao.update(emp);
+	public ArrayList<Employee> getEmployees() {
+		try {
+			ArrayList<Employee> emps = new ArrayList<>();
+			emps = employeeDao.getAll();
+			return emps;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
-	public void deleteEmployee(Employee emp) throws SQLException {
-		employeeDao.delete(emp);
+	public ArrayList<Employee> getEmployeeByTeamId(int teamId) {
+		try {
+			ArrayList<Employee> emps = new ArrayList<>();
+			emps = employeeDao.getEmployeeByTeamId(teamId);
+			return emps;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public ArrayList<Team> getEmpTeams(int id) {
+		try {
+			ArrayList<Team> teams = new ArrayList<>();
+			ArrayList<Integer> ids = employeeDao.getTId(id);
+			for (int tid : ids) {
+				teams.add(teamDao.get(tid));
+			}
+			return teams;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public void addEmployee(Employee emp) {
+		try {
+			employeeDao.insert(emp);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void updateEmployee(Employee emp) {
+		try {
+			employeeDao.update(emp);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void deleteEmployee(Employee emp) {
+		try {
+			employeeDao.delete(emp);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

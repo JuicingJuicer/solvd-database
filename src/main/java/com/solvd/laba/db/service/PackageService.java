@@ -31,51 +31,82 @@ public class PackageService implements IPackageService {
 		materialDao = new MaterialDao();
 	}
 
-	public Package getPackage(int id) throws SQLException {
-		Package pack = packageDao.get(id);
-		pack.setSite(getPackageSite(packageDao.getSId(id)));
-		pack.setMaterials(getMatQuantity(id));
-		return pack;
-	}
-
-	public Site getPackageSite(int id) throws SQLException {
-		Site site = siteDao.get(id);
-		City city = cityDao.get(site.getSiteId());
-		city.setState(stateDao.get(city.getCityId()));
-		site.setCity(city);
-		return site;
-	}
-
-	public ArrayList<Material> getMatQuantity(int id) throws SQLException {
-		ArrayList<Material> mats = new ArrayList<>();
-		HashMap<Integer, Integer> map = packageDao.getIdQuantity(id);
-		for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-			Material mat = materialDao.get(entry.getKey());
-			mat.setQuantity(entry.getValue());
-			mats.add(mat);
+	public Package getPackage(int id) {
+		try {
+			Package pack = packageDao.get(id);
+			pack.setSite(getPackageSite(packageDao.getSId(id)));
+			pack.setMaterials(getMatQuantity(id));
+			return pack;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
 		}
-		return mats;
+	}
+
+	public Site getPackageSite(int id) {
+		try {
+			Site site = siteDao.get(id);
+			City city = cityDao.get(site.getSiteId());
+			city.setState(stateDao.get(city.getCityId()));
+			site.setCity(city);
+			return site;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public ArrayList<Material> getMatQuantity(int id) {
+		try {
+			ArrayList<Material> mats = new ArrayList<>();
+			HashMap<Integer, Integer> map = packageDao.getIdQuantity(id);
+			for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+				Material mat = materialDao.get(entry.getKey());
+				mat.setQuantity(entry.getValue());
+				mats.add(mat);
+			}
+			return mats;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
-	public ArrayList<Package> getPackages() throws SQLException {
-		ArrayList<Package> packs = new ArrayList<>();
-		packs = packageDao.getAll();
-		return packs;
+	public ArrayList<Package> getPackages() {
+		try {
+			ArrayList<Package> packs = packageDao.getAll();
+			return packs;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
-	public void addPackage(Package pack) throws SQLException {
-		packageDao.insert(pack);
+	public void addPackage(Package pack) {
+		try {
+			packageDao.insert(pack);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public void updatePackage(Package pack) throws SQLException {
-		packageDao.update(pack);
+	public void updatePackage(Package pack) {
+		try {
+			packageDao.update(pack);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public void deletePackage(Package pack) throws SQLException {
-		packageDao.delete(pack);
+	public void deletePackage(Package pack) {
+		try {
+			packageDao.delete(pack);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -8,6 +8,10 @@
     select * from states where state_id = #{id}
   </select>
   
+  <select id="selectStateByStateName" resultMap="main.java.com.solvd.laba.db.mapper.StateMapper.stateResultMap">
+    select * from states where state_name = #{name}
+  </select>
+  
   <resultMap id="stateResultMap" type="main.java.com.solvd.laba.db.model.State" autoMapping="false">
 	  <id property="stateId" column="state_id"/>
 	  <result property="stateName" column="state_name"/>
